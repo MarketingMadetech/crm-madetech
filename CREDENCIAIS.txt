@@ -1,0 +1,170 @@
+═══════════════════════════════════════════════════════════════════
+  CRM MARKETING - MADETECH
+  CREDENCIAIS E INFORMAÇÕES IMPORTANTES
+═══════════════════════════════════════════════════════════════════
+
+📍 LOCALIZAÇÃO DO PROJETO
+─────────────────────────────────────────────────────────────────
+Caminho Principal:
+  C:\Users\madet\OneDrive\Desktop\Marketing Madetech\Planilhas CRM\CRM MArketing
+
+Backend:
+  C:\Users\madet\OneDrive\Desktop\Marketing Madetech\Planilhas CRM\CRM MArketing\backend
+
+Frontend:
+  C:\Users\madet\OneDrive\Desktop\Marketing Madetech\Planilhas CRM\CRM MArketing\frontend
+
+Banco de Dados:
+  C:\Users\madet\OneDrive\Desktop\Marketing Madetech\Planilhas CRM\CRM MArketing\backend\crm.db
+
+
+🌐 ACESSOS
+─────────────────────────────────────────────────────────────────
+Frontend (React + Vite):
+  URL: http://localhost:5173
+  Porta: 5173
+  Comando: npm run dev
+
+Backend (Node.js + Express):
+  URL: http://localhost:3001
+  Porta: 3001
+  Comando: npm start
+
+Banco de Dados:
+  Tipo: SQLite 3
+  Arquivo: crm.db
+  Local: backend/
+
+
+📊 INFORMAÇÕES DO BANCO
+─────────────────────────────────────────────────────────────────
+Total de Negócios: 817
+Valor Total em Ofertas: R$ 1.138.895.730,00
+Vendas Confirmadas: 51 (6.2% de conversão)
+Valor Fechado: R$ 78.807.000,00
+Em Andamento: 445
+Parados (>30 dias): 335
+
+Status Disponíveis:
+  - Em andamento (445)
+  - Venda Confirmada (51)
+  - Suspenso (115)
+  - Perdido (29)
+  - Cancelado (24)
+  - Parado (23)
+  - Proposta enviada (20)
+  - Prospecção (9)
+  - Em aberto (5)
+  - Encerrado (5)
+  - Sem status (91)
+
+
+🔄 COMO INICIAR
+─────────────────────────────────────────────────────────────────
+Opção 1 - Automático (RECOMENDADO):
+  1. Duplo clique em: iniciar-crm.bat
+  2. Aguarde 10-15 segundos
+  3. Acesse: http://localhost:5173
+
+Opção 2 - Manual (PowerShell):
+  # Terminal 1 - Backend
+  cd "C:\Users\madet\OneDrive\Desktop\Marketing Madetech\Planilhas CRM\CRM MArketing\backend"
+  npm start
+
+  # Terminal 2 - Frontend
+  cd "C:\Users\madet\OneDrive\Desktop\Marketing Madetech\Planilhas CRM\CRM MArketing\frontend"
+  npm run dev
+
+
+⚙️ COMANDOS ÚTEIS
+─────────────────────────────────────────────────────────────────
+# Reiniciar banco com 817 negócios
+cd backend\scripts
+node init-db.js
+
+# Instalar dependências (se necessário)
+cd backend
+npm install
+cd ../frontend
+npm install
+
+# Build para produção
+cd frontend
+npm run build
+
+# Checar status do banco
+node -e "const sqlite3 = require('sqlite3').verbose(); const db = new sqlite3.Database('./crm.db'); db.all('SELECT COUNT(*) as count FROM negocios', (err, rows) => { console.log('Total de negócios:', rows[0].count); db.close(); });"
+
+
+📱 FUNCIONALIDADES
+─────────────────────────────────────────────────────────────────
+✅ Dashboard com KPIs em tempo real
+✅ Funil Kanban (drag-and-drop)
+✅ Gestão de Negócios (CRUD completo)
+✅ 6 Categorias de Lembretes + Calendário
+✅ Relatórios e Analytics com gráficos
+✅ Notificações Inteligentes
+✅ Histórico de Atividades
+✅ Exportação para Excel
+✅ WhatsApp e Email integrados
+✅ Dark Mode
+✅ Responsivo para mobile
+
+
+🔐 SEGURANÇA
+─────────────────────────────────────────────────────────────────
+Banco de dados é armazenado localmente em SQLite
+Não há autenticação implementada (usar apenas em rede interna)
+Para produção, implementar:
+  - Login com JWT
+  - HTTPS obrigatório
+  - Validação de entrada
+  - Rate limiting
+
+
+📈 ESTATÍSTICAS DE USO
+─────────────────────────────────────────────────────────────────
+Última atualização: 17 de Novembro de 2025
+Versão: 1.0
+Status: Produção Local
+Banco atualizado com: 817 registros da planilha
+
+
+💾 BACKUP
+─────────────────────────────────────────────────────────────────
+Backup automático da pasta foi criado em:
+  C:\Users\madet\OneDrive\Desktop\BACKUP_CRM_2025-11-17\
+
+Fazer backup regular dos arquivos:
+  - backend/crm.db (banco de dados)
+  - Pasta completa do projeto
+
+
+🆘 TROUBLESHOOTING
+─────────────────────────────────────────────────────────────────
+Porta 3001 em uso:
+  Get-Process -Name node | Stop-Process -Force
+
+Dependências não instaladas:
+  cd backend && npm install
+  cd ../frontend && npm install
+
+Erro no banco:
+  cd backend\scripts && node init-db.js
+
+Frontend não encontra backend:
+  Verificar se backend está rodando em localhost:3001
+
+
+📝 NOTAS IMPORTANTES
+─────────────────────────────────────────────────────────────────
+- Dados de datas: SQL format (YYYY-MM-DD HH:MM:SS) e BR (DD/MM/YYYY)
+- Cache atualiza a cada 5 minutos
+- Notificações verificam a cada 5 minutos
+- WhatsApp precisa do número em formato: 5511999999999
+- Exportação Excel usa formatação automática
+
+
+═══════════════════════════════════════════════════════════════════
+Desenvolvido com ❤️ pela Madetech
+═══════════════════════════════════════════════════════════════════

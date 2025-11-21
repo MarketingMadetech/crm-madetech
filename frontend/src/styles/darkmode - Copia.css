@@ -1,0 +1,122 @@
+/* Classes globais para dark mode */
+
+/* Cards e containers */
+.dark .bg-white {
+  @apply bg-gray-800 !important;
+}
+
+.dark .bg-gray-50 {
+  @apply bg-gray-900 !important;
+}
+
+.dark .bg-gray-100 {
+  @apply bg-gray-700 !important;
+}
+
+/* Textos - com melhor contraste */
+.dark .text-gray-900 {
+  @apply text-gray-100 !important;
+}
+
+.dark .text-gray-800 {
+  @apply text-gray-100 !important;
+}
+
+.dark .text-gray-700 {
+  @apply text-gray-200 !important;
+}
+
+.dark .text-gray-600 {
+  @apply text-gray-300 !important;
+}
+
+.dark .text-gray-500 {
+  @apply text-gray-400 !important;
+}
+
+/* Títulos sempre visíveis */
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+  @apply text-white !important;
+}
+
+/* Labels de formulário */
+.dark label {
+  @apply text-gray-200 !important;
+}
+
+/* Bordas */
+.dark .border-gray-200 {
+  @apply border-gray-700 !important;
+}
+
+.dark .border-gray-300 {
+  @apply border-gray-600 !important;
+}
+
+.dark .divide-gray-200 {
+  @apply divide-gray-700 !important;
+}
+
+/* Inputs e selects */
+.dark input,
+.dark select,
+.dark textarea {
+  @apply bg-gray-700 border-gray-600 text-white placeholder-gray-400 !important;
+}
+
+.dark input:focus,
+.dark select:focus,
+.dark textarea:focus {
+  @apply border-blue-500 ring-blue-500 !important;
+}
+
+.dark input::placeholder {
+  @apply text-gray-400 !important;
+}
+
+/* Tabelas */
+.dark table {
+  @apply text-gray-200 !important;
+}
+
+.dark thead {
+  @apply bg-gray-700 !important;
+}
+
+.dark thead th {
+  @apply text-gray-200 !important;
+}
+
+.dark tbody {
+  @apply bg-gray-800 !important;
+}
+
+.dark tbody tr:hover {
+  @apply bg-gray-700 !important;
+}
+
+.dark tbody td {
+  @apply text-gray-200 !important;
+}
+
+.dark .divide-gray-200 > * {
+  @apply divide-gray-700 !important;
+}
+
+/* Botões */
+.dark button:not(.bg-blue-600):not(.bg-green-600):not(.bg-red-600) {
+  @apply hover:bg-gray-700;
+}
+
+/* Shadow */
+.dark .shadow,
+.dark .shadow-sm,
+.dark .shadow-lg,
+.dark .shadow-xl {
+  @apply shadow-gray-900;
+}

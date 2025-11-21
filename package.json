@@ -1,0 +1,14 @@
+{
+  "name": "crm-madetech",
+  "version": "1.0.0",
+  "description": "CRM Marketing Madetech - Sistema completo de gestão de vendas",
+  "scripts": {
+    "start": "cd backend && npm install && npm start",
+    "install-all": "cd backend && npm install && cd ../frontend && npm install",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
+    "build": "cd frontend && npm install && npm run build"
+  },
+  "keywords": ["crm", "vendas", "madetech"],
+  "author": "Madetech",
+  "license": "MIT"
+}

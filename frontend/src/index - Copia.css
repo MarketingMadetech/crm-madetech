@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+}
+
+@layer utilities {
+  /* Dark mode - Cards e containers */
+  .dark .bg-white {
+    background-color: rgb(31 41 55) !important;
+  }
+
+  .dark .bg-gray-50 {
+    background-color: rgb(17 24 39) !important;
+  }
+
+  .dark .bg-gray-100 {
+    background-color: rgb(55 65 81) !important;
+  }
+
+  /* Dark mode - Textos */
+  .dark .text-gray-900 {
+    color: rgb(243 244 246) !important;
+  }
+
+  .dark .text-gray-800 {
+    color: rgb(243 244 246) !important;
+  }
+
+  .dark .text-gray-700 {
+    color: rgb(229 231 235) !important;
+  }
+
+  .dark .text-gray-600 {
+    color: rgb(209 213 219) !important;
+  }
+
+  .dark .text-gray-500 {
+    color: rgb(156 163 175) !important;
+  }
+
+  /* Dark mode - Títulos e labels */
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5 {
+    color: white !important;
+  }
+
+  .dark label {
+    color: rgb(229 231 235) !important;
+  }
+
+  .dark p {
+    color: rgb(209 213 219) !important;
+  }
+
+  /* Dark mode - Bordas */
+  .dark .border-gray-200 {
+    border-color: rgb(55 65 81) !important;
+  }
+
+  .dark .border-gray-300 {
+    border-color: rgb(75 85 99) !important;
+  }
+
+  /* Dark mode - Inputs */
+  .dark input,
+  .dark select,
+  .dark textarea {
+    background-color: rgb(55 65 81) !important;
+    border-color: rgb(75 85 99) !important;
+    color: white !important;
+  }
+
+  /* Dark mode - Tabelas */
+  .dark table {
+    color: rgb(229 231 235) !important;
+  }
+
+  .dark thead {
+    background-color: rgb(55 65 81) !important;
+  }
+
+  .dark tbody {
+    background-color: rgb(31 41 55) !important;
+  }
+
+  .dark tbody tr:hover {
+    background-color: rgb(55 65 81) !important;
+  }
+
+  /* Dark mode - Botões e opções */
+  .dark button {
+    color: rgb(229 231 235);
+  }
+
+  .dark button:disabled {
+    color: rgb(107 114 128) !important;
+    opacity: 0.5;
+  }
+
+  .dark option {
+    background-color: rgb(31 41 55);
+    color: rgb(229 231 235);
+  }
+
+  /* Dark mode - Badges e spans */
+  .dark span {
+    color: rgb(209 213 219);
+  }
+
+  .dark .text-sm {
+    color: rgb(156 163 175);
+  }
+
+  .dark .font-medium,
+  .dark .font-semibold,
+  .dark .font-bold {
+    color: rgb(229 231 235) !important;
+  }
+
+  /* Dark mode - Scrollbar */
+  .dark ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: #1f2937;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 5px;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+  }
+}
