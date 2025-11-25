@@ -3,9 +3,11 @@ const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const transporter = require('./config/email');
+const { router: authRouter, authenticateToken } = require('./auth');
+const { createBackup, listBackups, restoreBackup, deleteBackup, BACKUP_DIR } = require('./backup');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 // CORS configurado para produção
 app.use(cors({
@@ -16,10 +18,13 @@ app.use(express.json());
 
 const db = new sqlite3.Database(path.join(__dirname, 'crm.db'));
 
+// ========== ROTAS DE AUTENTICAÇÃO ==========
+app.use('/api/auth', authRouter);
+
 // ========== ROTAS DE NEGÓCIOS ==========
 
 // Listar todos os negócios com filtros
-app.get('/api/negocios', (req, res) => {
+app.get('/api/negocios', authenticateToken, (req, res) => {
   const { status, etapa, origem, search } = req.query;
   
   let query = 'SELECT * FROM negocios WHERE 1=1';
@@ -57,7 +62,7 @@ app.get('/api/negocios', (req, res) => {
 });
 
 // Buscar negócio por ID
-app.get('/api/negocios/:id', (req, res) => {
+app.get('/api/negocios/:id', authenticateToken, (req, res) => {
   db.get('SELECT * FROM negocios WHERE id = ?', [req.params.id], (err, negocio) => {
     if (err) {
       return res.status(500).json({ error: err.message });
@@ -70,7 +75,7 @@ app.get('/api/negocios/:id', (req, res) => {
 });
 
 // Criar novo negócio
-app.post('/api/negocios', (req, res) => {
+app.post('/api/negocios', authenticateToken, (req, res) => {
   const {
     empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
     valor_produto, valor_oferta, valor_fabrica, valor_brasil,
@@ -108,7 +113,7 @@ app.post('/api/negocios', (req, res) => {
 });
 
 // Atualizar negócio
-app.put('/api/negocios/:id', (req, res) => {
+app.put('/api/negocios/:id', authenticateToken, (req, res) => {
   const {
     empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
     valor_produto, valor_oferta, valor_fabrica, valor_brasil,
@@ -171,7 +176,7 @@ app.put('/api/negocios/:id', (req, res) => {
 });
 
 // Deletar negócio
-app.delete('/api/negocios/:id', (req, res) => {
+app.delete('/api/negocios/:id', authenticateToken, (req, res) => {
   // Buscar dados antes de deletar para o histórico
   db.get('SELECT empresa FROM negocios WHERE id = ?', [req.params.id], (err, negocio) => {
     if (err) {
@@ -202,7 +207,7 @@ app.delete('/api/negocios/:id', (req, res) => {
 // ========== ESTATÍSTICAS E DASHBOARDS ==========
 
 // Dashboard - estatísticas gerais
-app.get('/api/dashboard/stats', (req, res) => {
+app.get('/api/dashboard/stats', authenticateToken, (req, res) => {
   const { periodo = 'todos' } = req.query;
   console.log('📊 Dashboard Stats - Período recebido:', periodo);
   
@@ -329,7 +334,7 @@ app.get('/api/dashboard/stats', (req, res) => {
 });
 
 // Pipeline de vendas
-app.get('/api/dashboard/pipeline', (req, res) => {
+app.get('/api/dashboard/pipeline', authenticateToken, (req, res) => {
   const query = `
     SELECT 
       etapa,
@@ -351,7 +356,7 @@ app.get('/api/dashboard/pipeline', (req, res) => {
 });
 
 // Tendência de criação de negócios (últimos 30 dias)
-app.get('/api/dashboard/tendencia', (req, res) => {
+app.get('/api/dashboard/tendencia', authenticateToken, (req, res) => {
   const query = `
     SELECT 
       DATE(data_criacao) as data,
@@ -381,7 +386,7 @@ app.get('/api/dashboard/tendencia', (req, res) => {
 });
 
 // Filtros disponíveis
-app.get('/api/filtros', (req, res) => {
+app.get('/api/filtros', authenticateToken, (req, res) => {
   const filtros = {};
   
   db.all('SELECT DISTINCT status FROM negocios WHERE status IS NOT NULL ORDER BY status', (err, rows) => {
@@ -402,7 +407,7 @@ app.get('/api/filtros', (req, res) => {
 });
 
 // ========== ROTA DE E-MAIL ==========
-app.post('/api/email/enviar', async (req, res) => {
+app.post('/api/email/enviar', authenticateToken, async (req, res) => {
   const { negocioId, destinatario, assunto, mensagem } = req.body;
 
   if (!destinatario || !assunto || !mensagem) {
@@ -438,7 +443,7 @@ app.post('/api/email/enviar', async (req, res) => {
 // ========== ROTAS DE HISTÓRICO ==========
 
 // Buscar histórico de um negócio
-app.get('/api/historico/:negocio_id', (req, res) => {
+app.get('/api/historico/:negocio_id', authenticateToken, (req, res) => {
   const { negocio_id } = req.params;
   
   db.all(
@@ -454,7 +459,7 @@ app.get('/api/historico/:negocio_id', (req, res) => {
 });
 
 // Registrar evento no histórico
-app.post('/api/historico', (req, res) => {
+app.post('/api/historico', authenticateToken, (req, res) => {
   const { negocio_id, tipo_acao, campo_alterado, valor_anterior, valor_novo, usuario } = req.body;
   
   db.run(
@@ -472,10 +477,138 @@ app.post('/api/historico', (req, res) => {
 
 // Iniciar servidor
 app.listen(PORT, '0.0.0.0', () => {
+// ========== ROTAS DE BACKUP ==========
+
+// Criar backup manual
+app.post('/api/backup/create', authenticateToken, async (req, res) => {
+  try {
+    const backup = await createBackup();
+    res.json({ 
+      success: true, 
+      message: 'Backup criado com sucesso',
+      backup 
+    });
+  } catch (error) {
+    console.error('Erro ao criar backup:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Erro ao criar backup',
+      error: error.message 
+    });
+  }
+});
+
+// Listar backups disponíveis
+app.get('/api/backup/list', authenticateToken, (req, res) => {
+  try {
+    const backups = listBackups();
+    res.json({ 
+      success: true, 
+      backups 
+    });
+  } catch (error) {
+    console.error('Erro ao listar backups:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Erro ao listar backups',
+      error: error.message 
+    });
+  }
+});
+
+// Download de backup
+app.get('/api/backup/download/:fileName', authenticateToken, (req, res) => {
+  try {
+    const { fileName } = req.params;
+    const filePath = path.join(BACKUP_DIR, fileName);
+    
+    if (!fileName.startsWith('crm_backup_') || !fileName.endsWith('.db')) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Nome de arquivo inválido' 
+      });
+    }
+
+    res.download(filePath, fileName, (err) => {
+      if (err) {
+        console.error('Erro ao fazer download:', err);
+        res.status(500).json({ 
+          success: false, 
+          message: 'Erro ao fazer download do backup' 
+        });
+      }
+    });
+  } catch (error) {
+    console.error('Erro ao baixar backup:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Erro ao baixar backup',
+      error: error.message 
+    });
+  }
+});
+
+// Restaurar backup
+app.post('/api/backup/restore/:fileName', authenticateToken, async (req, res) => {
+  try {
+    const { fileName } = req.params;
+    
+    if (!fileName.startsWith('crm_backup_') || !fileName.endsWith('.db')) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Nome de arquivo inválido' 
+      });
+    }
+
+    const result = await restoreBackup(fileName);
+    res.json({ 
+      success: true, 
+      message: 'Backup restaurado com sucesso. Reinicie o servidor para aplicar as mudanças.',
+      result 
+    });
+  } catch (error) {
+    console.error('Erro ao restaurar backup:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Erro ao restaurar backup',
+      error: error.message 
+    });
+  }
+});
+
+// Deletar backup
+app.delete('/api/backup/delete/:fileName', authenticateToken, async (req, res) => {
+  try {
+    const { fileName } = req.params;
+    
+    if (!fileName.startsWith('crm_backup_') || !fileName.endsWith('.db')) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Nome de arquivo inválido' 
+      });
+    }
+
+    await deleteBackup(fileName);
+    res.json({ 
+      success: true, 
+      message: 'Backup deletado com sucesso' 
+    });
+  } catch (error) {
+    console.error('Erro ao deletar backup:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Erro ao deletar backup',
+      error: error.message 
+    });
+  }
+});
+
+// ========== INICIAR SERVIDOR ==========
+
   console.log(`🚀 Servidor CRM rodando na porta ${PORT}`);
   console.log(`📊 Banco de dados: ${path.join(__dirname, 'crm.db')}`);
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Servidor rodando em http://0.0.0.0:${PORT}`);
 });
