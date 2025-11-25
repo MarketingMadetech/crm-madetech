@@ -39,5 +39,5 @@ WORKDIR /app/backend
 
 COPY --from=build /app/backend ./
 
-EXPOSE 3000
+EXPOSE 8080
 CMD ["npm", "start"]
