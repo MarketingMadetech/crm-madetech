@@ -475,8 +475,6 @@ app.post('/api/historico', authenticateToken, (req, res) => {
   );
 });
 
-// Iniciar servidor
-app.listen(PORT, '0.0.0.0', () => {
 // ========== ROTAS DE BACKUP ==========
 
 // Criar backup manual
@@ -605,10 +603,7 @@ app.delete('/api/backup/delete/:fileName', authenticateToken, async (req, res) =
 
 // ========== INICIAR SERVIDOR ==========
 
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Servidor CRM rodando na porta ${PORT}`);
   console.log(`📊 Banco de dados: ${path.join(__dirname, 'crm.db')}`);
-});
-
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Servidor rodando em http://0.0.0.0:${PORT}`);
 });
