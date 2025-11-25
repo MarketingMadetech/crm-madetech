@@ -19,8 +19,9 @@ COPY backend/package.json backend/package-lock.json* ./backend/
 WORKDIR /app/backend
 RUN npm install
 
-# Instala dependências e build do frontend
-COPY frontend/package.json frontend/package-lock.json* ./frontend/
+
+# Copia o código do frontend inteiro antes de buildar
+COPY frontend ./frontend
 WORKDIR /app/frontend
 RUN npm install && npm run build
 
