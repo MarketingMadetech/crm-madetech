@@ -9,15 +9,21 @@
     "init-db": "node scripts/init-db.js",
     "add-telefone": "node scripts/add-telefone.js"
   },
-  "keywords": ["crm", "api", "sqlite"],
+  "keywords": [
+    "crm",
+    "api",
+    "sqlite"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
-    "sqlite3": "^5.1.7",
     "csv-parser": "^3.0.0",
-    "nodemailer": "^6.9.8"
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.8",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"
