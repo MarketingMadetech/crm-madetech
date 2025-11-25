@@ -26,7 +26,7 @@ axios.interceptors.response.use(
       localStorage.removeItem('token')
       localStorage.removeItem('username')
       localStorage.removeItem('userRole')
-      window.location.href = '/login.html'
+      window.location.href = '/login'
     }
     return Promise.reject(error)
   }

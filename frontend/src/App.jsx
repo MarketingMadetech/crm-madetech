@@ -14,7 +14,7 @@ function App() {
     // Verificar autenticação ao carregar
     const token = localStorage.getItem('token')
     if (!token) {
-      window.location.href = '/login.html'
+      window.location.href = '/login'
     }
   }, []);
 

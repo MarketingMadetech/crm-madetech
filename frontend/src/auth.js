@@ -59,7 +59,7 @@ export const auth = {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
         localStorage.removeItem('userRole');
-        window.location.href = '/login.html';
+        window.location.href = '/login';
     },
 
     // Verificar token no servidor
@@ -112,7 +112,7 @@ export function setupAuthInterceptor() {
 // Middleware de proteção de rota
 export function requireAuth() {
     if (!auth.isAuthenticated()) {
-        window.location.href = '/login.html';
+        window.location.href = '/login';
         return false;
     }
     return true;
