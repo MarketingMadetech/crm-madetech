@@ -477,6 +477,17 @@ app.post('/api/historico', authenticateToken, (req, res) => {
 
 // ========== ROTAS DE BACKUP ==========
 
+// === SERVE FRONTEND REACT BUILD ===
+const distPath = path.join(__dirname, 'dist');
+app.use(express.static(distPath));
+
+// Fallback para SPA (React Router)
+app.get('*', (req, res) => {
+  // Só faz fallback se não for rota de API
+  if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'API route not found' });
+  res.sendFile(path.join(distPath, 'index.html'));
+});
+
 // Criar backup manual
 app.post('/api/backup/create', authenticateToken, async (req, res) => {
   try {
