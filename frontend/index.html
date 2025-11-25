@@ -3,7 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="https://www.madetech.com.br/loja/wp-content/uploads/2025/08/cropped-logo-2-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="https://www.madetech.com.br/loja/wp-content/uploads/2025/08/cropped-logo-2-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="https://www.madetech.com.br/loja/wp-content/uploads/2025/08/cropped-logo-2-180x180.png" />
     <title>CRM Madetech</title>
+    <script>
+      // Verificar autenticação antes de carregar o React
+      if (!localStorage.getItem('token')) {
+        window.location.href = '/login.html';
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

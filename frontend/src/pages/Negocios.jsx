@@ -6,6 +6,60 @@ import NegocioModal from '../components/NegocioModal'
 import EmailModal from '../components/EmailModal'
 import cacheService from '../utils/cacheService'
 
+// Componente para mostrar última atividade
+const UltimaAtividade = ({ negocioId }) => {
+  const [atividade, setAtividade] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const carregarAtividade = async () => {
+      try {
+        const res = await axios.get(`/api/historico/${negocioId}`)
+        if (res.data && res.data.length > 0) {
+          setAtividade(res.data[0]) // Pega a mais recente
+        }
+      } catch (error) {
+        console.error('Erro ao carregar atividade:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    carregarAtividade()
+  }, [negocioId])
+
+  if (loading) {
+    return <span className="text-gray-400 text-xs">...</span>
+  }
+
+  if (!atividade) {
+    return <span className="text-gray-400 text-xs">Sem atividade</span>
+  }
+
+  const icone = atividade.tipo_acao === 'criacao' ? '🆕' : 
+               atividade.tipo_acao === 'atualizacao' ? '✏️' : '📝'
+  
+  const textoAcao = atividade.tipo_acao === 'criacao' ? 'Criado' : 
+                   atividade.tipo_acao === 'atualizacao' ? `${atividade.campo_alterado} alterado` : 
+                   'Atividade'
+
+  const dataFormatada = new Date(atividade.data_hora).toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+
+  return (
+    <div className="text-xs">
+      <div className="flex items-center gap-1 text-gray-600">
+        <span>{icone}</span>
+        <span className="font-medium">{textoAcao}</span>
+      </div>
+      <div className="text-gray-400 mt-0.5">{dataFormatada}</div>
+    </div>
+  )
+}
+
 function Negocios() {
   const [negocios, setNegocios] = useState([])
   const [filtros, setFiltros] = useState({})
@@ -610,6 +664,7 @@ function Negocios() {
                       )}
                     </div>
                   </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Última Atividade</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Observações</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
                 </tr>
@@ -656,6 +711,9 @@ function Negocios() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{negocio.etapa || '-'}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatarData(negocio.data_criacao)}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <UltimaAtividade negocioId={negocio.id} />
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500 max-w-xs">
                       <div className="truncate" title={negocio.observacao || '-'}>

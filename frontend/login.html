@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://www.madetech.com.br/loja/wp-content/uploads/2025/08/cropped-logo-2-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="https://www.madetech.com.br/loja/wp-content/uploads/2025/08/cropped-logo-2-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="https://www.madetech.com.br/loja/wp-content/uploads/2025/08/cropped-logo-2-180x180.png" />
+    <title>Login - CRM Madetech</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animações de fundo */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            left: 10%;
+            top: 20%;
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            animation-delay: 0s;
+            animation-duration: 25s;
+        }
+
+        .shape:nth-child(2) {
+            left: 70%;
+            top: 60%;
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation-delay: 2s;
+            animation-duration: 20s;
+        }
+
+        .shape:nth-child(3) {
+            left: 30%;
+            top: 70%;
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 20px;
+            transform: rotate(45deg);
+            animation-delay: 4s;
+            animation-duration: 30s;
+        }
+
+        .shape:nth-child(4) {
+            left: 80%;
+            top: 20%;
+            width: 60px;
+            height: 60px;
+            background: white;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation-delay: 1s;
+            animation-duration: 22s;
+        }
+
+        .shape:nth-child(5) {
+            left: 50%;
+            top: 10%;
+            width: 90px;
+            height: 90px;
+            background: white;
+            border-radius: 50% 50% 0 0;
+            animation-delay: 3s;
+            animation-duration: 28s;
+        }
+
+        .shape:nth-child(6) {
+            left: 15%;
+            top: 80%;
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 50%;
+            animation-delay: 5s;
+            animation-duration: 24s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-30px) translateX(20px) rotate(90deg);
+            }
+            50% {
+                transform: translateY(-60px) translateX(-20px) rotate(180deg);
+            }
+            75% {
+                transform: translateY(-30px) translateX(30px) rotate(270deg);
+            }
+        }
+
+        /* Partículas brilhantes */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 3s infinite ease-in-out;
+            opacity: 0;
+        }
+
+        .particle:nth-child(1) { left: 20%; top: 30%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 60%; top: 50%; animation-delay: 0.5s; }
+        .particle:nth-child(3) { left: 80%; top: 70%; animation-delay: 1s; }
+        .particle:nth-child(4) { left: 40%; top: 80%; animation-delay: 1.5s; }
+        .particle:nth-child(5) { left: 70%; top: 20%; animation-delay: 2s; }
+        .particle:nth-child(6) { left: 30%; top: 60%; animation-delay: 2.5s; }
+        .particle:nth-child(7) { left: 90%; top: 40%; animation-delay: 0.3s; }
+        .particle:nth-child(8) { left: 10%; top: 90%; animation-delay: 1.2s; }
+        .particle:nth-child(9) { left: 50%; top: 15%; animation-delay: 1.8s; }
+        .particle:nth-child(10) { left: 25%; top: 45%; animation-delay: 2.3s; }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Ondas de gradiente */
+        .gradient-wave {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(255,255,255,0.03) 25%, 
+                transparent 50%, 
+                rgba(255,255,255,0.03) 75%, 
+                transparent 100%);
+            animation: wave 15s infinite linear;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translate(-25%, -25%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-25%, -25%) rotate(360deg);
+            }
+        }
+
+        /* Container com mais profundidade */
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+            animation: slideUp 0.5s ease-out;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .login-header img {
+            max-width: 200px;
+            height: auto;
+            margin: 0 auto 15px;
+            display: block;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .login-body {
+            padding: 40px 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle input {
+            padding-right: 45px;
+        }
+
+        .password-toggle button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            padding: 5px;
+            font-size: 18px;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .btn-login:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-error {
+            background: #fee;
+            color: #c33;
+            border: 1px solid #fcc;
+        }
+
+        .alert-success {
+            background: #efe;
+            color: #3c3;
+            border: 1px solid #cfc;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .login-footer {
+            text-align: center;
+            padding: 20px 30px;
+            background: #f9f9f9;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animações de fundo -->
+    <div class="bg-animation">
+        <div class="gradient-wave"></div>
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <div class="login-header">
+            <img src="https://www.madetech.com.br/loja/wp-content/uploads/2025/05/Logo-Madetech-Final.png" alt="Madetech Logo">
+            <h1>🔐 CRM Madetech</h1>
+            <p>Sistema de Gestão de Negócios</p>
+        </div>
+
+        <div class="login-body">
+            <div id="alert" class="alert"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="Digite seu usuário"
+                        required
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <div class="password-toggle">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Digite sua senha"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <button type="button" id="togglePassword" title="Mostrar/Ocultar senha">
+                            👁️
+                        </button>
+                    </div>
+                </div>
+
+                <div class="remember-forgot">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <span>Lembrar-me</span>
+                    </label>
+                    <a href="#" class="forgot-password" id="forgotPassword">Esqueci a senha</a>
+                </div>
+
+                <button type="submit" class="btn-login" id="btnLogin">
+                    Entrar
+                </button>
+            </form>
+        </div>
+
+        <div class="login-footer">
+            © 2025 Madetech - Todos os direitos reservados
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3001/api';
+        
+        // Toggle mostrar/ocultar senha
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        // Mostrar alerta
+        function showAlert(message, type = 'error') {
+            const alert = document.getElementById('alert');
+            alert.className = `alert alert-${type} show`;
+            alert.textContent = message;
+            
+            setTimeout(() => {
+                alert.classList.remove('show');
+            }, 5000);
+        }
+
+        // Carregar usuário salvo
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedUsername = localStorage.getItem('rememberedUsername');
+            if (savedUsername) {
+                document.getElementById('username').value = savedUsername;
+                document.getElementById('remember').checked = true;
+            }
+        });
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btnLogin = document.getElementById('btnLogin');
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+
+            if (!username || !password) {
+                showAlert('Por favor, preencha todos os campos');
+                return;
+            }
+
+            // Desabilitar botão e mostrar loading
+            btnLogin.disabled = true;
+            btnLogin.innerHTML = '<span class="spinner"></span>Entrando...';
+
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Salvar token
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('username', data.user.username);
+                    localStorage.setItem('userRole', data.user.role);
+
+                    // Lembrar usuário se marcado
+                    if (remember) {
+                        localStorage.setItem('rememberedUsername', username);
+                    } else {
+                        localStorage.removeItem('rememberedUsername');
+                    }
+
+                    showAlert('Login realizado com sucesso!', 'success');
+                    
+                    // Redirecionar para o React app
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 500);
+                } else {
+                    showAlert(data.message || 'Usuário ou senha inválidos');
+                    btnLogin.disabled = false;
+                    btnLogin.textContent = 'Entrar';
+                }
+            } catch (error) {
+                console.error('Erro ao fazer login:', error);
+                showAlert('Erro ao conectar com o servidor. Verifique se o backend está rodando.');
+                btnLogin.disabled = false;
+                btnLogin.textContent = 'Entrar';
+            }
+        });
+
+        // Esqueci a senha
+        document.getElementById('forgotPassword').addEventListener('click', (e) => {
+            e.preventDefault();
+            showAlert('Entre em contato com o administrador do sistema para redefinir sua senha', 'error');
+        });
+    </script>
+</body>
+</html>
