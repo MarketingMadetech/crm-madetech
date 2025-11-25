@@ -1,42 +1,42 @@
+
 # syntax = docker/dockerfile:1
 
-# Adjust NODE_VERSION as desired
 ARG NODE_VERSION=20.18.0
 FROM node:${NODE_VERSION}-slim AS base
 
 LABEL fly_launch_runtime="Node.js"
-
-# Node.js app lives here
 WORKDIR /app
-
-# Set production environment
 ENV NODE_ENV="production"
 
-
-# Throw-away build stage to reduce size of final image
+# --- Build Stage ---
 FROM base AS build
 
-# Install packages needed to build node modules
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
-# Install node modules
-COPY package.json ./
+# Instala dependências do backend
+COPY backend/package.json backend/package-lock.json* ./backend/
+WORKDIR /app/backend
 RUN npm install
 
-# Copy application code
-COPY . .
+# Instala dependências e build do frontend
+COPY frontend/package.json frontend/package-lock.json* ./frontend/
+WORKDIR /app/frontend
+RUN npm install && npm run build
 
-# Build application
-RUN npm run build
+# Copia o build do frontend para o backend
+WORKDIR /app/backend
+RUN rm -rf public && mkdir public && cp -r /app/frontend/dist/* public/
 
+# Copia o restante dos códigos
+WORKDIR /app
+COPY backend ./backend
 
-# Final stage for app image
+# --- Production Image ---
 FROM base
+WORKDIR /app/backend
 
-# Copy built application
-COPY --from=build /app /app
+COPY --from=build /app/backend ./
 
-# Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD [ "npm", "run", "start" ]
+CMD ["npm", "start"]
