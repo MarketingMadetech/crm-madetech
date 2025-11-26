@@ -15,6 +15,7 @@ const allowedOrigins = [
   'http://localhost:3000', // Outra porta local, se necessário
   process.env.FRONTEND_URL  // URL de produção
 ].filter(Boolean); // Remove valores nulos/undefined
+    'https://crm-madetech.onrender.com', // URL pública do frontend Render
 
 // CORS configurado para produção
 app.use(cors({
