@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
 import Dashboard from './pages/Dashboard'
@@ -8,15 +8,30 @@ import Funil from './pages/Funil'
 import Lembretes from './pages/Lembretes'
 import Relatorios from './pages/Relatorios'
 import Backup from './pages/Backup'
+import Login from './pages/Login'
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   useEffect(() => {
     // Verificar autenticação ao carregar
     const token = localStorage.getItem('token')
-    if (!token) {
-      window.location.href = '/login'
+    if (token) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
     }
   }, []);
+
+  // Se não estiver autenticado, mostrar apenas login
+  if (!isAuthenticated) {
+    return (
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    );
+  }
 
   return (
     <Layout>

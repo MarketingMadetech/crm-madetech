@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 
 export default function Backup() {
   const [backups, setBackups] = useState([]);
@@ -13,7 +13,8 @@ export default function Backup() {
   const loadBackups = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('/api/backup/list');
+      const response = await api.get('/backup/list');
+      console.log('Resposta /backup/list:', response.data);
       setBackups(response.data.backups);
     } catch (error) {
       showMessage('error', 'Erro ao carregar lista de backups');
@@ -26,7 +27,7 @@ export default function Backup() {
   const createBackup = async () => {
     setLoading(true);
     try {
-      const response = await axios.post('/api/backup/create');
+      const response = await api.post('/backup/create');
       showMessage('success', 'Backup criado com sucesso!');
       loadBackups();
     } catch (error) {
@@ -39,7 +40,7 @@ export default function Backup() {
 
   const downloadBackup = async (fileName) => {
     try {
-      const response = await axios.get(`/api/backup/download/${fileName}`, {
+      const response = await api.get(`/backup/download/${fileName}`, {
         responseType: 'blob'
       });
       
@@ -65,7 +66,7 @@ export default function Backup() {
 
     setLoading(true);
     try {
-      await axios.post(`/api/backup/restore/${fileName}`);
+      await api.post(`/backup/restore/${fileName}`);
       showMessage('success', 'Backup restaurado! Recarregue a página para ver as mudanças.');
       setTimeout(() => {
         window.location.reload();
@@ -84,7 +85,7 @@ export default function Backup() {
 
     setLoading(true);
     try {
-      await axios.delete(`/api/backup/delete/${fileName}`);
+      await api.delete(`/backup/delete/${fileName}`);
       showMessage('success', 'Backup deletado com sucesso!');
       loadBackups();
     } catch (error) {

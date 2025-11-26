@@ -1,6 +1,6 @@
 // Utility functions para autenticação
 
-const API_URL = 'http://localhost:3001/api';
+const API_URL = '/api';
 
 export const auth = {
     // Verificar se está logado

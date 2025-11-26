@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import api from '../utils/api'
 import * as XLSX from 'xlsx'
 import NegocioModal from '../components/NegocioModal'
 import EmailModal from '../components/EmailModal'
@@ -14,7 +14,7 @@ const UltimaAtividade = ({ negocioId }) => {
   useEffect(() => {
     const carregarAtividade = async () => {
       try {
-        const res = await axios.get(`/api/historico/${negocioId}`)
+        const res = await api.get(`/historico/${negocioId}`)
         if (res.data && res.data.length > 0) {
           setAtividade(res.data[0]) // Pega a mais recente
         }
@@ -122,7 +122,7 @@ function Negocios() {
         return
       }
 
-      const res = await axios.get('/api/filtros')
+      const res = await api.get('/filtros')
       cacheService.set('filtros', res.data, 10 * 60 * 1000) // 10 min cache
       setFiltros(res.data)
     } catch (error) {
@@ -144,7 +144,7 @@ function Negocios() {
         return
       }
 
-      const res = await axios.get('/api/negocios', { params })
+      const res = await api.get('/negocios', { params })
       cacheService.set(cacheKey, res.data)
       setNegocios(res.data)
       setLoading(false)
@@ -251,7 +251,7 @@ function Negocios() {
   const deletarNegocio = async (id) => {
     setDeletando(true)
     try {
-      await axios.delete(`/api/negocios/${id}`)
+      await api.delete(`/negocios/${id}`)
       setConfirmDelete(null)
       
       // Invalida todo cache relacionado a negócios
@@ -292,7 +292,7 @@ function Negocios() {
     try {
       for (const id of selecionados) {
         const negocio = negocios.find(n => n.id === id)
-        await axios.put(`/api/negocios/${id}`, {
+        await api.put(`/negocios/${id}`, {
           ...negocio,
           [campo]: valor
         })

@@ -9,9 +9,23 @@ const { createBackup, listBackups, restoreBackup, deleteBackup, BACKUP_DIR } = r
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Lista de origens permitidas
+const allowedOrigins = [
+  'http://localhost:5173', // Frontend local
+  'http://localhost:3000', // Outra porta local, se necessário
+  process.env.FRONTEND_URL  // URL de produção
+].filter(Boolean); // Remove valores nulos/undefined
+
 // CORS configurado para produção
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
+  origin: function (origin, callback) {
+    // Permite requisições sem 'origin' (ex: Postman) ou se a origem está na lista
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
@@ -19,44 +33,57 @@ app.use(express.json());
 const db = new sqlite3.Database(path.join(__dirname, 'crm.db'));
 
 // ========== ROTAS DE AUTENTICAÇÃO ==========
+// Log para saber quando o middleware é carregado
+console.log('🔒 Middleware authenticateToken carregado');
 app.use('/api/auth', authRouter);
 
 // ========== ROTAS DE NEGÓCIOS ==========
 
 // Listar todos os negócios com filtros
-app.get('/api/negocios', authenticateToken, (req, res) => {
+app.get('/api/negocios', (req, res, next) => {
+  console.log('➡️  [API] GET /api/negocios chamada');
+  if (req.headers && req.headers.authorization) {
+    console.log('🔑 Authorization header:', req.headers.authorization);
+  } else {
+    console.log('⚠️  Sem Authorization header');
+  }
+  next();
+}, authenticateToken, (req, res) => {
+  console.log('✅ Passou pelo authenticateToken');
   const { status, etapa, origem, search } = req.query;
-  
+
   let query = 'SELECT * FROM negocios WHERE 1=1';
   const params = [];
-  
+
   if (status) {
     query += ' AND status = ?';
     params.push(status);
   }
-  
+
   if (etapa) {
     query += ' AND etapa = ?';
     params.push(etapa);
   }
-  
+
   if (origem) {
     query += ' AND origem = ?';
     params.push(origem);
   }
-  
+
   if (search) {
     query += ' AND (empresa LIKE ? OR pessoa_contato LIKE ? OR equipamento LIKE ? OR telefone LIKE ?)';
     const searchTerm = `%${search}%`;
     params.push(searchTerm, searchTerm, searchTerm, searchTerm);
   }
-  
+
   query += ' ORDER BY data_criacao DESC';
-  
+
   db.all(query, params, (err, negocios) => {
     if (err) {
+      console.log('❌ Erro ao buscar negócios:', err.message);
       return res.status(500).json({ error: err.message });
     }
+    console.log('📦 Negócios retornados:', negocios.length);
     res.json(negocios);
   });
 });
@@ -475,18 +502,23 @@ app.post('/api/historico', authenticateToken, (req, res) => {
   );
 });
 
-// ========== ROTAS DE BACKUP ==========
+// ========== ROTAS ESPECÍFICAS (ANTES DE STATIC) ========
 
-// === SERVE FRONTEND REACT BUILD ===
-const distPath = path.join(__dirname, 'dist');
-app.use(express.static(distPath));
-
-// Fallback para SPA (React Router)
-app.get('*', (req, res) => {
-  // Só faz fallback se não for rota de API
-  if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'API route not found' });
-  res.sendFile(path.join(distPath, 'index.html'));
+// Rota para servir o CRM React após login
+app.get('/crm', (req, res) => {
+  console.log('⚡ Servindo /crm - arquivo index-crm.html');
+  res.sendFile(path.join(distPath, 'index-crm.html'));
 });
+
+// Rota para servir página simples de diagnóstico
+app.get('/test', (req, res) => {
+  console.log('⚡ Servindo /test - arquivo test.html');
+  res.sendFile(path.join(distPath, 'test.html'));
+});
+
+
+// ========== ROTAS DE BACKUP ==========
+console.log('🚀 Servidor CRM inicializado!');
 
 // Criar backup manual
 app.post('/api/backup/create', authenticateToken, async (req, res) => {
@@ -612,9 +644,31 @@ app.delete('/api/backup/delete/:fileName', authenticateToken, async (req, res) =
   }
 });
 
-// ========== INICIAR SERVIDOR ==========
+// === SERVE FRONTEND REACT BUILD ===
+const distPath = path.join(__dirname, 'dist');
+app.use(express.static(distPath));
+
+// Fallback para SPA (React Router) - VEM POR ÚLTIMO
+app.get('*', (req, res) => {
+  if (req.path.startsWith('/api')) {
+    res.status(404).json({ error: 'API route not found' });
+  } else {
+    console.log('⚡ Servindo wildcard * - arquivo index.html');
+    res.sendFile(path.join(distPath, 'index.html'));
+  }
+});
+
+// ========== INICIAR SERVIDOR ========== 
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Servidor CRM rodando na porta ${PORT}`);
   console.log(`📊 Banco de dados: ${path.join(__dirname, 'crm.db')}`);
+});
+
+process.on('SIGINT', () => {
+  console.log('\n🛑 Servidor CRM encerrado');
+  db.close((err) => {
+    if (err) console.error('Erro ao fechar banco:', err);
+    process.exit(0);
+  });
 });

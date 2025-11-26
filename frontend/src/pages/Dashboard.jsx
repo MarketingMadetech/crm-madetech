@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import axios from 'axios'
+import api from '../utils/api';
 import { PieChart, Pie, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell, ResponsiveContainer } from 'recharts'
 import { Link } from 'react-router-dom'
 import cacheService from '../utils/cacheService'
@@ -56,22 +56,22 @@ function Dashboard() {
       console.log('📡 Fazendo requisições com params:', params)
       
       // Buscar dados com tratamento individual de erros
-      const statsRes = await axios.get('/api/dashboard/stats', { params }).catch(err => {
+      const statsRes = await api.get('/dashboard/stats', { params }).catch(err => {
         console.error('Erro ao buscar stats:', err)
         return { data: null }
       })
       
-      const pipelineRes = await axios.get('/api/dashboard/pipeline', { params }).catch(err => {
+      const pipelineRes = await api.get('/dashboard/pipeline', { params }).catch(err => {
         console.error('Erro ao buscar pipeline:', err)
         return { data: [] }
       })
       
-      const negociosRes = await axios.get('/api/negocios').catch(err => {
+      const negociosRes = await api.get('/negocios').catch(err => {
         console.error('Erro ao buscar negócios:', err)
         return { data: [] }
       })
       
-      const tendenciaRes = await axios.get('/api/dashboard/tendencia', { params }).catch(err => {
+      const tendenciaRes = await api.get('/dashboard/tendencia', { params }).catch(err => {
         console.error('Erro ao buscar tendência:', err)
         return { data: [] }
       })
