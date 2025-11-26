@@ -1,4 +1,5 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
@@ -31,6 +32,32 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+app.use(fileUpload());
+// Rota para upload e restauração de backup por arquivo
+app.post('/api/backup/upload', authenticateToken, async (req, res) => {
+  try {
+    if (!req.files || !req.files.backup) {
+      return res.status(400).json({ success: false, message: 'Nenhum arquivo enviado' });
+    }
+    const backupFile = req.files.backup;
+    if (!backupFile.name.endsWith('.db')) {
+      return res.status(400).json({ success: false, message: 'Arquivo inválido. Envie um arquivo .db' });
+    }
+    // Salvar arquivo temporariamente
+    const tempPath = path.join(BACKUP_DIR, `uploaded_${Date.now()}.db`);
+    await backupFile.mv(tempPath);
+    // Restaurar usando a função já existente
+    await restoreBackup(path.basename(tempPath));
+    // Remover arquivo temporário após restaurar
+    setTimeout(() => {
+      try { require('fs').unlinkSync(tempPath); } catch (e) {}
+    }, 1000);
+    res.json({ success: true, message: 'Backup restaurado do arquivo com sucesso. Recarregue a página.' });
+  } catch (error) {
+    console.error('Erro ao restaurar backup por upload:', error);
+    res.status(500).json({ success: false, message: 'Erro ao restaurar backup por upload', error: error.message });
+  }
+});
 
 const db = new sqlite3.Database(path.join(__dirname, 'crm.db'));
 

@@ -8,7 +8,14 @@
     "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
     "build": "cd frontend && npm install && npm run build"
   },
-  "keywords": ["crm", "vendas", "madetech"],
+  "keywords": [
+    "crm",
+    "vendas",
+    "madetech"
+  ],
   "author": "Madetech",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express-fileupload": "^1.5.2"
+  }
 }

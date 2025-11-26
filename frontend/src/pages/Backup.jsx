@@ -1,4 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+  const fileInputRef = useRef();
+  const [uploading, setUploading] = useState(false);
+  // Upload e restauração de backup por arquivo
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!window.confirm(`Tem certeza que deseja restaurar o backup a partir do arquivo "${file.name}"?\n\nISSO IRÁ SUBSTITUIR TODOS OS DADOS ATUAIS!`)) {
+      fileInputRef.current.value = '';
+      return;
+    }
+    setUploading(true);
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append('backup', file);
+      await api.post('/backup/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      showMessage('success', 'Backup restaurado do arquivo! Recarregue a página para ver as mudanças.');
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    } catch (error) {
+      showMessage('error', 'Erro ao restaurar backup do arquivo');
+      console.error(error);
+      setLoading(false);
+    } finally {
+      setUploading(false);
+      fileInputRef.current.value = '';
+    }
+  };
 import api from '../utils/api';
 
 export default function Backup() {
@@ -141,37 +172,55 @@ export default function Backup() {
         </div>
       )}
 
-      {/* Botão Criar Backup */}
+      {/* Botão Criar Backup e Upload */}
       <div className="mb-6 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
               Criar Novo Backup
             </h2>
             <p className="text-gray-600 dark:text-gray-400">
-              Crie um backup manual do banco de dados atual
+              Crie um backup manual do banco de dados atual ou restaure a partir de um arquivo .db
             </p>
           </div>
-          <button
-            onClick={createBackup}
-            disabled={loading}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2"
-          >
-            {loading ? (
-              <>
-                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                </svg>
-                Processando...
-              </>
-            ) : (
-              <>
-                <span>➕</span>
-                Criar Backup
-              </>
-            )}
-          </button>
+          <div className="flex flex-col md:flex-row gap-2 items-center">
+            <button
+              onClick={createBackup}
+              disabled={loading}
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2"
+            >
+              {loading ? (
+                <>
+                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  Processando...
+                </>
+              ) : (
+                <>
+                  <span>➕</span>
+                  Criar Backup
+                </>
+              )}
+            </button>
+            <label className="flex items-center gap-2 cursor-pointer px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition">
+              <input
+                type="file"
+                accept=".db"
+                ref={fileInputRef}
+                onChange={handleFileUpload}
+                style={{ display: 'none' }}
+                disabled={uploading}
+              />
+              {uploading ? (
+                <span className="animate-spin">♻️</span>
+              ) : (
+                <span>⬆️</span>
+              )}
+              Restaurar por Arquivo
+            </label>
+          </div>
         </div>
       </div>
 
