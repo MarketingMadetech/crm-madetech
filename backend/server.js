@@ -34,6 +34,39 @@ app.use(express.json());
 
 const db = new sqlite3.Database(path.join(__dirname, 'crm.db'));
 
+// Inicialização automática do banco de dados e usuários padrão
+const bcrypt = require('bcrypt');
+db.serialize(() => {
+  db.run(`CREATE TABLE IF NOT EXISTS usuarios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE,
+    senha TEXT,
+    nome TEXT,
+    email TEXT,
+    role TEXT,
+    ativo INTEGER DEFAULT 1,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    ultimo_acesso DATETIME
+  )`);
+
+  // Usuários padrão
+  const usuariosPadrao = [
+    { username: 'admin', senha: 'admin123', nome: 'Administrador', email: 'admin@crm.com', role: 'admin' },
+    { username: 'RCPGrs', senha: '241289', nome: 'Reinaldo', email: 'reinaldo@crm.com', role: 'user' },
+    { username: 'thiago.costa', senha: '301190', nome: 'Thiago', email: 'thiago@crm.com', role: 'user' }
+  ];
+
+  usuariosPadrao.forEach(u => {
+    db.get('SELECT * FROM usuarios WHERE username = ?', [u.username], (err, row) => {
+      if (!row) {
+        const senhaHash = bcrypt.hashSync(u.senha, 10);
+        db.run('INSERT INTO usuarios (username, senha, nome, email, role) VALUES (?, ?, ?, ?, ?)',
+          [u.username, senhaHash, u.nome, u.email, u.role]);
+      }
+    });
+  });
+});
+
 // ========== ROTAS DE AUTENTICAÇÃO ==========
 // Log para saber quando o middleware é carregado
 console.log('🔒 Middleware authenticateToken carregado');
