@@ -10,11 +10,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Lista de origens permitidas
-const allowedOrigins = [
-  'http://localhost:5173', // Frontend local
-  'http://localhost:3000', // Outra porta local, se necessário
-  process.env.FRONTEND_URL  // URL de produção
-].filter(Boolean); // Remove valores nulos/undefined
+   const allowedOrigins = [
+     'http://localhost:5173', // Frontend local
+     'http://localhost:3000', // Outra porta local, se necessário
+     'https://crm-madetech.onrender.com', // URL pública do frontend Render
+     process.env.FRONTEND_URL  // URL de produção
+   ].filter(Boolean); // Remove valores nulos/undefined
     'https://crm-madetech.onrender.com', // URL pública do frontend Render
 
 // CORS configurado para produção
