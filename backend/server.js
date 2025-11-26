@@ -37,6 +37,7 @@ const db = new sqlite3.Database(path.join(__dirname, 'crm.db'));
 // Inicialização automática do banco de dados e usuários padrão
 const bcrypt = require('bcrypt');
 db.serialize(() => {
+  // Tabela de usuários
   db.run(`CREATE TABLE IF NOT EXISTS usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE,
@@ -47,6 +48,42 @@ db.serialize(() => {
     ativo INTEGER DEFAULT 1,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     ultimo_acesso DATETIME
+  )`);
+
+  // Tabela de negócios
+  db.run(`CREATE TABLE IF NOT EXISTS negocios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    empresa TEXT,
+    pessoa_contato TEXT,
+    telefone TEXT,
+    email TEXT,
+    equipamento TEXT,
+    tipo_maquina TEXT,
+    tipo_negociacao TEXT,
+    valor_produto REAL,
+    valor_oferta REAL,
+    valor_fabrica REAL,
+    valor_brasil REAL,
+    data_criacao DATE,
+    data_fechamento DATE,
+    etapa TEXT,
+    status TEXT,
+    origem TEXT,
+    observacao TEXT,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  )`);
+
+  // Tabela de histórico
+  db.run(`CREATE TABLE IF NOT EXISTS historico (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    negocio_id INTEGER,
+    tipo_acao TEXT,
+    campo_alterado TEXT,
+    valor_anterior TEXT,
+    valor_novo TEXT,
+    usuario TEXT,
+    data_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (negocio_id) REFERENCES negocios(id) ON DELETE CASCADE
   )`);
 
   // Usuários padrão
