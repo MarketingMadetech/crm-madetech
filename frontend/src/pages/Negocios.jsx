@@ -144,7 +144,9 @@ function Negocios() {
         return
       }
 
+      console.log('[Negocios] Buscando negócios com params:', params)
       const res = await api.get('/negocios', { params })
+      console.log('[Negocios] Resposta da API:', res.data)
       cacheService.set(cacheKey, res.data)
       setNegocios(res.data)
       setLoading(false)
