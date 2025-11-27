@@ -1,38 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-  const fileInputRef = useRef();
-  const [uploading, setUploading] = useState(false);
-  // Upload e restauração de backup por arquivo
-  const handleFileUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    if (!window.confirm(`Tem certeza que deseja restaurar o backup a partir do arquivo "${file.name}"?\n\nISSO IRÁ SUBSTITUIR TODOS OS DADOS ATUAIS!`)) {
-      fileInputRef.current.value = '';
-      return;
-    }
-    setUploading(true);
-    setLoading(true);
-    try {
-      const formData = new FormData();
-      formData.append('backup', file);
-      await api.post('/backup/upload', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
-      showMessage('success', 'Backup restaurado do arquivo! Recarregue a página para ver as mudanças.');
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
-    } catch (error) {
-      showMessage('error', 'Erro ao restaurar backup do arquivo');
-      console.error(error);
-      setLoading(false);
-    } finally {
-      setUploading(false);
-      fileInputRef.current.value = '';
-    }
-  };
+import React, { useRef, useState, useEffect } from 'react';
 import api from '../utils/api';
 
 export default function Backup() {
+  const fileInputRef = useRef();
+  const [uploading, setUploading] = useState(false);
   const [backups, setBackups] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
@@ -45,7 +16,6 @@ export default function Backup() {
     setLoading(true);
     try {
       const response = await api.get('/backup/list');
-      console.log('Resposta /backup/list:', response.data);
       setBackups(response.data.backups);
     } catch (error) {
       showMessage('error', 'Erro ao carregar lista de backups');
@@ -58,7 +28,7 @@ export default function Backup() {
   const createBackup = async () => {
     setLoading(true);
     try {
-      const response = await api.post('/backup/create');
+      await api.post('/backup/create');
       showMessage('success', 'Backup criado com sucesso!');
       loadBackups();
     } catch (error) {
@@ -74,7 +44,6 @@ export default function Backup() {
       const response = await api.get(`/backup/download/${fileName}`, {
         responseType: 'blob'
       });
-      
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
@@ -82,7 +51,6 @@ export default function Backup() {
       document.body.appendChild(link);
       link.click();
       link.remove();
-      
       showMessage('success', 'Download iniciado!');
     } catch (error) {
       showMessage('error', 'Erro ao fazer download do backup');
@@ -94,7 +62,6 @@ export default function Backup() {
     if (!window.confirm(`Tem certeza que deseja restaurar o backup "${fileName}"?\n\nISSO IRÁ SUBSTITUIR TODOS OS DADOS ATUAIS!`)) {
       return;
     }
-
     setLoading(true);
     try {
       await api.post(`/backup/restore/${fileName}`);
@@ -113,7 +80,6 @@ export default function Backup() {
     if (!window.confirm(`Tem certeza que deseja deletar o backup "${fileName}"?`)) {
       return;
     }
-
     setLoading(true);
     try {
       await api.delete(`/backup/delete/${fileName}`);
@@ -150,6 +116,36 @@ export default function Backup() {
     });
   };
 
+  // Upload e restauração de backup por arquivo
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!window.confirm(`Tem certeza que deseja restaurar o backup a partir do arquivo "${file.name}"?\n\nISSO IRÁ SUBSTITUIR TODOS OS DADOS ATUAIS!`)) {
+      fileInputRef.current.value = '';
+      return;
+    }
+    setUploading(true);
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append('backup', file);
+      await api.post('/backup/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      showMessage('success', 'Backup restaurado do arquivo! Recarregue a página para ver as mudanças.');
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    } catch (error) {
+      showMessage('error', 'Erro ao restaurar backup do arquivo');
+      console.error(error);
+      setLoading(false);
+    } finally {
+      setUploading(false);
+      fileInputRef.current.value = '';
+    }
+  };
+
   return (
     <div className="p-6">
       <div className="mb-6">
@@ -163,11 +159,14 @@ export default function Backup() {
 
       {/* Mensagens */}
       {message.text && (
-        <div className={`mb-4 p-4 rounded-lg ${
-          message.type === 'success' 
-            ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
-            : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
-        }`}>
+        <div
+          className={
+            'mb-4 p-4 rounded-lg ' +
+            (message.type === 'success'
+              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+              : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200')
+          }
+        >
           {message.text}
         </div>
       )}
