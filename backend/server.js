@@ -8,16 +8,15 @@ const { router: authRouter, authenticateToken } = require('./auth');
 const { createBackup, listBackups, restoreBackup, deleteBackup, BACKUP_DIR } = require('./backup');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Lista de origens permitidas
-   const allowedOrigins = [
-     'http://localhost:5173', // Frontend local
-     'http://localhost:3000', // Outra porta local, se necessário
-     'https://crm-madetech.onrender.com', // URL pública do frontend Render
-     process.env.FRONTEND_URL  // URL de produção
-   ].filter(Boolean); // Remove valores nulos/undefined
-    'https://crm-madetech.onrender.com', // URL pública do frontend Render
+const allowedOrigins = [
+  'http://localhost:5173', // Frontend local
+  'http://localhost:3000', // Outra porta local, se necessário
+  'https://crm-madetech.onrender.com', // URL pública do frontend Render
+  process.env.FRONTEND_URL  // URL de produção
+].filter(Boolean); // Remove valores nulos/undefined
 
 // CORS configurado para produção
 app.use(cors({
