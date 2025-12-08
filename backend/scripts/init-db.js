@@ -73,7 +73,20 @@ console.log('📥 Importando dados do CSV...');
 const parseValue = (value) => {
   if (!value || value.trim() === '') return null;
   
-  const cleaned = value.replace(/[R$€\s]/g, '').replace(/\./g, '').replace(',', '.');
+  // Remove R$, €, espaços e $
+  let cleaned = value.replace(/[R$€\s$]/g, '');
+  
+  // Remove traços que representam valores zerados
+  if (cleaned === '-' || cleaned === '') return null;
+  
+  // Identifica se usa ponto como separador de milhar e vírgula como decimal (padrão brasileiro)
+  // Exemplo: 340.120,00 → remove pontos de milhar, troca vírgula por ponto
+  if (cleaned.includes(',')) {
+    // Remove pontos (separadores de milhar) e troca vírgula por ponto (decimal)
+    cleaned = cleaned.replace(/\./g, '').replace(',', '.');
+  }
+  // Se não tem vírgula, assume que já está no formato correto (ex: 340120.00)
+  
   const parsed = parseFloat(cleaned);
   return isNaN(parsed) ? null : parsed;
 };
