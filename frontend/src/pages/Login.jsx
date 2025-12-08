@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import auth from '../auth';
 
-function Login() {
+function Login({ onLogin }) {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
@@ -33,8 +35,13 @@ function Login() {
         localStorage.removeItem('rememberedUsername');
       }
 
+      // Notificar App.jsx que login foi bem-sucedido
+      if (onLogin) {
+        onLogin();
+      }
+      
       // Redirecionar para dashboard
-      window.location.href = '/dashboard';
+      navigate('/dashboard');
     } else {
       setError(result.message);
     }

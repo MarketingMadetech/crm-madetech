@@ -12,6 +12,7 @@ import Login from './pages/Login'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Verificar autenticação ao carregar
@@ -21,13 +22,23 @@ function App() {
     } else {
       setIsAuthenticated(false);
     }
+    setIsLoading(false);
   }, []);
+
+  // Mostrar loading enquanto verifica
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <div className="text-white text-xl">Carregando...</div>
+      </div>
+    );
+  }
 
   // Se não estiver autenticado, mostrar apenas login
   if (!isAuthenticated) {
     return (
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login onLogin={() => setIsAuthenticated(true)} />} />
         <Route path="/*" element={<Navigate to="/login" replace />} />
       </Routes>
     );
