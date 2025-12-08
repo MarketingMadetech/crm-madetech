@@ -37,6 +37,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/funil" element={<Funil />} />
         <Route path="/lembretes" element={<Lembretes />} />
         <Route path="/relatorios" element={<Relatorios />} />
