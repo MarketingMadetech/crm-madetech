@@ -34,7 +34,7 @@ function Login() {
       }
 
       // Redirecionar para dashboard
-      window.location.href = '/';
+      window.location.href = '/dashboard';
     } else {
       setError(result.message);
     }
