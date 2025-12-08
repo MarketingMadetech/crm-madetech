@@ -26,13 +26,12 @@ function Layout({ children }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <Link to="/" className="flex-shrink-0 flex items-center gap-2 hover:opacity-80 transition-opacity">
+              <Link to="/" className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity">
                 <img 
                   src="https://www.madetech.com.br/loja/wp-content/uploads/2025/08/cropped-logo-2.png" 
                   alt="Madetech Logo"
                   className="h-8 sm:h-10 w-auto cursor-pointer"
                 />
-                <h1 className="text-lg sm:text-2xl font-bold text-blue-600 dark:text-blue-400 cursor-pointer hidden sm:block">CRM Madetech</h1>
               </Link>
               
               {/* Menu Desktop */}
