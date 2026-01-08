@@ -47,8 +47,7 @@ function Layout({ children }) {
                     }`}
                   >
                     <span className="text-base">{item.icon}</span>
-                    <span className="ml-1.5 hidden 2xl:inline">{item.label}</span>
-                    {item.label}
+                    <span className="ml-1.5">{item.label}</span>
                   </Link>
                 ))}
               </div>

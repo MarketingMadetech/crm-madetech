@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx'
 import NegocioModal from '../components/NegocioModal'
 import EmailModal from '../components/EmailModal'
 import cacheService from '../utils/cacheService'
+import EQUIPAMENTOS from '../config/equipamentos'
 
 // Componente para mostrar última atividade
 const UltimaAtividade = ({ negocioId }) => {
@@ -67,7 +68,10 @@ function Negocios() {
     status: '',
     etapa: '',
     origem: '',
-    search: ''
+    equipamento: '',
+    search: '',
+    dataInicio: '',
+    dataFim: ''
   })
   const [loading, setLoading] = useState(true)
   const [negocioSelecionado, setNegocioSelecionado] = useState(null)
@@ -174,6 +178,24 @@ function Negocios() {
   }
 
   const filtrarPorData = (negocios) => {
+    // Filtro por período personalizado (dataInicio e dataFim)
+    if (filtroAtivo.dataInicio || filtroAtivo.dataFim) {
+      return negocios.filter(n => {
+        if (!n.data_criacao) return false
+        const dataCriacao = parseData(n.data_criacao)
+        if (!dataCriacao) return false
+        
+        const dataInicio = filtroAtivo.dataInicio ? new Date(filtroAtivo.dataInicio) : null
+        const dataFim = filtroAtivo.dataFim ? new Date(filtroAtivo.dataFim) : null
+        
+        if (dataInicio && dataCriacao < dataInicio) return false
+        if (dataFim && dataCriacao > dataFim) return false
+        
+        return true
+      })
+    }
+
+    // Filtro por período rápido
     if (!filtroData) return negocios
 
     const hoje = new Date()
@@ -201,6 +223,11 @@ function Negocios() {
       const dataCriacao = parseData(n.data_criacao)
       return dataCriacao && dataCriacao >= dataLimite
     })
+  }
+  
+  const filtrarPorEquipamento = (negocios) => {
+    if (!filtroAtivo.equipamento) return negocios
+    return negocios.filter(n => n.equipamento === filtroAtivo.equipamento)
   }
 
   const ordenarNegocios = (negocios) => {
@@ -237,15 +264,17 @@ function Negocios() {
   }
 
   // Aplicar filtros, ordenação e paginação
-  const negociosFiltrados = filtrarPorData(negocios)
-  const negociosOrdenados = ordenarNegocios(negociosFiltrados)
+  const negociosFiltradosPorData = filtrarPorData(negocios)
+  const negociosFiltradosPorEquipamento = filtrarPorEquipamento(negociosFiltradosPorData)
+  const negociosOrdenados = ordenarNegocios(negociosFiltradosPorEquipamento)
   const totalPaginas = Math.ceil(negociosOrdenados.length / itensPorPagina)
   const indiceInicio = (paginaAtual - 1) * itensPorPagina
   const indiceFim = indiceInicio + itensPorPagina
   const negociosPaginados = negociosOrdenados.slice(indiceInicio, indiceFim)
 
   const limparFiltros = () => {
-    setFiltroAtivo({ status: '', etapa: '', origem: '', search: '' })
+    setFiltroAtivo({ status: '', etapa: '', origem: '', equipamento: '', search: '', dataInicio: '', dataFim: '' })
+    setFiltroData('')
     setPaginaAtual(1)
     loadNegocios({}, true) // Force refresh
   }
@@ -394,11 +423,16 @@ function Negocios() {
       <div className="flex justify-between items-center px-4 py-5 sm:px-6">
         <div>
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Negócios</h2>
-          {selecionados.length > 0 && (
-            <p className="text-sm text-blue-600 mt-1">
-              {selecionados.length} negócio(s) selecionado(s)
+          <div className="flex items-center gap-3 mt-2">
+            {selecionados.length > 0 && (
+              <p className="text-sm text-blue-600 dark:text-blue-400">
+                {selecionados.length} negócio(s) selecionado(s)
+              </p>
+            )}
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              📊 {negociosOrdenados.length} de {negocios.length} negócios
             </p>
-          )}
+          </div>
         </div>
         <div className="flex gap-3">
           {selecionados.length > 0 && (
@@ -497,7 +531,7 @@ function Negocios() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-4 mb-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Buscar</label>
             <input
@@ -545,14 +579,97 @@ function Negocios() {
             </select>
           </div>
         </div>
+
+        {/* Nova linha de filtros: Equipamento e Datas */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">🔧 Equipamento</label>
+            <select
+              value={filtroAtivo.equipamento}
+              onChange={(e) => handleFiltroChange('equipamento', e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Todos os equipamentos</option>
+              {EQUIPAMENTOS.map(eq => <option key={eq} value={eq}>{eq}</option>)}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">📅 Data Início</label>
+            <input
+              type="date"
+              value={filtroAtivo.dataInicio}
+              onChange={(e) => handleFiltroChange('dataInicio', e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">📅 Data Fim</label>
+            <input
+              type="date"
+              value={filtroAtivo.dataFim}
+              onChange={(e) => handleFiltroChange('dataFim', e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
         
-        <div className="mt-4">
-          <button
-            onClick={limparFiltros}
-            className="text-sm text-blue-600 hover:text-blue-800"
-          >
-            Limpar filtros
-          </button>
+        {/* Badges de filtros ativos e botão limpar */}
+        <div className="mt-4 flex items-center justify-between flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
+            {filtroAtivo.status && (
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                Status: {filtroAtivo.status}
+                <button onClick={() => handleFiltroChange('status', '')} className="hover:text-blue-600">✕</button>
+              </span>
+            )}
+            {filtroAtivo.etapa && (
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                Etapa: {filtroAtivo.etapa}
+                <button onClick={() => handleFiltroChange('etapa', '')} className="hover:text-purple-600">✕</button>
+              </span>
+            )}
+            {filtroAtivo.origem && (
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                Origem: {filtroAtivo.origem}
+                <button onClick={() => handleFiltroChange('origem', '')} className="hover:text-green-600">✕</button>
+              </span>
+            )}
+            {filtroAtivo.equipamento && (
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200">
+                🔧 {filtroAtivo.equipamento}
+                <button onClick={() => handleFiltroChange('equipamento', '')} className="hover:text-orange-600">✕</button>
+              </span>
+            )}
+            {filtroAtivo.dataInicio && (
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+                📅 Início: {new Date(filtroAtivo.dataInicio).toLocaleDateString('pt-BR')}
+                <button onClick={() => handleFiltroChange('dataInicio', '')} className="hover:text-yellow-600">✕</button>
+              </span>
+            )}
+            {filtroAtivo.dataFim && (
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+                📅 Fim: {new Date(filtroAtivo.dataFim).toLocaleDateString('pt-BR')}
+                <button onClick={() => handleFiltroChange('dataFim', '')} className="hover:text-yellow-600">✕</button>
+              </span>
+            )}
+            {filtroData && (
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200">
+                Período rápido
+                <button onClick={() => aplicarFiltroData('')} className="hover:text-indigo-600">✕</button>
+              </span>
+            )}
+          </div>
+          
+          {(filtroAtivo.status || filtroAtivo.etapa || filtroAtivo.origem || filtroAtivo.equipamento || filtroAtivo.dataInicio || filtroAtivo.dataFim || filtroData) && (
+            <button
+              onClick={limparFiltros}
+              className="px-4 py-2 text-sm font-medium text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md transition-colors"
+            >
+              🗑️ Limpar todos os filtros
+            </button>
+          )}
         </div>
       </div>
 

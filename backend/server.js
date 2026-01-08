@@ -96,8 +96,16 @@ db.serialize(() => {
     status TEXT,
     origem TEXT,
     observacao TEXT,
+    ocorrencias TEXT,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )`);
+
+  // Adicionar coluna ocorrencias se não existir (migração)
+  db.run(`ALTER TABLE negocios ADD COLUMN ocorrencias TEXT`, (err) => {
+    if (err && !err.message.includes('duplicate column')) {
+      console.log('Erro ao adicionar coluna ocorrencias:', err.message);
+    }
+  });
 
   // Tabela de histórico
   db.run(`CREATE TABLE IF NOT EXISTS historico (
@@ -204,21 +212,21 @@ app.post('/api/negocios', authenticateToken, (req, res) => {
   const {
     empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
     valor_produto, valor_oferta, valor_fabrica, valor_brasil,
-    data_criacao, data_fechamento, etapa, status, origem, observacao
+    data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias
   } = req.body;
   
   const query = `
     INSERT INTO negocios (
       empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
       valor_produto, valor_oferta, valor_fabrica, valor_brasil,
-      data_criacao, data_fechamento, etapa, status, origem, observacao
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
   
   db.run(query, [
     empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
     valor_produto, valor_oferta, valor_fabrica, valor_brasil,
-    data_criacao, data_fechamento, etapa, status, origem, observacao
+    data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias || ''
   ], function(err) {
     if (err) {
       return res.status(500).json({ error: err.message });
@@ -242,7 +250,7 @@ app.put('/api/negocios/:id', authenticateToken, (req, res) => {
   const {
     empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
     valor_produto, valor_oferta, valor_fabrica, valor_brasil,
-    data_criacao, data_fechamento, etapa, status, origem, observacao
+    data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias
   } = req.body;
   
   // Primeiro, buscar valores antigos para registrar no histórico
@@ -258,7 +266,7 @@ app.put('/api/negocios/:id', authenticateToken, (req, res) => {
       UPDATE negocios SET
         empresa = ?, pessoa_contato = ?, telefone = ?, email = ?, equipamento = ?, tipo_maquina = ?, tipo_negociacao = ?,
         valor_produto = ?, valor_oferta = ?, valor_fabrica = ?, valor_brasil = ?,
-        data_criacao = ?, data_fechamento = ?, etapa = ?, status = ?, origem = ?, observacao = ?,
+        data_criacao = ?, data_fechamento = ?, etapa = ?, status = ?, origem = ?, observacao = ?, ocorrencias = ?,
         updated_at = CURRENT_TIMESTAMP
       WHERE id = ?
     `;
@@ -266,7 +274,7 @@ app.put('/api/negocios/:id', authenticateToken, (req, res) => {
     db.run(query, [
       empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
       valor_produto, valor_oferta, valor_fabrica, valor_brasil,
-      data_criacao, data_fechamento, etapa, status, origem, observacao,
+      data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias || '',
       req.params.id
     ], function(err) {
       if (err) {

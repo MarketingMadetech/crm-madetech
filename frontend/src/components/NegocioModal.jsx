@@ -174,6 +174,30 @@ function NegocioModal({ negocio, onClose }) {
             </div>
           )}
 
+          {/* Histórico de Ocorrências */}
+          {negocio.ocorrencias && (
+            <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4">
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-3">📋 Histórico de Ocorrências</h3>
+              <div className="space-y-2">
+                {negocio.ocorrencias.split('\n').filter(o => o.trim()).map((ocorrencia, index) => {
+                  const match = ocorrencia.match(/\[(\d{2}\/\d{2}\/\d{4})\]\s*(.+)/);
+                  if (match) {
+                    const [, data, descricao] = match;
+                    return (
+                      <div key={index} className="flex gap-3 items-start border-l-2 border-purple-300 dark:border-purple-700 pl-3 py-1">
+                        <span className="text-xs font-semibold text-purple-600 dark:text-purple-400 whitespace-nowrap">{data}</span>
+                        <span className="text-sm text-gray-700 dark:text-gray-300">{descricao}</span>
+                      </div>
+                    );
+                  }
+                  return (
+                    <div key={index} className="text-sm text-gray-700 dark:text-gray-300 pl-3">{ocorrencia}</div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {/* Histórico de Atividades */}
           <div className="bg-gray-50 dark:bg-gray-900/20 rounded-lg p-4">
             <h3 className="font-semibold text-gray-900 dark:text-white mb-3">📜 Histórico de Atividades</h3>

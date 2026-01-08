@@ -24,12 +24,19 @@ function NegocioForm() {
     etapa: '',
     status: '',
     origem: '',
-    observacao: ''
+    observacao: '',
+    ocorrencias: ''
   })
 
   const [loading, setLoading] = useState(isEditing)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
+  
+  // Estado para nova ocorrência
+  const [novaOcorrencia, setNovaOcorrencia] = useState({
+    data: new Date().toISOString().split('T')[0],
+    descricao: ''
+  })
 
   useEffect(() => {
     if (isEditing) {
@@ -54,6 +61,36 @@ function NegocioForm() {
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const adicionarOcorrencia = () => {
+    if (!novaOcorrencia.descricao.trim()) {
+      alert('Por favor, descreva a ocorrência')
+      return
+    }
+    
+    const dataFormatada = new Date(novaOcorrencia.data).toLocaleDateString('pt-BR')
+    const textoOcorrencia = `[${dataFormatada}] ${novaOcorrencia.descricao}`
+    
+    setFormData(prev => ({
+      ...prev,
+      ocorrencias: prev.ocorrencias ? `${prev.ocorrencias}\n${textoOcorrencia}` : textoOcorrencia
+    }))
+    
+    // Limpar campos da ocorrência
+    setNovaOcorrencia({
+      data: new Date().toISOString().split('T')[0],
+      descricao: ''
+    })
+  }
+
+  const removerOcorrencia = (index) => {
+    const ocorrencias = formData.ocorrencias.split('\n').filter(o => o.trim())
+    ocorrencias.splice(index, 1)
+    setFormData(prev => ({
+      ...prev,
+      ocorrencias: ocorrencias.join('\n')
+    }))
   }
 
   const handleSubmit = async (e) => {
@@ -302,14 +339,115 @@ function NegocioForm() {
           </div>
         </div>
 
+        {/* Sistema de Ocorrências */}
+        {isEditing && (
+          <div className="border-t pt-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">📋 Nova Ocorrência</h3>
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 space-y-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Data</label>
+                  <input
+                    type="date"
+                    value={novaOcorrencia.data}
+                    onChange={(e) => setNovaOcorrencia(prev => ({ ...prev, data: e.target.value }))}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição *</label>
+                  <input
+                    type="text"
+                    placeholder="Ex: Cliente solicitou desconto adicional"
+                    value={novaOcorrencia.descricao}
+                    onChange={(e) => setNovaOcorrencia(prev => ({ ...prev, descricao: e.target.value }))}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault()
+                        adicionarOcorrencia()
+                      }
+                    }}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={adicionarOcorrencia}
+                className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium"
+              >
+                ➕ Adicionar Ocorrência
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Campo de Ocorrências */}
+        {isEditing && formData.ocorrencias && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              📝 Histórico de Ocorrências
+            </label>
+            <div className="border border-gray-300 dark:border-gray-600 rounded-lg p-4 space-y-2 bg-gray-50 dark:bg-gray-700/50">
+              {formData.ocorrencias.split('\n').filter(o => o.trim()).map((ocorrencia, index) => {
+                const match = ocorrencia.match(/\[(\d{2}\/\d{2}\/\d{4})\]\s*(.+)/);
+                if (match) {
+                  const [, data, descricao] = match;
+                  return (
+                    <div key={index} className="flex gap-3 items-start bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-md p-3 group hover:border-red-300 dark:hover:border-red-700 transition-colors">
+                      <span className="text-xs font-semibold text-purple-600 dark:text-purple-400 whitespace-nowrap pt-0.5">{data}</span>
+                      <span className="text-sm text-gray-700 dark:text-gray-300 flex-1">{descricao}</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (confirm('Deseja realmente remover esta ocorrência?')) {
+                            removerOcorrencia(index)
+                          }
+                        }}
+                        className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 opacity-0 group-hover:opacity-100 transition-opacity"
+                        title="Remover ocorrência"
+                      >
+                        🗑️
+                      </button>
+                    </div>
+                  );
+                }
+                return (
+                  <div key={index} className="flex gap-3 items-start bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-md p-3 group">
+                    <span className="text-sm text-gray-700 dark:text-gray-300 flex-1">{ocorrencia}</span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (confirm('Deseja realmente remover esta ocorrência?')) {
+                          removerOcorrencia(index)
+                        }
+                      }}
+                      className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 opacity-0 group-hover:opacity-100 transition-opacity"
+                      title="Remover ocorrência"
+                    >
+                      🗑️
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              💡 Passe o mouse sobre uma ocorrência para ver o botão de remover
+            </p>
+          </div>
+        )}
+
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Observação</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Observações Gerais
+          </label>
           <textarea
             name="observacao"
             value={formData.observacao}
             onChange={handleChange}
             rows="4"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Observações gerais sobre o negócio..."
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 

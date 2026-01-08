@@ -6,6 +6,15 @@ node_modules/
 *.db
 *.sqlite
 *.sqlite3
+backups/
+
+# CSV e JSON temporários
+*.csv
+equipamentos_extraidos.json
+analisar_duplicatas.js
+analisar_duplicatas_detalhado.js
+remover_duplicata.js
+RELATORIO_DUPLICATAS_PROFUNDO.md
 
 # Logs
 logs/
