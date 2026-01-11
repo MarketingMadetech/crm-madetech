@@ -751,23 +751,23 @@ function Negocios() {
                     </div>
                   </th>
                   <th 
-                    onClick={() => handleOrdenar('status')}
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                  >
-                    <div className="flex items-center gap-1">
-                      Status
-                      {ordenacao.campo === 'status' && (
-                        <span>{ordenacao.direcao === 'asc' ? '↑' : '↓'}</span>
-                      )}
-                    </div>
-                  </th>
-                  <th 
                     onClick={() => handleOrdenar('etapa')}
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                   >
                     <div className="flex items-center gap-1">
                       Etapa
                       {ordenacao.campo === 'etapa' && (
+                        <span>{ordenacao.direcao === 'asc' ? '↑' : '↓'}</span>
+                      )}
+                    </div>
+                  </th>
+                  <th 
+                    onClick={() => handleOrdenar('status')}
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                  >
+                    <div className="flex items-center gap-1">
+                      Status
+                      {ordenacao.campo === 'status' && (
                         <span>{ordenacao.direcao === 'asc' ? '↑' : '↓'}</span>
                       )}
                     </div>
@@ -822,12 +822,12 @@ function Negocios() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{negocio.equipamento || '-'}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{formatCurrency(negocio.valor_oferta)}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{negocio.etapa || '-'}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(negocio.status)}`}>
                         {negocio.status || '-'}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{negocio.etapa || '-'}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatarData(negocio.data_criacao)}
                     </td>

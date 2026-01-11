@@ -63,6 +63,40 @@ function NegocioForm() {
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
+  // Função para formatar valor em R$
+  const formatarReal = (valor) => {
+    if (!valor) return ''
+    const numero = valor.toString().replace(/\D/g, '')
+    const valorFormatado = (Number(numero) / 100).toLocaleString('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })
+    return valorFormatado
+  }
+
+  // Função para converter valor formatado em número
+  const converterParaNumero = (valorFormatado) => {
+    if (!valorFormatado) return ''
+    return valorFormatado.replace(/\./g, '').replace(',', '.')
+  }
+
+  // Handler específico para campos de valor
+  const handleValorChange = (e) => {
+    const { name, value } = e.target
+    const apenasNumeros = value.replace(/\D/g, '')
+    const valorEmReais = (Number(apenasNumeros) / 100).toFixed(2)
+    setFormData(prev => ({ ...prev, [name]: valorEmReais }))
+  }
+
+  // Função para exibir valor formatado no input
+  const exibirValorFormatado = (valor) => {
+    if (!valor || valor === '0' || valor === '0.00') return ''
+    return Number(valor).toLocaleString('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })
+  }
+
   const adicionarOcorrencia = () => {
     if (!novaOcorrencia.descricao.trim()) {
       alert('Por favor, descreva a ocorrência')
@@ -227,50 +261,62 @@ function NegocioForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Valor do Produto</label>
-            <input
-              type="number"
-              step="0.01"
-              name="valor_produto"
-              value={formData.valor_produto}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <div className="relative">
+              <span className="absolute left-3 top-2 text-gray-500">R$</span>
+              <input
+                type="text"
+                name="valor_produto"
+                value={exibirValorFormatado(formData.valor_produto)}
+                onChange={handleValorChange}
+                placeholder="0,00"
+                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Valor da Oferta</label>
-            <input
-              type="number"
-              step="0.01"
-              name="valor_oferta"
-              value={formData.valor_oferta}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <div className="relative">
+              <span className="absolute left-3 top-2 text-gray-500">R$</span>
+              <input
+                type="text"
+                name="valor_oferta"
+                value={exibirValorFormatado(formData.valor_oferta)}
+                onChange={handleValorChange}
+                placeholder="0,00"
+                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Valor Fábrica</label>
-            <input
-              type="number"
-              step="0.01"
-              name="valor_fabrica"
-              value={formData.valor_fabrica}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <div className="relative">
+              <span className="absolute left-3 top-2 text-gray-500">R$</span>
+              <input
+                type="text"
+                name="valor_fabrica"
+                value={exibirValorFormatado(formData.valor_fabrica)}
+                onChange={handleValorChange}
+                placeholder="0,00"
+                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Valor Brasil</label>
-            <input
-              type="number"
-              step="0.01"
-              name="valor_brasil"
-              value={formData.valor_brasil}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <div className="relative">
+              <span className="absolute left-3 top-2 text-gray-500">R$</span>
+              <input
+                type="text"
+                name="valor_brasil"
+                value={exibirValorFormatado(formData.valor_brasil)}
+                onChange={handleValorChange}
+                placeholder="0,00"
+                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
           </div>
 
           <div>
