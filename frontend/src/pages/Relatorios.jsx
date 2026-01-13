@@ -76,14 +76,14 @@ function Relatorios() {
 
   // Taxa de conversão
   const totalNegocios = negociosFiltrados.length
-  const negociosFechados = negociosFiltrados.filter(n => n.status === 'Venda Confirmada').length
-  const negociosPerdidos = negociosFiltrados.filter(n => n.status === 'Perdido').length
+  const negociosFechados = negociosFiltrados.filter(n => n.status === 'VENDA CONFIRMADA').length
+  const negociosPerdidos = negociosFiltrados.filter(n => n.status === 'PERDIDO').length
   const taxaConversao = totalNegocios > 0 ? ((negociosFechados / totalNegocios) * 100).toFixed(1) : 0
 
   // Valor total
   const valorTotal = negociosFiltrados.reduce((sum, n) => sum + (n.valor_oferta || 0), 0)
   const valorFechado = negociosFiltrados
-    .filter(n => n.status === 'Venda Confirmada')
+    .filter(n => n.status === 'VENDA CONFIRMADA')
     .reduce((sum, n) => sum + (n.valor_oferta || 0), 0)
 
   const formatCurrency = (value) => {
