@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import { formatarDataBrasileira, converterParaISO } from '../utils/dateUtils'
 
 function NegocioForm() {
   const navigate = useNavigate()
@@ -19,6 +20,14 @@ function NegocioForm() {
     valor_oferta: '',
     valor_fabrica: '',
     valor_brasil: '',
+    valor_produto_usd: '',
+    valor_oferta_usd: '',
+    valor_fabrica_usd: '',
+    valor_brasil_usd: '',
+    valor_produto_eur: '',
+    valor_oferta_eur: '',
+    valor_fabrica_eur: '',
+    valor_brasil_eur: '',
     data_criacao: '',
     data_fechamento: '',
     etapa: '',
@@ -49,7 +58,15 @@ function NegocioForm() {
       setLoading(true)
       setError(null)
       const res = await axios.get(`/api/negocios/${id}`)
-      setFormData(res.data)
+      
+      // Converter datas ISO do banco para formato brasileiro para exibição
+      const dadosFormatados = {
+        ...res.data,
+        data_criacao: formatarDataBrasileira(res.data.data_criacao),
+        data_fechamento: formatarDataBrasileira(res.data.data_fechamento)
+      }
+      
+      setFormData(dadosFormatados)
     } catch (error) {
       console.error('Erro ao carregar negócio:', error)
       setError('Erro ao carregar negócio. Tente novamente.')
@@ -133,10 +150,17 @@ function NegocioForm() {
     setSubmitting(true)
     
     try {
+      // Converter datas brasileiras para formato ISO antes de enviar
+      const dadosParaEnviar = {
+        ...formData,
+        data_criacao: converterParaISO(formData.data_criacao),
+        data_fechamento: converterParaISO(formData.data_fechamento)
+      }
+      
       if (isEditing) {
-        await axios.put(`/api/negocios/${id}`, formData)
+        await axios.put(`/api/negocios/${id}`, dadosParaEnviar)
       } else {
-        await axios.post('/api/negocios', formData)
+        await axios.post('/api/negocios', dadosParaEnviar)
       }
       navigate('/negocios')
     } catch (error) {
@@ -260,7 +284,7 @@ function NegocioForm() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Valor do Produto</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Valor do Produto (BRL)</label>
             <div className="relative">
               <span className="absolute left-3 top-2 text-gray-500">R$</span>
               <input
@@ -274,8 +298,42 @@ function NegocioForm() {
             </div>
           </div>
 
+          {formData.tipo_negociacao === 'Importação Direta' && (
+            <>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Valor do Produto (USD)</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-2 text-gray-500">$</span>
+                  <input
+                    type="text"
+                    name="valor_produto_usd"
+                    value={exibirValorFormatado(formData.valor_produto_usd)}
+                    onChange={handleValorChange}
+                    placeholder="0.00"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Valor do Produto (EUR)</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-2 text-gray-500">€</span>
+                  <input
+                    type="text"
+                    name="valor_produto_eur"
+                    value={exibirValorFormatado(formData.valor_produto_eur)}
+                    onChange={handleValorChange}
+                    placeholder="0.00"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Valor da Oferta</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Valor da Oferta (BRL)</label>
             <div className="relative">
               <span className="absolute left-3 top-2 text-gray-500">R$</span>
               <input
@@ -289,8 +347,42 @@ function NegocioForm() {
             </div>
           </div>
 
+          {formData.tipo_negociacao === 'Importação Direta' && (
+            <>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Valor da Oferta (USD)</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-2 text-gray-500">$</span>
+                  <input
+                    type="text"
+                    name="valor_oferta_usd"
+                    value={exibirValorFormatado(formData.valor_oferta_usd)}
+                    onChange={handleValorChange}
+                    placeholder="0.00"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Valor da Oferta (EUR)</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-2 text-gray-500">€</span>
+                  <input
+                    type="text"
+                    name="valor_oferta_eur"
+                    value={exibirValorFormatado(formData.valor_oferta_eur)}
+                    onChange={handleValorChange}
+                    placeholder="0.00"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Valor Fábrica</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Valor Fábrica (BRL)</label>
             <div className="relative">
               <span className="absolute left-3 top-2 text-gray-500">R$</span>
               <input
@@ -304,8 +396,42 @@ function NegocioForm() {
             </div>
           </div>
 
+          {formData.tipo_negociacao === 'Importação Direta' && (
+            <>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Valor Fábrica (USD)</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-2 text-gray-500">$</span>
+                  <input
+                    type="text"
+                    name="valor_fabrica_usd"
+                    value={exibirValorFormatado(formData.valor_fabrica_usd)}
+                    onChange={handleValorChange}
+                    placeholder="0.00"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Valor Fábrica (EUR)</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-2 text-gray-500">€</span>
+                  <input
+                    type="text"
+                    name="valor_fabrica_eur"
+                    value={exibirValorFormatado(formData.valor_fabrica_eur)}
+                    onChange={handleValorChange}
+                    placeholder="0.00"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Valor Brasil</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Valor Brasil (BRL)</label>
             <div className="relative">
               <span className="absolute left-3 top-2 text-gray-500">R$</span>
               <input
@@ -318,6 +444,41 @@ function NegocioForm() {
               />
             </div>
           </div>
+
+          {formData.tipo_negociacao === 'Importação Direta' && (
+            <>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Valor Brasil (USD)</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-2 text-gray-500">$</span>
+                  <input
+                    type="text"
+                    name="valor_brasil_usd"
+                    value={exibirValorFormatado(formData.valor_brasil_usd)}
+                    onChange={handleValorChange}
+                    placeholder="0.00"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Valor Brasil (EUR)</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-2 text-gray-500">€</span>
+                  <input
+                    type="text"
+                    name="valor_brasil_eur"
+                    value={exibirValorFormatado(formData.valor_brasil_eur)}
+                    onChange={handleValorChange}
+                    placeholder="0.00"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Data de Criação</label>

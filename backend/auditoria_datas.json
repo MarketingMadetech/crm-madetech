@@ -1,0 +1,4720 @@
+{
+  "dataAuditoria": "2026-01-13T11:44:15.605Z",
+  "totalNegociosDB": 784,
+  "totalRegistrosExcel": 1846,
+  "resumo": {
+    "datasCorretas": 0,
+    "datasDiferentes": 0,
+    "naoEncontrados": 784,
+    "semDataNoPlanilha": 0
+  },
+  "datasCorretas": [],
+  "datasDiferentes": [],
+  "naoEncontrados": [
+    {
+      "id": 2454,
+      "empresa": "MGM",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2016-03-16"
+    },
+    {
+      "id": 2455,
+      "empresa": "OP",
+      "equipamento": "SVP 133",
+      "dataCriacaoDB": "2017-12-10"
+    },
+    {
+      "id": 2456,
+      "empresa": "Corporativa Revestimentos",
+      "equipamento": "SVP 145",
+      "dataCriacaoDB": "2018-04-14"
+    },
+    {
+      "id": 2457,
+      "empresa": "Visoma",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2018-12-09"
+    },
+    {
+      "id": 2458,
+      "empresa": "Visoma",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2018-12-09"
+    },
+    {
+      "id": 2459,
+      "empresa": "WNS Com. e Serviços - Casa do Marceneiro",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2019-03-19"
+    },
+    {
+      "id": 2460,
+      "empresa": "WNS Com. e Serviços - Casa do Marceneiro",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": "2019-04-09"
+    },
+    {
+      "id": 2461,
+      "empresa": "WNS Com. e Serviços - Casa do Marceneiro",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2019-04-12"
+    },
+    {
+      "id": 2462,
+      "empresa": "WNS Com. e Serviços - Casa do Marceneiro",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2019-04-12"
+    },
+    {
+      "id": 2463,
+      "empresa": "Fábrica de Móveis Bontempo",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2020-01-23"
+    },
+    {
+      "id": 2464,
+      "empresa": "Madeirama",
+      "equipamento": "SVP 145",
+      "dataCriacaoDB": "2020-07-13"
+    },
+    {
+      "id": 2465,
+      "empresa": "Maqmóveis Ind. e Comércio",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2020-07-20"
+    },
+    {
+      "id": 2466,
+      "empresa": "Maqmóveis Ind. e Comércio",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2020-07-20"
+    },
+    {
+      "id": 2467,
+      "empresa": "JCS Eletro Indusrial",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2020-08-21"
+    },
+    {
+      "id": 2468,
+      "empresa": "Incomaf",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2020-11-04"
+    },
+    {
+      "id": 2469,
+      "empresa": "Palfer Comércio de Móveis",
+      "equipamento": "SVP 145",
+      "dataCriacaoDB": "2021-01-21"
+    },
+    {
+      "id": 2470,
+      "empresa": "Listone Ind. e Com. de Madeiras",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2021-05-17"
+    },
+    {
+      "id": 2471,
+      "empresa": "Listone Ind. e Com. de Madeiras",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2021-05-17"
+    },
+    {
+      "id": 2472,
+      "empresa": "SVS Marcenaria",
+      "equipamento": "SVP 145",
+      "dataCriacaoDB": "2021-08-04"
+    },
+    {
+      "id": 2473,
+      "empresa": "Marcenaria Moderna",
+      "equipamento": "SVP 145",
+      "dataCriacaoDB": "2021-12-06"
+    },
+    {
+      "id": 2474,
+      "empresa": "Personale Movelaria",
+      "equipamento": "SVP 145",
+      "dataCriacaoDB": "2022-03-29"
+    },
+    {
+      "id": 2475,
+      "empresa": "Marcetex",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-05-02"
+    },
+    {
+      "id": 2476,
+      "empresa": "Water Marcenaria",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2022-05-31"
+    },
+    {
+      "id": 2477,
+      "empresa": "Marcenaria Barros",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2022-06-08"
+    },
+    {
+      "id": 2478,
+      "empresa": "Marcenaria Barros",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-06-08"
+    },
+    {
+      "id": 2479,
+      "empresa": "G5 Comércio de Madeiras - Léo Madeiras João Pessoa PB",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2022-07-14"
+    },
+    {
+      "id": 2480,
+      "empresa": "Vita Móveis",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-07-26"
+    },
+    {
+      "id": 2481,
+      "empresa": "Fefer Ind. Com. (Breton)",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-07-27"
+    },
+    {
+      "id": 2482,
+      "empresa": "Di Legno",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-08-10"
+    },
+    {
+      "id": 2483,
+      "empresa": "Camerata Móveis Planejados",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2022-08-25"
+    },
+    {
+      "id": 2484,
+      "empresa": "Grifell Marcenaria",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2022-08-31"
+    },
+    {
+      "id": 2485,
+      "empresa": "Bossi Movelaria",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-09-13"
+    },
+    {
+      "id": 2486,
+      "empresa": "Marcenaria Tanigushi",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2022-09-14"
+    },
+    {
+      "id": 2487,
+      "empresa": "Marcenaria Tanigushi",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-09-14"
+    },
+    {
+      "id": 2488,
+      "empresa": "Bama Madeiras",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2022-09-18"
+    },
+    {
+      "id": 2489,
+      "empresa": "Bama Madeiras",
+      "equipamento": "Millenium 6GS",
+      "dataCriacaoDB": "2022-09-18"
+    },
+    {
+      "id": 2490,
+      "empresa": "Rúpulo Móveis",
+      "equipamento": "Célula Nesting",
+      "dataCriacaoDB": "2022-10-12"
+    },
+    {
+      "id": 2491,
+      "empresa": "Compensados Amizade",
+      "equipamento": "SVP 145",
+      "dataCriacaoDB": "2022-10-19"
+    },
+    {
+      "id": 2492,
+      "empresa": "Lami Brasil",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-10-19"
+    },
+    {
+      "id": 2493,
+      "empresa": "Planus Marcenaria",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-10-24"
+    },
+    {
+      "id": 2494,
+      "empresa": "Andrade Móveis Sob Medida",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2022-10-31"
+    },
+    {
+      "id": 2495,
+      "empresa": "Andrade Móveis Sob Medida",
+      "equipamento": "Millenium 6GS",
+      "dataCriacaoDB": "2022-10-31"
+    },
+    {
+      "id": 2496,
+      "empresa": "Instart",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2022-11-02"
+    },
+    {
+      "id": 2497,
+      "empresa": "Instart",
+      "equipamento": "Millenium 6GS",
+      "dataCriacaoDB": "2022-11-02"
+    },
+    {
+      "id": 2498,
+      "empresa": "Dispama Madeiras",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2022-11-08"
+    },
+    {
+      "id": 2499,
+      "empresa": "Dispama Madeiras",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-11-08"
+    },
+    {
+      "id": 2500,
+      "empresa": "Taec Módulos",
+      "equipamento": "Point 2",
+      "dataCriacaoDB": "2022-11-10"
+    },
+    {
+      "id": 2501,
+      "empresa": "Marcenaria SM",
+      "equipamento": "SVP 145",
+      "dataCriacaoDB": "2022-11-11"
+    },
+    {
+      "id": 2502,
+      "empresa": "Madeireira Ibicui",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2022-11-15"
+    },
+    {
+      "id": 2503,
+      "empresa": "Madeireira Ibicui",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2022-11-15"
+    },
+    {
+      "id": 2504,
+      "empresa": "Madera Marcenaria",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2022-11-20"
+    },
+    {
+      "id": 2505,
+      "empresa": "Madera Marcenaria",
+      "equipamento": "Classic 21",
+      "dataCriacaoDB": "2022-11-20"
+    },
+    {
+      "id": 2506,
+      "empresa": "Madera Marcenaria",
+      "equipamento": "Lixadeira Banda Larga",
+      "dataCriacaoDB": "2022-11-20"
+    },
+    {
+      "id": 2507,
+      "empresa": "Madera Marcenaria",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2022-11-20"
+    },
+    {
+      "id": 2508,
+      "empresa": "Madera Marcenaria",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-11-20"
+    },
+    {
+      "id": 2509,
+      "empresa": "Madera Marcenaria",
+      "equipamento": "Millenium 6GS",
+      "dataCriacaoDB": "2022-11-20"
+    },
+    {
+      "id": 2510,
+      "empresa": "Claussi Ramos Marcenaria",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2022-11-21"
+    },
+    {
+      "id": 2511,
+      "empresa": "DS Móveis Planejados",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2022-11-21"
+    },
+    {
+      "id": 2512,
+      "empresa": "DS Móveis Planejados",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2022-11-21"
+    },
+    {
+      "id": 2513,
+      "empresa": "Claussi Ramos Marcenaria",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-11-21"
+    },
+    {
+      "id": 2514,
+      "empresa": "DS Móveis Planejados",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2022-11-21"
+    },
+    {
+      "id": 2515,
+      "empresa": "DS Móveis Planejados",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-11-21"
+    },
+    {
+      "id": 2516,
+      "empresa": "Planus Marcenaria",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-11-21"
+    },
+    {
+      "id": 2517,
+      "empresa": "Caliman Madeiras Ltda",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2022-11-22"
+    },
+    {
+      "id": 2518,
+      "empresa": "Logaf Móveis",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2022-11-22"
+    },
+    {
+      "id": 2519,
+      "empresa": "Caliman Madeiras Ltda",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-11-22"
+    },
+    {
+      "id": 2520,
+      "empresa": "Logaf Móveis",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-11-22"
+    },
+    {
+      "id": 2521,
+      "empresa": "Ciplast",
+      "equipamento": "SVP 145",
+      "dataCriacaoDB": "2022-11-22"
+    },
+    {
+      "id": 2522,
+      "empresa": "Estúdio M Marcenaria",
+      "equipamento": "Prensa OMC",
+      "dataCriacaoDB": "2022-12-07"
+    },
+    {
+      "id": 2523,
+      "empresa": "Mideast Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2022-12-07"
+    },
+    {
+      "id": 2524,
+      "empresa": "Mideast Móveis",
+      "equipamento": "Prensa OMC",
+      "dataCriacaoDB": "2022-12-07"
+    },
+    {
+      "id": 2525,
+      "empresa": "Mideast Móveis",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2022-12-07"
+    },
+    {
+      "id": 2526,
+      "empresa": "Fefer Ind. Com. (Breton)",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2022-12-15"
+    },
+    {
+      "id": 2527,
+      "empresa": "Fefer Ind. Com. (Breton)",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2022-12-15"
+    },
+    {
+      "id": 2528,
+      "empresa": "Instart",
+      "equipamento": "Coladeira de Bordos Falcon",
+      "dataCriacaoDB": "2022-12-17"
+    },
+    {
+      "id": 2529,
+      "empresa": "Instart",
+      "equipamento": "Coladeira Falcon",
+      "dataCriacaoDB": "2022-12-17"
+    },
+    {
+      "id": 2530,
+      "empresa": "Montafarma",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2022-12-19"
+    },
+    {
+      "id": 2531,
+      "empresa": "B. W. Puva Móveis Ltda",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2022-12-20"
+    },
+    {
+      "id": 2532,
+      "empresa": "Icasa Móveis",
+      "equipamento": "Point 2",
+      "dataCriacaoDB": "2022-12-20"
+    },
+    {
+      "id": 2533,
+      "empresa": "M2X Construtora",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2022-12-26"
+    },
+    {
+      "id": 2534,
+      "empresa": "M2X Construtora",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2022-12-26"
+    },
+    {
+      "id": 2535,
+      "empresa": "Jotas Móveis",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2023-01-09"
+    },
+    {
+      "id": 2536,
+      "empresa": "Jotas Móveis",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2023-01-09"
+    },
+    {
+      "id": 2537,
+      "empresa": "Bold Plásticos",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-01-09"
+    },
+    {
+      "id": 2538,
+      "empresa": "Bold Plásticos",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2023-01-09"
+    },
+    {
+      "id": 2539,
+      "empresa": "Braspan",
+      "equipamento": "Coladeira Verry",
+      "dataCriacaoDB": "2023-01-11"
+    },
+    {
+      "id": 2540,
+      "empresa": "Bestechi Engenharia",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2023-01-15"
+    },
+    {
+      "id": 2541,
+      "empresa": "Bestechi Engenharia",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-01-15"
+    },
+    {
+      "id": 2542,
+      "empresa": "RT Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-01-16"
+    },
+    {
+      "id": 2543,
+      "empresa": "RT Móveis",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-01-16"
+    },
+    {
+      "id": 2544,
+      "empresa": "Plancus",
+      "equipamento": "Célula Nesting",
+      "dataCriacaoDB": "2023-01-24"
+    },
+    {
+      "id": 2545,
+      "empresa": "Olver do Brasil",
+      "equipamento": "SVP 133",
+      "dataCriacaoDB": "2023-01-29"
+    },
+    {
+      "id": 2546,
+      "empresa": "Madeireira Ibicui",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-01-30"
+    },
+    {
+      "id": 2547,
+      "empresa": "DSP Cortes e Serviços Especiais",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-01-31"
+    },
+    {
+      "id": 2548,
+      "empresa": "DSP Cortes e Serviços Especiais",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-01-31"
+    },
+    {
+      "id": 2549,
+      "empresa": "Vick Plásticos",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2023-02-02"
+    },
+    {
+      "id": 2550,
+      "empresa": "Patrimar Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-02-12"
+    },
+    {
+      "id": 2551,
+      "empresa": "Piata Norte Móveis",
+      "equipamento": "SVP 133",
+      "dataCriacaoDB": "2023-02-12"
+    },
+    {
+      "id": 2552,
+      "empresa": "Patrimar Móveis",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-02-12"
+    },
+    {
+      "id": 2553,
+      "empresa": "DalPra Ind. Com. de Móveis Ltda",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-02-19"
+    },
+    {
+      "id": 2554,
+      "empresa": "DalPra Ind. Com. de Móveis Ltda",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-02-19"
+    },
+    {
+      "id": 2555,
+      "empresa": "B R Catanhede Móveis",
+      "equipamento": "Point 2",
+      "dataCriacaoDB": "2023-02-20"
+    },
+    {
+      "id": 2556,
+      "empresa": "Arte & Design",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2023-02-23"
+    },
+    {
+      "id": 2557,
+      "empresa": "Arte & Design",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-02-23"
+    },
+    {
+      "id": 2558,
+      "empresa": "Marcenaria Efatá Ltda",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-02-26"
+    },
+    {
+      "id": 2559,
+      "empresa": "NTSE Ind. e Com. de Móveis",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2023-02-28"
+    },
+    {
+      "id": 2560,
+      "empresa": "NTSE Ind. e Com. de Móveis",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-02-28"
+    },
+    {
+      "id": 2561,
+      "empresa": "Bontempo Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-03-01"
+    },
+    {
+      "id": 2562,
+      "empresa": "NTSE Ind. e Com. de Móveis",
+      "equipamento": "Célula Nesting",
+      "dataCriacaoDB": "2023-03-01"
+    },
+    {
+      "id": 2563,
+      "empresa": "Visualflex",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-03-01"
+    },
+    {
+      "id": 2564,
+      "empresa": "Bontempo Móveis",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-03-01"
+    },
+    {
+      "id": 2565,
+      "empresa": "Visualflex",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-03-01"
+    },
+    {
+      "id": 2566,
+      "empresa": "Raízes Móveis",
+      "equipamento": "Seccionadora CVL 3400",
+      "dataCriacaoDB": "2023-03-06"
+    },
+    {
+      "id": 2567,
+      "empresa": "E-Led Iluminação Ltda",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-03-08"
+    },
+    {
+      "id": 2568,
+      "empresa": "E-Led Iluminação Ltda",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-03-08"
+    },
+    {
+      "id": 2569,
+      "empresa": "Blum do Brasil",
+      "equipamento": "Point 2",
+      "dataCriacaoDB": "2023-03-09"
+    },
+    {
+      "id": 2570,
+      "empresa": "Gravex",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2023-03-10"
+    },
+    {
+      "id": 2571,
+      "empresa": "Gravex",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-03-10"
+    },
+    {
+      "id": 2572,
+      "empresa": "Aggile Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-03-12"
+    },
+    {
+      "id": 2573,
+      "empresa": "Aggile Móveis",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-03-12"
+    },
+    {
+      "id": 2574,
+      "empresa": "Glamour Móveis",
+      "equipamento": "Célula Nesting 5º eixo",
+      "dataCriacaoDB": "2023-03-26"
+    },
+    {
+      "id": 2575,
+      "empresa": "Anderson Marcenaria",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2023-03-28"
+    },
+    {
+      "id": 2576,
+      "empresa": "Espaço A Móveis",
+      "equipamento": "Furadeira Múltipla Lidear",
+      "dataCriacaoDB": "2023-03-29"
+    },
+    {
+      "id": 2577,
+      "empresa": "Linea Rica",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2023-03-29"
+    },
+    {
+      "id": 2578,
+      "empresa": "Mobles Fábrica de Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-03-29"
+    },
+    {
+      "id": 2579,
+      "empresa": "Norte Sul Indústria de Móveis (Castinni Móveis)",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-03-29"
+    },
+    {
+      "id": 2580,
+      "empresa": "Linea Rica",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2023-03-29"
+    },
+    {
+      "id": 2581,
+      "empresa": "Mobles Fábrica de Móveis",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-03-29"
+    },
+    {
+      "id": 2582,
+      "empresa": "Norte Sul Indústria de Móveis (Castinni Móveis)",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-03-29"
+    },
+    {
+      "id": 2583,
+      "empresa": "Girus",
+      "equipamento": "Coladeira Falcon",
+      "dataCriacaoDB": "2023-04-03"
+    },
+    {
+      "id": 2584,
+      "empresa": "Z Comércio e Fabricação Ltda",
+      "equipamento": "SVP 145",
+      "dataCriacaoDB": "2023-04-09"
+    },
+    {
+      "id": 2585,
+      "empresa": "Blank Marcenaria",
+      "equipamento": "SVP 145",
+      "dataCriacaoDB": "2023-04-10"
+    },
+    {
+      "id": 2586,
+      "empresa": "Ipê Negro Móveis Comerciais",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-04-10"
+    },
+    {
+      "id": 2587,
+      "empresa": "Ipê Negro Móveis Comerciais",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-04-10"
+    },
+    {
+      "id": 2588,
+      "empresa": "Leroy Merlin",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2023-04-14"
+    },
+    {
+      "id": 2589,
+      "empresa": "Andrade Móveis Sob Medida",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2023-04-18"
+    },
+    {
+      "id": 2590,
+      "empresa": "Marzo Vitorino",
+      "equipamento": "Contour 2.0 Plus",
+      "dataCriacaoDB": "2023-04-19"
+    },
+    {
+      "id": 2591,
+      "empresa": "Marzo Vitorino",
+      "equipamento": "Contour 2 braços",
+      "dataCriacaoDB": "2023-04-19"
+    },
+    {
+      "id": 2592,
+      "empresa": "Mercado das Folhas",
+      "equipamento": "Prensa Térmica 3013 4PM",
+      "dataCriacaoDB": "2023-04-25"
+    },
+    {
+      "id": 2593,
+      "empresa": "Mercado das Folhas",
+      "equipamento": "Prensa 4 pratos",
+      "dataCriacaoDB": "2023-04-25"
+    },
+    {
+      "id": 2594,
+      "empresa": "Andrade Móveis Sob Medida",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2023-04-26"
+    },
+    {
+      "id": 2595,
+      "empresa": "Andrade Móveis Sob Medida",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-04-26"
+    },
+    {
+      "id": 2596,
+      "empresa": "Sólido Móveis",
+      "equipamento": "Point 2",
+      "dataCriacaoDB": "2023-04-27"
+    },
+    {
+      "id": 2597,
+      "empresa": "Marcenaria Coração de Jesus",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2023-04-27"
+    },
+    {
+      "id": 2598,
+      "empresa": "Leo Madeiras",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2023-04-27"
+    },
+    {
+      "id": 2599,
+      "empresa": "B R Catanhede Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-05-01"
+    },
+    {
+      "id": 2600,
+      "empresa": "Marcenaria Volponi",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2023-05-01"
+    },
+    {
+      "id": 2601,
+      "empresa": "Marcenaria Volponi",
+      "equipamento": "Point 2",
+      "dataCriacaoDB": "2023-05-01"
+    },
+    {
+      "id": 2602,
+      "empresa": "Marcenaria Volponi",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-05-01"
+    },
+    {
+      "id": 2603,
+      "empresa": "B R Catanhede Móveis",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-05-01"
+    },
+    {
+      "id": 2604,
+      "empresa": "Refrigeração São Luiz",
+      "equipamento": "Seccionadora AXO",
+      "dataCriacaoDB": "2023-05-02"
+    },
+    {
+      "id": 2605,
+      "empresa": "Casa Silva",
+      "equipamento": "Embaladora Strech Immergut",
+      "dataCriacaoDB": "2023-05-03"
+    },
+    {
+      "id": 2606,
+      "empresa": "Casa Silva",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2023-05-03"
+    },
+    {
+      "id": 2607,
+      "empresa": "Casa Silva",
+      "equipamento": "Embaladora Strech",
+      "dataCriacaoDB": "2023-05-03"
+    },
+    {
+      "id": 2608,
+      "empresa": "Casa Silva",
+      "equipamento": "Millenium 6GS",
+      "dataCriacaoDB": "2023-05-03"
+    },
+    {
+      "id": 2609,
+      "empresa": "Marcenaria Tanigushi",
+      "equipamento": "Coladeira Astra",
+      "dataCriacaoDB": "2023-05-08"
+    },
+    {
+      "id": 2610,
+      "empresa": "Marcenaria Tanigushi",
+      "equipamento": "Seccionadora CVL 3400",
+      "dataCriacaoDB": "2023-05-08"
+    },
+    {
+      "id": 2611,
+      "empresa": "Marcenaria Tanigushi",
+      "equipamento": "Coladeira Bend",
+      "dataCriacaoDB": "2023-05-08"
+    },
+    {
+      "id": 2612,
+      "empresa": "Dirceu de Lima",
+      "equipamento": "Triturador Immergut",
+      "dataCriacaoDB": "2023-05-09"
+    },
+    {
+      "id": 2613,
+      "empresa": "Europlan Marcenaria",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2023-05-09"
+    },
+    {
+      "id": 2614,
+      "empresa": "Europlan Marcenaria",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": "2023-05-09"
+    },
+    {
+      "id": 2615,
+      "empresa": "Tersetec",
+      "equipamento": "Nesting Robust V1 com descarga",
+      "dataCriacaoDB": "2023-05-09"
+    },
+    {
+      "id": 2616,
+      "empresa": "Tersetec",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-05-09"
+    },
+    {
+      "id": 2617,
+      "empresa": "Europlan Marcenaria",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-05-09"
+    },
+    {
+      "id": 2618,
+      "empresa": "Europlan Marcenaria",
+      "equipamento": "Centro de Furação CNC",
+      "dataCriacaoDB": "2023-05-09"
+    },
+    {
+      "id": 2619,
+      "empresa": "Kyoddai",
+      "equipamento": "Célula Nesting",
+      "dataCriacaoDB": "2023-05-09"
+    },
+    {
+      "id": 2620,
+      "empresa": "Cortes Sob Medida",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2023-05-11"
+    },
+    {
+      "id": 2621,
+      "empresa": "G Móveis Planejados",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2023-05-11"
+    },
+    {
+      "id": 2622,
+      "empresa": "G Móveis Planejados",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2023-05-11"
+    },
+    {
+      "id": 2623,
+      "empresa": "Dick Sporting Goods",
+      "equipamento": "Lixadeira Banda Larga",
+      "dataCriacaoDB": "2023-05-15"
+    },
+    {
+      "id": 2624,
+      "empresa": "P R Comércio Ltda (Grupo Potiguar)",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2023-05-18"
+    },
+    {
+      "id": 2625,
+      "empresa": "P R Comércio Ltda (Grupo Potiguar)",
+      "equipamento": "Century 5GS",
+      "dataCriacaoDB": "2023-05-18"
+    },
+    {
+      "id": 2626,
+      "empresa": "P R Comércio Ltda (Grupo Potiguar)",
+      "equipamento": "Prime 4GS",
+      "dataCriacaoDB": "2023-05-18"
+    },
+    {
+      "id": 2627,
+      "empresa": "Calimazzo Madeiras",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-05-18"
+    },
+    {
+      "id": 2628,
+      "empresa": "Calimazzo Madeiras",
+      "equipamento": "Point 2 TPA",
+      "dataCriacaoDB": "2023-05-23"
+    },
+    {
+      "id": 2629,
+      "empresa": "Calimazzo Madeiras",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": "2023-05-23"
+    },
+    {
+      "id": 2630,
+      "empresa": "Calimazzo Madeiras",
+      "equipamento": "Coladeira de Bordos Astra 30mm",
+      "dataCriacaoDB": "2023-05-23"
+    },
+    {
+      "id": 2631,
+      "empresa": "Itália Office",
+      "equipamento": "Seccionadora CVL 3400",
+      "dataCriacaoDB": "2023-05-23"
+    },
+    {
+      "id": 2632,
+      "empresa": "Itália Office",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": "2023-05-23"
+    },
+    {
+      "id": 2633,
+      "empresa": "Itália Office",
+      "equipamento": "Compressor Parafuso",
+      "dataCriacaoDB": "2023-05-23"
+    },
+    {
+      "id": 2634,
+      "empresa": "Itália Office",
+      "equipamento": "Seccionadora CVL",
+      "dataCriacaoDB": "2023-05-23"
+    },
+    {
+      "id": 2635,
+      "empresa": "Itália Office",
+      "equipamento": "Centro de Furação CNC",
+      "dataCriacaoDB": "2023-05-23"
+    },
+    {
+      "id": 2636,
+      "empresa": "Calimazzo Madeiras",
+      "equipamento": "Centro de Furação CNC",
+      "dataCriacaoDB": "2023-05-23"
+    },
+    {
+      "id": 2637,
+      "empresa": "Calimazzo Madeiras",
+      "equipamento": "Millenium 6GS",
+      "dataCriacaoDB": "2023-05-23"
+    },
+    {
+      "id": 2638,
+      "empresa": "Serbin Indústria e Comércio (Empório Tiffany)",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-05-24"
+    },
+    {
+      "id": 2639,
+      "empresa": "Serbin Indústria e Comércio (Empório Tiffany)",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-05-24"
+    },
+    {
+      "id": 2640,
+      "empresa": "Marcenaria Soares de Campos Ltda",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2023-05-30"
+    },
+    {
+      "id": 2641,
+      "empresa": "Marcenaria Soares de Campos Ltda",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2023-05-30"
+    },
+    {
+      "id": 2642,
+      "empresa": "Atelier BK",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2023-06-01"
+    },
+    {
+      "id": 2643,
+      "empresa": "HL Serviços e Comércio Ltda",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-06-01"
+    },
+    {
+      "id": 2644,
+      "empresa": "Atelier BK",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2023-06-01"
+    },
+    {
+      "id": 2645,
+      "empresa": "HL Serviços e Comércio Ltda",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-06-01"
+    },
+    {
+      "id": 2646,
+      "empresa": "Móveis Roso",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2023-06-06"
+    },
+    {
+      "id": 2647,
+      "empresa": "Móveis Roso",
+      "equipamento": "Centro de Furação CNC",
+      "dataCriacaoDB": "2023-06-08"
+    },
+    {
+      "id": 2648,
+      "empresa": "Móveis Roso",
+      "equipamento": "Célula Nesting",
+      "dataCriacaoDB": "2023-06-08"
+    },
+    {
+      "id": 2649,
+      "empresa": "Plancus",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2023-06-11"
+    },
+    {
+      "id": 2650,
+      "empresa": "Plancus",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2023-06-11"
+    },
+    {
+      "id": 2651,
+      "empresa": "On Design Indústria e Comércio de Móveis",
+      "equipamento": "Point 2",
+      "dataCriacaoDB": "2023-06-11"
+    },
+    {
+      "id": 2652,
+      "empresa": "Alberflex",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-06-13"
+    },
+    {
+      "id": 2653,
+      "empresa": "Alberflex",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-06-13"
+    },
+    {
+      "id": 2654,
+      "empresa": "Jomari Marcenaria Ltda",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-06-15"
+    },
+    {
+      "id": 2655,
+      "empresa": "Jomari Marcenaria Ltda",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-06-15"
+    },
+    {
+      "id": 2656,
+      "empresa": "Segatto",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2023-06-18"
+    },
+    {
+      "id": 2657,
+      "empresa": "Segatto",
+      "equipamento": "Coladeira de Bordos CH21",
+      "dataCriacaoDB": "2023-06-18"
+    },
+    {
+      "id": 2658,
+      "empresa": "Segatto",
+      "equipamento": "Millenium 6GS",
+      "dataCriacaoDB": "2023-06-18"
+    },
+    {
+      "id": 2659,
+      "empresa": "Segatto",
+      "equipamento": "CH 21",
+      "dataCriacaoDB": "2023-06-18"
+    },
+    {
+      "id": 2660,
+      "empresa": "Sandrin Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-06-20"
+    },
+    {
+      "id": 2661,
+      "empresa": "Sandrin Móveis",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-06-20"
+    },
+    {
+      "id": 2662,
+      "empresa": "Nossa Casa",
+      "equipamento": "Célula Nesting",
+      "dataCriacaoDB": "2023-06-28"
+    },
+    {
+      "id": 2663,
+      "empresa": "Semad Marcenaria",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2023-06-28"
+    },
+    {
+      "id": 2664,
+      "empresa": "Semad Marcenaria",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": "2023-06-28"
+    },
+    {
+      "id": 2665,
+      "empresa": "MAP Mobília Carapicuiba",
+      "equipamento": "Point 2",
+      "dataCriacaoDB": "2023-07-06"
+    },
+    {
+      "id": 2666,
+      "empresa": "Projeto Promov",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-07-06"
+    },
+    {
+      "id": 2667,
+      "empresa": "WNS Com. e Serviços - Casa do Marceneiro",
+      "equipamento": "Coladeira Astra",
+      "dataCriacaoDB": "2023-07-06"
+    },
+    {
+      "id": 2668,
+      "empresa": "Projeto Promov",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-07-06"
+    },
+    {
+      "id": 2669,
+      "empresa": "Rei das Capas MDF e MDP",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2023-07-06"
+    },
+    {
+      "id": 2670,
+      "empresa": "RTEC Tecnologia em revestimentos",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2023-07-09"
+    },
+    {
+      "id": 2671,
+      "empresa": "RTEC Tecnologia em revestimentos",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-07-09"
+    },
+    {
+      "id": 2672,
+      "empresa": "Astral Design",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-07-12"
+    },
+    {
+      "id": 2673,
+      "empresa": "Casagrande Móveis",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2023-07-12"
+    },
+    {
+      "id": 2674,
+      "empresa": "Casagrande Móveis",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-07-12"
+    },
+    {
+      "id": 2675,
+      "empresa": "Lazzarini Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-07-13"
+    },
+    {
+      "id": 2676,
+      "empresa": "Romani Marcenaria",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-07-16"
+    },
+    {
+      "id": 2677,
+      "empresa": "Romani Marcenaria",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-07-16"
+    },
+    {
+      "id": 2678,
+      "empresa": "Astral Design",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2023-07-17"
+    },
+    {
+      "id": 2679,
+      "empresa": "Astral Design",
+      "equipamento": "Nesting CNC 3020 ATC-LE",
+      "dataCriacaoDB": "2023-07-17"
+    },
+    {
+      "id": 2680,
+      "empresa": "Astral Design",
+      "equipamento": "Point 2",
+      "dataCriacaoDB": "2023-07-17"
+    },
+    {
+      "id": 2681,
+      "empresa": "Decoli Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-07-17"
+    },
+    {
+      "id": 2682,
+      "empresa": "Decoli Móveis",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-07-17"
+    },
+    {
+      "id": 2683,
+      "empresa": "Marcenaria Requinte",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-07-17"
+    },
+    {
+      "id": 2684,
+      "empresa": "Semad Marcenaria",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-07-17"
+    },
+    {
+      "id": 2685,
+      "empresa": "Astral Design",
+      "equipamento": "Millenium 6GS",
+      "dataCriacaoDB": "2023-07-17"
+    },
+    {
+      "id": 2686,
+      "empresa": "Astral Design",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": "2023-07-17"
+    },
+    {
+      "id": 2687,
+      "empresa": "Astral Design",
+      "equipamento": "Centro de Furação CNC",
+      "dataCriacaoDB": "2023-07-17"
+    },
+    {
+      "id": 2688,
+      "empresa": "Moto Madeiras",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-07-20"
+    },
+    {
+      "id": 2689,
+      "empresa": "Moto Madeiras",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-07-20"
+    },
+    {
+      "id": 2690,
+      "empresa": "Gabriel Portas",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2023-07-24"
+    },
+    {
+      "id": 2691,
+      "empresa": "Equipa Group",
+      "equipamento": "Centro HB611GXS",
+      "dataCriacaoDB": "2023-07-24"
+    },
+    {
+      "id": 2692,
+      "empresa": "Equipa Group",
+      "equipamento": "Linha Nesting",
+      "dataCriacaoDB": "2023-07-24"
+    },
+    {
+      "id": 2693,
+      "empresa": "Cellus Móveis Corporativos",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-07-26"
+    },
+    {
+      "id": 2694,
+      "empresa": "Cellus Móveis Corporativos",
+      "equipamento": "Contour",
+      "dataCriacaoDB": "2023-07-26"
+    },
+    {
+      "id": 2695,
+      "empresa": "Cellus Móveis Corporativos",
+      "equipamento": "Linha Nesting",
+      "dataCriacaoDB": "2023-07-27"
+    },
+    {
+      "id": 2696,
+      "empresa": "Madeireira Pinhões",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2023-07-30"
+    },
+    {
+      "id": 2697,
+      "empresa": "Madeireira Pinhões",
+      "equipamento": "Millenium 6GS",
+      "dataCriacaoDB": "2023-07-30"
+    },
+    {
+      "id": 2698,
+      "empresa": "Plancus",
+      "equipamento": "Prensa Térmica 3513 3PM",
+      "dataCriacaoDB": "2023-08-04"
+    },
+    {
+      "id": 2699,
+      "empresa": "CB Móveis",
+      "equipamento": "Millenium 6GS",
+      "dataCriacaoDB": "2023-08-07"
+    },
+    {
+      "id": 2700,
+      "empresa": "CB Móveis",
+      "equipamento": "Router CNC LE",
+      "dataCriacaoDB": "2023-08-07"
+    },
+    {
+      "id": 2701,
+      "empresa": "Portile (Monteiro Móveis)",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2023-08-08"
+    },
+    {
+      "id": 2702,
+      "empresa": "Portile (Monteiro Móveis)",
+      "equipamento": "Prensa Térmica",
+      "dataCriacaoDB": "2023-08-08"
+    },
+    {
+      "id": 2703,
+      "empresa": "Prime Marcenaria",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2023-08-10"
+    },
+    {
+      "id": 2704,
+      "empresa": "Prime Marcenaria",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2023-08-10"
+    },
+    {
+      "id": 2705,
+      "empresa": "D Brito Móveis (Projetto One)",
+      "equipamento": "Linha Nesting",
+      "dataCriacaoDB": "2023-08-16"
+    },
+    {
+      "id": 2706,
+      "empresa": "Maqmóveis Ind. e Comércio",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": "2023-08-28"
+    },
+    {
+      "id": 2707,
+      "empresa": "Camerata Móveis Planejados",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": "2023-08-29"
+    },
+    {
+      "id": 2708,
+      "empresa": "Diego Schimidt Móveis",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2023-08-29"
+    },
+    {
+      "id": 2709,
+      "empresa": "Diego Schimidt Móveis",
+      "equipamento": "Juntadeira de lâmina lateral",
+      "dataCriacaoDB": "2023-08-29"
+    },
+    {
+      "id": 2710,
+      "empresa": "Móveis Roso",
+      "equipamento": "Centro 5º eixo",
+      "dataCriacaoDB": "2023-08-29"
+    },
+    {
+      "id": 2711,
+      "empresa": "Portex Placa Centro",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2023-08-29"
+    },
+    {
+      "id": 2712,
+      "empresa": "Prodomo Indústria e Ccomércio",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-09-02"
+    },
+    {
+      "id": 2713,
+      "empresa": "Acácia Ambientes",
+      "equipamento": "Lixadeira Banda Larga",
+      "dataCriacaoDB": "2023-09-04"
+    },
+    {
+      "id": 2714,
+      "empresa": "Acácia Ambientes",
+      "equipamento": "Centro de Usinagem Masterwood",
+      "dataCriacaoDB": "2023-09-04"
+    },
+    {
+      "id": 2715,
+      "empresa": "MRP Movelaria",
+      "equipamento": "Coladeira de bordos Vectra",
+      "dataCriacaoDB": "2023-09-04"
+    },
+    {
+      "id": 2716,
+      "empresa": "MRP Movelaria",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": "2023-09-04"
+    },
+    {
+      "id": 2717,
+      "empresa": "Prime Marcenaria",
+      "equipamento": "Emendadora de Lâminas",
+      "dataCriacaoDB": "2023-09-14"
+    },
+    {
+      "id": 2718,
+      "empresa": "Comac Comercial",
+      "equipamento": "SVP 145",
+      "dataCriacaoDB": "2023-09-17"
+    },
+    {
+      "id": 2719,
+      "empresa": "Comac Comercial",
+      "equipamento": "Coladeira de Bordos Prime 4GS",
+      "dataCriacaoDB": "2023-09-17"
+    },
+    {
+      "id": 2720,
+      "empresa": "Comac Comercial",
+      "equipamento": "Coladeira de Bordos Century 5GS",
+      "dataCriacaoDB": "2023-09-17"
+    },
+    {
+      "id": 2721,
+      "empresa": "Marcenaria SM",
+      "equipamento": "Coladeira de Bordos Prime 4GS",
+      "dataCriacaoDB": "2023-09-27"
+    },
+    {
+      "id": 2722,
+      "empresa": "Marcenaria Soares de Campos Ltda",
+      "equipamento": "Lixadeira Banda Larga",
+      "dataCriacaoDB": "2023-10-03"
+    },
+    {
+      "id": 2723,
+      "empresa": "Franccino Móveis",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": "2023-10-17"
+    },
+    {
+      "id": 2724,
+      "empresa": "Franccino Móveis",
+      "equipamento": "Emendadora de Lâminas",
+      "dataCriacaoDB": "2023-10-17"
+    },
+    {
+      "id": 2725,
+      "empresa": "Franccino Móveis",
+      "equipamento": "Serra de Fita CNC",
+      "dataCriacaoDB": "2023-10-17"
+    },
+    {
+      "id": 2726,
+      "empresa": "Franccino Móveis",
+      "equipamento": "Centro de Usinagem Mitika",
+      "dataCriacaoDB": "2023-10-17"
+    },
+    {
+      "id": 2727,
+      "empresa": "Franccino Móveis",
+      "equipamento": "Centro de Usinagem Poker",
+      "dataCriacaoDB": "2023-10-17"
+    },
+    {
+      "id": 2728,
+      "empresa": "Achei Indústria de Móveis Ltda",
+      "equipamento": "Nesting CNC 3020 ATC-LE",
+      "dataCriacaoDB": "2023-10-18"
+    },
+    {
+      "id": 2729,
+      "empresa": "Achei Indústria de Móveis Ltda",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": "2023-10-18"
+    },
+    {
+      "id": 2730,
+      "empresa": "Tabano & Tabano",
+      "equipamento": "Centro Versa 4º eixo",
+      "dataCriacaoDB": "2023-10-23"
+    },
+    {
+      "id": 2731,
+      "empresa": "Mideast Móveis",
+      "equipamento": "Coladeira de Bordos Prime 4GS",
+      "dataCriacaoDB": "2023-10-26"
+    },
+    {
+      "id": 2732,
+      "empresa": "Mideast Móveis",
+      "equipamento": "Coladeira de Bordos Century 5GS",
+      "dataCriacaoDB": "2023-10-26"
+    },
+    {
+      "id": 2733,
+      "empresa": "Móveis Vêneto - Confortin",
+      "equipamento": "NestingHold HE710GA",
+      "dataCriacaoDB": "2023-10-31"
+    },
+    {
+      "id": 2734,
+      "empresa": "Mideast Móveis",
+      "equipamento": "Esquadrejadeira MJ 1132",
+      "dataCriacaoDB": "2023-11-09"
+    },
+    {
+      "id": 2735,
+      "empresa": "Retesp  Vedantes",
+      "equipamento": "Centro Versa 4º eixo",
+      "dataCriacaoDB": "2023-11-09"
+    },
+    {
+      "id": 2736,
+      "empresa": "Brovália",
+      "equipamento": "Coladeira de Bordos Century 5GS",
+      "dataCriacaoDB": "2023-12-06"
+    },
+    {
+      "id": 2737,
+      "empresa": "Segatto",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": "2023-12-14"
+    },
+    {
+      "id": 2738,
+      "empresa": "Alberflex",
+      "equipamento": "Kit Prensa HF",
+      "dataCriacaoDB": "2024-01-07"
+    },
+    {
+      "id": 2739,
+      "empresa": "Centro de Tecnologia Elements",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-01-10"
+    },
+    {
+      "id": 2740,
+      "empresa": "Omni Marcenaria",
+      "equipamento": "Seccionadora 3400 CVL",
+      "dataCriacaoDB": "2024-01-14"
+    },
+    {
+      "id": 2741,
+      "empresa": "Marcenaria Almeida",
+      "equipamento": "SVP 145 Revisada",
+      "dataCriacaoDB": "2024-01-15"
+    },
+    {
+      "id": 2742,
+      "empresa": "Nova Linea",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2024-01-22"
+    },
+    {
+      "id": 2743,
+      "empresa": "Plancus",
+      "equipamento": "Linha de Prensa Auyu",
+      "dataCriacaoDB": "2024-01-22"
+    },
+    {
+      "id": 2744,
+      "empresa": "Gabbinetto",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-01-23"
+    },
+    {
+      "id": 2745,
+      "empresa": "JDN Móveis Ltda",
+      "equipamento": "Coladeira de Bordos Prime 4GS",
+      "dataCriacaoDB": "2024-01-24"
+    },
+    {
+      "id": 2746,
+      "empresa": "De Astro Indústria e Comércio de Móveis P/ Escritório",
+      "equipamento": "Coladeira de Bordos Astra 30mm",
+      "dataCriacaoDB": "2024-01-24"
+    },
+    {
+      "id": 2747,
+      "empresa": "Nova Linea",
+      "equipamento": "Coladeira de Bordos Astra 30mm",
+      "dataCriacaoDB": "2024-01-30"
+    },
+    {
+      "id": 2748,
+      "empresa": "JC Ind. e Comércio de Móveis",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-01-31"
+    },
+    {
+      "id": 2749,
+      "empresa": "JC Ind. e Comércio de Móveis",
+      "equipamento": "Coladeira de Bordos Prime 4GS",
+      "dataCriacaoDB": "2024-01-31"
+    },
+    {
+      "id": 2750,
+      "empresa": "JC Ind. e Comércio de Móveis",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2024-01-31"
+    },
+    {
+      "id": 2751,
+      "empresa": "JC Ind. e Comércio de Móveis",
+      "equipamento": "Emendadora de Lâminas",
+      "dataCriacaoDB": "2024-01-31"
+    },
+    {
+      "id": 2752,
+      "empresa": "Trevisan Esquadrias",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-02-01"
+    },
+    {
+      "id": 2753,
+      "empresa": "Metal Madeira",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-02-04"
+    },
+    {
+      "id": 2754,
+      "empresa": "Olifon S.A",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-02-04"
+    },
+    {
+      "id": 2755,
+      "empresa": "UP Concept",
+      "equipamento": "Nesting CNC 3020 ATC-LE",
+      "dataCriacaoDB": "2024-02-04"
+    },
+    {
+      "id": 2756,
+      "empresa": "UP Concept",
+      "equipamento": "Coladeira de Bordos CH21",
+      "dataCriacaoDB": "2024-02-04"
+    },
+    {
+      "id": 2757,
+      "empresa": "UP Concept",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": "2024-02-04"
+    },
+    {
+      "id": 2758,
+      "empresa": "UP Concept",
+      "equipamento": "Point 2 TPA",
+      "dataCriacaoDB": "2024-02-04"
+    },
+    {
+      "id": 2759,
+      "empresa": "UP Concept",
+      "equipamento": "Central de Exaustão Immergut",
+      "dataCriacaoDB": "2024-02-04"
+    },
+    {
+      "id": 2760,
+      "empresa": "UP Concept",
+      "equipamento": "Embaladora Strech Immergut",
+      "dataCriacaoDB": "2024-02-04"
+    },
+    {
+      "id": 2761,
+      "empresa": "Metal Madeira",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2024-02-05"
+    },
+    {
+      "id": 2762,
+      "empresa": "Metal Madeira",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": "2024-02-05"
+    },
+    {
+      "id": 2763,
+      "empresa": "Art House",
+      "equipamento": "Nesting CNC 3020 ATC-LE",
+      "dataCriacaoDB": "2024-02-07"
+    },
+    {
+      "id": 2764,
+      "empresa": "ML Indústria",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-02-08"
+    },
+    {
+      "id": 2765,
+      "empresa": "Olifon S.A",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-02-13"
+    },
+    {
+      "id": 2766,
+      "empresa": "Leroy Merlin - Jardim Botânico",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2024-02-14"
+    },
+    {
+      "id": 2767,
+      "empresa": "Leroy Merlin - Joinville",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2024-02-14"
+    },
+    {
+      "id": 2768,
+      "empresa": "Fortline",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-02-15"
+    },
+    {
+      "id": 2769,
+      "empresa": "HTA Móveis",
+      "equipamento": "Esquadrejadeira MJ 1132",
+      "dataCriacaoDB": "2024-02-15"
+    },
+    {
+      "id": 2770,
+      "empresa": "Ornare",
+      "equipamento": "Furadeira Horizontal CNC",
+      "dataCriacaoDB": "2024-02-18"
+    },
+    {
+      "id": 2771,
+      "empresa": "Fortline",
+      "equipamento": "Coladeira de Bordos Astra 30mm",
+      "dataCriacaoDB": "2024-02-19"
+    },
+    {
+      "id": 2772,
+      "empresa": "Eduplus Indústria e Comércio",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-02-22"
+    },
+    {
+      "id": 2773,
+      "empresa": "Tersetec",
+      "equipamento": "Linha Nesting Master",
+      "dataCriacaoDB": "2024-02-22"
+    },
+    {
+      "id": 2774,
+      "empresa": "Leroy Merlin",
+      "equipamento": "Coladeira de Bordos Prime 4GS",
+      "dataCriacaoDB": "2024-02-25"
+    },
+    {
+      "id": 2775,
+      "empresa": "RGD Indústria e Comércio Ltda",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-02-27"
+    },
+    {
+      "id": 2776,
+      "empresa": "RGD Indústria e Comércio Ltda",
+      "equipamento": "Linha Nesting Master",
+      "dataCriacaoDB": "2024-02-27"
+    },
+    {
+      "id": 2777,
+      "empresa": "Sérgio Nascimento",
+      "equipamento": "Kit Prensa HFPB 1608 CH",
+      "dataCriacaoDB": "2024-02-27"
+    },
+    {
+      "id": 2778,
+      "empresa": "Martin Office",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": "2024-02-29"
+    },
+    {
+      "id": 2779,
+      "empresa": "Disegno",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-03-03"
+    },
+    {
+      "id": 2780,
+      "empresa": "Disegno",
+      "equipamento": "BC91",
+      "dataCriacaoDB": "2024-03-03"
+    },
+    {
+      "id": 2781,
+      "empresa": "Disegno",
+      "equipamento": "Router",
+      "dataCriacaoDB": "2024-03-03"
+    },
+    {
+      "id": 2782,
+      "empresa": "GTM Cenografia",
+      "equipamento": "Esquadrejadeira MJ 1132",
+      "dataCriacaoDB": "2024-03-05"
+    },
+    {
+      "id": 2783,
+      "empresa": "Artcompany Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-03-18"
+    },
+    {
+      "id": 2784,
+      "empresa": "Artcompany Móveis",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": "2024-03-18"
+    },
+    {
+      "id": 2785,
+      "empresa": "Jimmy Rannder Lopes Coelho - ME",
+      "equipamento": "Coladeira de bordos Verry",
+      "dataCriacaoDB": "2024-03-26"
+    },
+    {
+      "id": 2786,
+      "empresa": "Bold Participações",
+      "equipamento": "Nesting3020 Marchiori",
+      "dataCriacaoDB": "2024-03-27"
+    },
+    {
+      "id": 2787,
+      "empresa": "Dispama Madeiras",
+      "equipamento": "Linha Nesting Master",
+      "dataCriacaoDB": "2024-03-31"
+    },
+    {
+      "id": 2788,
+      "empresa": "Dispama Madeiras",
+      "equipamento": "Centro de Furação HB621G",
+      "dataCriacaoDB": "2024-03-31"
+    },
+    {
+      "id": 2789,
+      "empresa": "Dispama Madeiras",
+      "equipamento": "Coladeira de Bordos Ultimate",
+      "dataCriacaoDB": "2024-03-31"
+    },
+    {
+      "id": 2790,
+      "empresa": "WNS Comércio de Serviços",
+      "equipamento": "Linha Nesting Master",
+      "dataCriacaoDB": "2024-04-01"
+    },
+    {
+      "id": 2791,
+      "empresa": "WNS Com. e Serviços - Casa do Marceneiro",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-04-01"
+    },
+    {
+      "id": 2792,
+      "empresa": "WNS Comércio de Serviços",
+      "equipamento": "Coladeira de bordos Astra + R",
+      "dataCriacaoDB": "2024-04-01"
+    },
+    {
+      "id": 2793,
+      "empresa": "WNS Comércio de Serviços",
+      "equipamento": "Coladeira de bordos Vectra",
+      "dataCriacaoDB": "2024-04-01"
+    },
+    {
+      "id": 2794,
+      "empresa": "WNS Com. e Serviços - Casa do Marceneiro",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2024-04-01"
+    },
+    {
+      "id": 2795,
+      "empresa": "Mada Marcenaria",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-04-02"
+    },
+    {
+      "id": 2796,
+      "empresa": "RGD Indústria e Comércio Ltda",
+      "equipamento": "Central de Exaustão Immergut",
+      "dataCriacaoDB": "2024-04-02"
+    },
+    {
+      "id": 2797,
+      "empresa": "RGD Indústria e Comércio Ltda",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-04-02"
+    },
+    {
+      "id": 2798,
+      "empresa": "Mada Marcenaria",
+      "equipamento": "Guilhotina",
+      "dataCriacaoDB": "2024-04-03"
+    },
+    {
+      "id": 2799,
+      "empresa": "Mada Marcenaria",
+      "equipamento": "Emendadora de Lâminas",
+      "dataCriacaoDB": "2024-04-03"
+    },
+    {
+      "id": 2800,
+      "empresa": "Móveis Roso",
+      "equipamento": "Centro de Furação HB621G",
+      "dataCriacaoDB": "2024-04-04"
+    },
+    {
+      "id": 2801,
+      "empresa": "Móveis Roso",
+      "equipamento": "Coladeira de bordos Ultimate",
+      "dataCriacaoDB": "2024-04-04"
+    },
+    {
+      "id": 2802,
+      "empresa": "Nossa Casa",
+      "equipamento": "Linha Nesting Master",
+      "dataCriacaoDB": "2024-04-04"
+    },
+    {
+      "id": 2803,
+      "empresa": "Fazz Indústria de Móveis",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-04-07"
+    },
+    {
+      "id": 2804,
+      "empresa": "Moto Madeiras",
+      "equipamento": "Coladeira de Bordos Astra 45°",
+      "dataCriacaoDB": "2024-04-07"
+    },
+    {
+      "id": 2805,
+      "empresa": "Difatto Móveis",
+      "equipamento": "Esquadrejadeira MJ 1132",
+      "dataCriacaoDB": "2024-04-14"
+    },
+    {
+      "id": 2806,
+      "empresa": "Difatto Móveis",
+      "equipamento": "Nesting CNC 3020 ATC-LE",
+      "dataCriacaoDB": "2024-04-14"
+    },
+    {
+      "id": 2807,
+      "empresa": "Difatto Móveis",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2024-04-14"
+    },
+    {
+      "id": 2808,
+      "empresa": "Difatto Móveis",
+      "equipamento": "Coletores de pó",
+      "dataCriacaoDB": "2024-04-14"
+    },
+    {
+      "id": 2809,
+      "empresa": "Dispama Madeiras",
+      "equipamento": "Coladeira de Bordos Astra 30mm",
+      "dataCriacaoDB": "2024-04-14"
+    },
+    {
+      "id": 2810,
+      "empresa": "Marcenaria Barros",
+      "equipamento": "Laser chapa e tubo",
+      "dataCriacaoDB": "2024-04-15"
+    },
+    {
+      "id": 2811,
+      "empresa": "Marcenaria Barros",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": "2024-04-15"
+    },
+    {
+      "id": 2812,
+      "empresa": "Carvin Móveis Planejados",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-04-17"
+    },
+    {
+      "id": 2813,
+      "empresa": "Fabribam Ind. Com. de Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-04-21"
+    },
+    {
+      "id": 2814,
+      "empresa": "Eduplus Indústria e Comércio",
+      "equipamento": "Nesting3020 Marchiori",
+      "dataCriacaoDB": "2024-04-22"
+    },
+    {
+      "id": 2815,
+      "empresa": "Flowserve",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2024-04-23"
+    },
+    {
+      "id": 2816,
+      "empresa": "Marcenaria Artesanal",
+      "equipamento": "Guilhotina MQJ320A",
+      "dataCriacaoDB": "2024-04-23"
+    },
+    {
+      "id": 2817,
+      "empresa": "Marcenaria Artesanal",
+      "equipamento": "Emendadora de Lâminas",
+      "dataCriacaoDB": "2024-04-23"
+    },
+    {
+      "id": 2818,
+      "empresa": "RR Marcenaria",
+      "equipamento": "Guilhotina MQJ320A",
+      "dataCriacaoDB": "2024-04-23"
+    },
+    {
+      "id": 2819,
+      "empresa": "RR Marcenaria",
+      "equipamento": "Emendadora de Lâminas",
+      "dataCriacaoDB": "2024-04-23"
+    },
+    {
+      "id": 2820,
+      "empresa": "Prime Marcenaria",
+      "equipamento": "Seccionadora Giben SP 90 (Barros)",
+      "dataCriacaoDB": "2024-04-25"
+    },
+    {
+      "id": 2821,
+      "empresa": "Elite Móveis",
+      "equipamento": "Coladeira de Bordos Century 5GS",
+      "dataCriacaoDB": "2024-05-02"
+    },
+    {
+      "id": 2822,
+      "empresa": "Móveis Roso",
+      "equipamento": "Coladeira de bordos Astra + R",
+      "dataCriacaoDB": "2024-05-02"
+    },
+    {
+      "id": 2823,
+      "empresa": "Trael Transformadores Elétricos",
+      "equipamento": "Guilhotina MQJ320A",
+      "dataCriacaoDB": "2024-05-02"
+    },
+    {
+      "id": 2824,
+      "empresa": "Trael Transformadores Elétricos",
+      "equipamento": "Seccionadora HP290",
+      "dataCriacaoDB": "2024-05-02"
+    },
+    {
+      "id": 2825,
+      "empresa": "Marcenaria Marvelar",
+      "equipamento": "Emendadora de Lâminas",
+      "dataCriacaoDB": "2024-05-06"
+    },
+    {
+      "id": 2826,
+      "empresa": "R&R Móveis Marcenaria",
+      "equipamento": "Emendadora de Lâminas",
+      "dataCriacaoDB": "2024-05-12"
+    },
+    {
+      "id": 2827,
+      "empresa": "Formespaço Móveis e Instalações Ltda",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2024-05-16"
+    },
+    {
+      "id": 2828,
+      "empresa": "Forte Rocha",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-05-16"
+    },
+    {
+      "id": 2829,
+      "empresa": "Rita de Fátima Dias",
+      "equipamento": "Coladeira de Bordos Prime 4GS",
+      "dataCriacaoDB": "2024-05-16"
+    },
+    {
+      "id": 2830,
+      "empresa": "Dispama Madeiras",
+      "equipamento": "Coladeira de Bordos Astra 45°",
+      "dataCriacaoDB": "2024-05-20"
+    },
+    {
+      "id": 2831,
+      "empresa": "Fabio Fuzimoto",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-05-29"
+    },
+    {
+      "id": 2832,
+      "empresa": "Fabio Fuzimoto",
+      "equipamento": "Coladeira Adamik",
+      "dataCriacaoDB": "2024-05-29"
+    },
+    {
+      "id": 2833,
+      "empresa": "Dellus Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-06-02"
+    },
+    {
+      "id": 2834,
+      "empresa": "Alphenz",
+      "equipamento": "Nesting CNC RC3020-ATC",
+      "dataCriacaoDB": "2024-06-05"
+    },
+    {
+      "id": 2835,
+      "empresa": "Moval",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-06-06"
+    },
+    {
+      "id": 2836,
+      "empresa": "Wood Parts Ind e Com de Chapas",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": "2024-06-06"
+    },
+    {
+      "id": 2837,
+      "empresa": "Elite Móveis",
+      "equipamento": "SVP 145 Revisada",
+      "dataCriacaoDB": "2024-06-10"
+    },
+    {
+      "id": 2838,
+      "empresa": "Ellan S/A",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-06-12"
+    },
+    {
+      "id": 2839,
+      "empresa": "CDM - Centro de Distribuição de Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-06-13"
+    },
+    {
+      "id": 2840,
+      "empresa": "Decoli Móveis",
+      "equipamento": "Centro de Furação PT6.5",
+      "dataCriacaoDB": "2024-06-17"
+    },
+    {
+      "id": 2841,
+      "empresa": "Disk Madeira",
+      "equipamento": "Centro de Furação Vitap",
+      "dataCriacaoDB": "2024-06-20"
+    },
+    {
+      "id": 2842,
+      "empresa": "Pro Corte",
+      "equipamento": "Coladeira de bordos Vectra",
+      "dataCriacaoDB": "2024-06-20"
+    },
+    {
+      "id": 2843,
+      "empresa": "LamiBrasil",
+      "equipamento": "Guilhotina MQJ320A",
+      "dataCriacaoDB": "2024-06-20"
+    },
+    {
+      "id": 2844,
+      "empresa": "LamiBrasil",
+      "equipamento": "Emendadora de Lâminas",
+      "dataCriacaoDB": "2024-06-20"
+    },
+    {
+      "id": 2845,
+      "empresa": "YBY Design",
+      "equipamento": "Centro Versa 4º eixo",
+      "dataCriacaoDB": "2024-06-23"
+    },
+    {
+      "id": 2846,
+      "empresa": "Varotti",
+      "equipamento": "Seccionadora Horizontal",
+      "dataCriacaoDB": "2024-06-24"
+    },
+    {
+      "id": 2847,
+      "empresa": "Aldo Almeida Movelaria",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-06-28"
+    },
+    {
+      "id": 2848,
+      "empresa": "Aldo Almeida Movelaria",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2024-07-01"
+    },
+    {
+      "id": 2849,
+      "empresa": "Minimal Movelaria",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-07-02"
+    },
+    {
+      "id": 2850,
+      "empresa": "Minimal Movelaria",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": "2024-07-02"
+    },
+    {
+      "id": 2851,
+      "empresa": "Minimal Movelaria",
+      "equipamento": "Linha Nesting Master V2",
+      "dataCriacaoDB": "2024-07-02"
+    },
+    {
+      "id": 2852,
+      "empresa": "Multimóveis",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-07-02"
+    },
+    {
+      "id": 2853,
+      "empresa": "Multimóveis",
+      "equipamento": "Coladeira Starwood HD623JPKQ",
+      "dataCriacaoDB": "2024-07-02"
+    },
+    {
+      "id": 2854,
+      "empresa": "CMR Marcenaria",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-07-03"
+    },
+    {
+      "id": 2855,
+      "empresa": "WV",
+      "equipamento": "Nesting CNC 3020 ATC-LE",
+      "dataCriacaoDB": "2024-07-03"
+    },
+    {
+      "id": 2856,
+      "empresa": "Cellini Móveis",
+      "equipamento": "Coladeira de Bordos Century 5GS",
+      "dataCriacaoDB": "2024-07-03"
+    },
+    {
+      "id": 2857,
+      "empresa": "Cellini Móveis",
+      "equipamento": "Centro de Furação",
+      "dataCriacaoDB": "2024-07-03"
+    },
+    {
+      "id": 2858,
+      "empresa": "Plaxmetal S/A",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-07-08"
+    },
+    {
+      "id": 2859,
+      "empresa": "Dispama Madeiras",
+      "equipamento": "Return Conveyor",
+      "dataCriacaoDB": "2024-07-09"
+    },
+    {
+      "id": 2860,
+      "empresa": "Tabano & Tabano",
+      "equipamento": "Kit Prensa HFPB 1608 CH",
+      "dataCriacaoDB": "2024-07-10"
+    },
+    {
+      "id": 2861,
+      "empresa": "Visoma Móveis",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-07-11"
+    },
+    {
+      "id": 2862,
+      "empresa": "Visoma Móveis",
+      "equipamento": "Emendadora de Lâminas",
+      "dataCriacaoDB": "2024-07-11"
+    },
+    {
+      "id": 2863,
+      "empresa": "Visoma Móveis",
+      "equipamento": "Guilhotina MQJ320A",
+      "dataCriacaoDB": "2024-07-11"
+    },
+    {
+      "id": 2864,
+      "empresa": "Pilati Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-07-14"
+    },
+    {
+      "id": 2865,
+      "empresa": "CasaPlan",
+      "equipamento": "Nesting CNC RC3020-ATC",
+      "dataCriacaoDB": "2024-07-14"
+    },
+    {
+      "id": 2866,
+      "empresa": "CasaPlan",
+      "equipamento": "Nesting3020 Marchiori",
+      "dataCriacaoDB": "2024-07-14"
+    },
+    {
+      "id": 2867,
+      "empresa": "CasaPlan",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2024-07-14"
+    },
+    {
+      "id": 2868,
+      "empresa": "Pratik Line",
+      "equipamento": "Emendadora de Lâminas",
+      "dataCriacaoDB": "2024-07-14"
+    },
+    {
+      "id": 2869,
+      "empresa": "Pratik Line",
+      "equipamento": "Guilhotina MQJ320A",
+      "dataCriacaoDB": "2024-07-14"
+    },
+    {
+      "id": 2870,
+      "empresa": "Taboão",
+      "equipamento": "Seccionadora Horizontal",
+      "dataCriacaoDB": "2024-07-14"
+    },
+    {
+      "id": 2871,
+      "empresa": "Bela Madeira",
+      "equipamento": "Esquadrejadeira MJ 1132",
+      "dataCriacaoDB": "2024-07-14"
+    },
+    {
+      "id": 2872,
+      "empresa": "Bela Madeira",
+      "equipamento": "Nesting CNC RC3020-ATC",
+      "dataCriacaoDB": "2024-07-14"
+    },
+    {
+      "id": 2873,
+      "empresa": "MN Moveis",
+      "equipamento": "Seccionadora SVP 145",
+      "dataCriacaoDB": "2024-07-14"
+    },
+    {
+      "id": 2874,
+      "empresa": "Andrade Moveis",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2024-07-14"
+    },
+    {
+      "id": 2875,
+      "empresa": "Andrade Moveis",
+      "equipamento": "Nesting CNC RC3020-ATC",
+      "dataCriacaoDB": "2024-07-15"
+    },
+    {
+      "id": 2876,
+      "empresa": "Classi Marcenaria",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-07-15"
+    },
+    {
+      "id": 2877,
+      "empresa": "Classi Marcenaria",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-07-16"
+    },
+    {
+      "id": 2878,
+      "empresa": "Cemaf",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2024-07-21"
+    },
+    {
+      "id": 2879,
+      "empresa": "Cemaf",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-07-21"
+    },
+    {
+      "id": 2880,
+      "empresa": "Adriana e Ledson Marcenaria",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2024-07-21"
+    },
+    {
+      "id": 2881,
+      "empresa": "Wood Decor Móveis",
+      "equipamento": "Centro Versa 4º eixo",
+      "dataCriacaoDB": "2024-07-22"
+    },
+    {
+      "id": 2882,
+      "empresa": "C.A.F de Oliveira",
+      "equipamento": "Nesting CNC 3020 ATC-LE",
+      "dataCriacaoDB": "2024-07-22"
+    },
+    {
+      "id": 2883,
+      "empresa": "Aldo Almeida Movelaria",
+      "equipamento": "Coladeira de bordos Vectra",
+      "dataCriacaoDB": "2024-07-22"
+    },
+    {
+      "id": 2884,
+      "empresa": "Aldo Almeida Movelaria",
+      "equipamento": "Centro de Furação PT6.5",
+      "dataCriacaoDB": "2024-07-22"
+    },
+    {
+      "id": 2885,
+      "empresa": "Aldo Almeida Movelaria",
+      "equipamento": "Univer 620",
+      "dataCriacaoDB": "2024-07-22"
+    },
+    {
+      "id": 2886,
+      "empresa": "Pacheco Flex",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-07-28"
+    },
+    {
+      "id": 2887,
+      "empresa": "Brovália",
+      "equipamento": "Centro de Furação Point 2",
+      "dataCriacaoDB": "2024-07-31"
+    },
+    {
+      "id": 2888,
+      "empresa": "Casa Silva",
+      "equipamento": "Coladeira de Bordos CH17",
+      "dataCriacaoDB": "2024-08-05"
+    },
+    {
+      "id": 2889,
+      "empresa": "Móveis Becker Projetados Ltda",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-08-07"
+    },
+    {
+      "id": 2890,
+      "empresa": "Alianza Imex Ltda",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2024-08-08"
+    },
+    {
+      "id": 2891,
+      "empresa": "Impactto Movelaria",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": "2024-08-11"
+    },
+    {
+      "id": 2892,
+      "empresa": "Fortline",
+      "equipamento": "Furadeira Horizontal CNC",
+      "dataCriacaoDB": "2024-08-13"
+    },
+    {
+      "id": 2893,
+      "empresa": "Marcenaria Artesanal",
+      "equipamento": "Prensa Térmica 3013 4PM",
+      "dataCriacaoDB": "2024-08-15"
+    },
+    {
+      "id": 2894,
+      "empresa": "Marcenaria Artesanal",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-08-15"
+    },
+    {
+      "id": 2895,
+      "empresa": "Bold Plásticos Ltda",
+      "equipamento": "Nesting CNC 2161 ATC",
+      "dataCriacaoDB": "2024-08-15"
+    },
+    {
+      "id": 2896,
+      "empresa": "Grupo RP",
+      "equipamento": "Coladeira de Bordos Astra 30mm",
+      "dataCriacaoDB": "2024-08-19"
+    },
+    {
+      "id": 2897,
+      "empresa": "Acácia Ambientes",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-08-25"
+    },
+    {
+      "id": 2898,
+      "empresa": "Realta - HMY",
+      "equipamento": "Esteira Retorno para Coladora de Brodo",
+      "dataCriacaoDB": "2024-08-25"
+    },
+    {
+      "id": 2899,
+      "empresa": "Achei Indústria de Móveis Ltda",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-08-25"
+    },
+    {
+      "id": 2900,
+      "empresa": "Geotec",
+      "equipamento": "SVP 145 Revisada",
+      "dataCriacaoDB": "2024-08-25"
+    },
+    {
+      "id": 2901,
+      "empresa": "MB Indústria de Móveis Eireli",
+      "equipamento": "Gerador Alta Frequência + Prensa 3D",
+      "dataCriacaoDB": "2024-08-27"
+    },
+    {
+      "id": 2902,
+      "empresa": "MB Indústria de Móveis Eireli",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-08-27"
+    },
+    {
+      "id": 2903,
+      "empresa": "A. Menozzi Marcenaria Ltda",
+      "equipamento": "Nesting Robust B1",
+      "dataCriacaoDB": "2024-09-02"
+    },
+    {
+      "id": 2904,
+      "empresa": "Prodomo Design",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-09-02"
+    },
+    {
+      "id": 2905,
+      "empresa": "Achei Indústria de Móveis Ltda",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-09-03"
+    },
+    {
+      "id": 2906,
+      "empresa": "Ticupol Indústria e Comércio Ltda",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-09-03"
+    },
+    {
+      "id": 2907,
+      "empresa": "Artefacto",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-09-04"
+    },
+    {
+      "id": 2908,
+      "empresa": "Marcetex",
+      "equipamento": "Prensa Térmica 3013 3PM",
+      "dataCriacaoDB": "2024-09-05"
+    },
+    {
+      "id": 2909,
+      "empresa": "Stanza Marcenaria",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-09-08"
+    },
+    {
+      "id": 2910,
+      "empresa": "Marcenaria Legno",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-09-16"
+    },
+    {
+      "id": 2911,
+      "empresa": "TL Móveis e Expositores Ltda",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": "2024-09-17"
+    },
+    {
+      "id": 2912,
+      "empresa": "SN Metais",
+      "equipamento": "Prensa Chancsmac",
+      "dataCriacaoDB": "2024-09-18"
+    },
+    {
+      "id": 2913,
+      "empresa": "Securit",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-09-22"
+    },
+    {
+      "id": 2914,
+      "empresa": "ART Móveis",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-09-22"
+    },
+    {
+      "id": 2915,
+      "empresa": "Brazil Contemporâneo",
+      "equipamento": "Prensa Térmica 4016 3PM",
+      "dataCriacaoDB": "2024-09-22"
+    },
+    {
+      "id": 2916,
+      "empresa": "Brazil Contemporâneo",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-09-22"
+    },
+    {
+      "id": 2917,
+      "empresa": "Placca Marcenaria",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-09-23"
+    },
+    {
+      "id": 2918,
+      "empresa": "Aggile Móveis",
+      "equipamento": "Coladeira de bordos Vectra",
+      "dataCriacaoDB": "2024-09-25"
+    },
+    {
+      "id": 2919,
+      "empresa": "Gabbinetto",
+      "equipamento": "Triturador Immergut",
+      "dataCriacaoDB": "2024-09-25"
+    },
+    {
+      "id": 2920,
+      "empresa": "Suenne Costa Cavanha ME",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2024-10-02"
+    },
+    {
+      "id": 2921,
+      "empresa": "Ornare",
+      "equipamento": "Prensa Térmica 4013 2PM",
+      "dataCriacaoDB": "2024-10-02"
+    },
+    {
+      "id": 2922,
+      "empresa": "Alcides Bernardinelli",
+      "equipamento": "Nesting CNC 3020 ATC-LE",
+      "dataCriacaoDB": "2024-10-06"
+    },
+    {
+      "id": 2923,
+      "empresa": "Alcides Bernardinelli",
+      "equipamento": "Centro de Furação Point 2",
+      "dataCriacaoDB": "2024-10-06"
+    },
+    {
+      "id": 2924,
+      "empresa": "Alcides Bernardinelli",
+      "equipamento": "Coladeira de Bordos Century 5GS",
+      "dataCriacaoDB": "2024-10-06"
+    },
+    {
+      "id": 2925,
+      "empresa": "Barros Decorações",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2024-10-06"
+    },
+    {
+      "id": 2926,
+      "empresa": "Wood 4 All Ltda",
+      "equipamento": "Coladeira de bordos Vectra",
+      "dataCriacaoDB": "2024-10-06"
+    },
+    {
+      "id": 2927,
+      "empresa": "Wood 4 All Ltda",
+      "equipamento": "Furadeira Horizontal CNC",
+      "dataCriacaoDB": "2024-10-06"
+    },
+    {
+      "id": 2928,
+      "empresa": "Wood 4 All Ltda",
+      "equipamento": "Nesting Robust V2",
+      "dataCriacaoDB": "2024-10-06"
+    },
+    {
+      "id": 2929,
+      "empresa": "Dispama Madeiras",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-10-09"
+    },
+    {
+      "id": 2930,
+      "empresa": "Wood 4 All Ltda",
+      "equipamento": "Nesting Robust V2",
+      "dataCriacaoDB": "2024-10-13"
+    },
+    {
+      "id": 2931,
+      "empresa": "Wood 4 All Ltda",
+      "equipamento": "Coladeira de Bordos Vectra",
+      "dataCriacaoDB": "2024-10-13"
+    },
+    {
+      "id": 2932,
+      "empresa": "Wood 4 All Ltda",
+      "equipamento": "Furadeira Horizontal CNC",
+      "dataCriacaoDB": "2024-10-13"
+    },
+    {
+      "id": 2933,
+      "empresa": "ANBI Marcenaria",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-10-13"
+    },
+    {
+      "id": 2934,
+      "empresa": "Ornare",
+      "equipamento": "Prensa Térmica 4016 3PM",
+      "dataCriacaoDB": "2024-10-13"
+    },
+    {
+      "id": 2935,
+      "empresa": "Woodmood Ind. Com. Instalações",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-10-20"
+    },
+    {
+      "id": 2936,
+      "empresa": "Didjurgeit Industrial e Comércio",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-10-23"
+    },
+    {
+      "id": 2937,
+      "empresa": "Ornare",
+      "equipamento": "Corte Laser tubos",
+      "dataCriacaoDB": "2024-10-27"
+    },
+    {
+      "id": 2938,
+      "empresa": "Corte Prime Comércio e Serviços",
+      "equipamento": "Nesting Robust V2",
+      "dataCriacaoDB": "2024-10-27"
+    },
+    {
+      "id": 2939,
+      "empresa": "Baluarte Móveis",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": "2024-10-29"
+    },
+    {
+      "id": 2940,
+      "empresa": "Monfardini Madeiras e Ferragens",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-11-05"
+    },
+    {
+      "id": 2941,
+      "empresa": "Shopping Matriz Fabril",
+      "equipamento": "CNC Fiber Laser AL1530F",
+      "dataCriacaoDB": "2024-11-06"
+    },
+    {
+      "id": 2942,
+      "empresa": "MRP Movelaria",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2024-11-07"
+    },
+    {
+      "id": 2943,
+      "empresa": "Baixada Comércio de Madeiras Ltda",
+      "equipamento": "Nesting Robust V2",
+      "dataCriacaoDB": "2024-11-10"
+    },
+    {
+      "id": 2944,
+      "empresa": "Fefer Ind. Com. (Breton)",
+      "equipamento": "Corte Laser tubos",
+      "dataCriacaoDB": "2024-11-10"
+    },
+    {
+      "id": 2945,
+      "empresa": "Fefer Ind. Com. (Breton)",
+      "equipamento": "Emendadora de Lâminas",
+      "dataCriacaoDB": "2024-11-10"
+    },
+    {
+      "id": 2946,
+      "empresa": "Fefer Ind. Com. (Breton)",
+      "equipamento": "Guilhotina MQJ320A",
+      "dataCriacaoDB": "2024-11-10"
+    },
+    {
+      "id": 2947,
+      "empresa": "Fefer Ind. Com. (Breton)",
+      "equipamento": "Prensa Térmica 3516 2PM",
+      "dataCriacaoDB": "2024-11-10"
+    },
+    {
+      "id": 2948,
+      "empresa": "Placca Marcenaria",
+      "equipamento": "Linha Nesting Master",
+      "dataCriacaoDB": "2024-11-12"
+    },
+    {
+      "id": 2949,
+      "empresa": "Martin Office",
+      "equipamento": "Coladeira de bordos BC92",
+      "dataCriacaoDB": "2024-11-12"
+    },
+    {
+      "id": 2950,
+      "empresa": "Martin Office",
+      "equipamento": "Coladeira de Bordos Astra 45°",
+      "dataCriacaoDB": "2024-11-12"
+    },
+    {
+      "id": 2951,
+      "empresa": "Nacional Madeiras Ltda",
+      "equipamento": "Centro Versa 4º eixo",
+      "dataCriacaoDB": "2024-11-19"
+    },
+    {
+      "id": 2952,
+      "empresa": "Flexform",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2024-11-20"
+    },
+    {
+      "id": 2953,
+      "empresa": "Metalurgica Shekinah",
+      "equipamento": "Contour S Line",
+      "dataCriacaoDB": "2024-11-24"
+    },
+    {
+      "id": 2954,
+      "empresa": "Tavoloni Madeiras e Compensados",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": "2024-11-26"
+    },
+    {
+      "id": 2955,
+      "empresa": "MAG Serviços de Marcenaria",
+      "equipamento": "Nesting CNC 3020 ATC-LE",
+      "dataCriacaoDB": "2024-12-01"
+    },
+    {
+      "id": 2956,
+      "empresa": "TL Móveis e Expositores Ltda",
+      "equipamento": "Centro de Furação  PT6.5",
+      "dataCriacaoDB": "2024-12-01"
+    },
+    {
+      "id": 2957,
+      "empresa": "TL Móveis e Expositores Ltda",
+      "equipamento": "Linha Nesting Master V2",
+      "dataCriacaoDB": "2024-12-01"
+    },
+    {
+      "id": 2958,
+      "empresa": "Roberto Marcenaria",
+      "equipamento": "Prensa MDT3013 2PM",
+      "dataCriacaoDB": "2024-12-05"
+    },
+    {
+      "id": 2959,
+      "empresa": "MF de Oliveira",
+      "equipamento": "Coladeira de bordos Astra + R",
+      "dataCriacaoDB": "2024-12-08"
+    },
+    {
+      "id": 2960,
+      "empresa": "MF de Oliveira",
+      "equipamento": "Nesting CNC 3020 ATC-LE",
+      "dataCriacaoDB": "2024-12-08"
+    },
+    {
+      "id": 2961,
+      "empresa": "MF de Oliveira",
+      "equipamento": "Centro Versa 4º eixo",
+      "dataCriacaoDB": "2024-12-08"
+    },
+    {
+      "id": 2962,
+      "empresa": "Dinalva Maria Toledo Ribeiro",
+      "equipamento": "Nesting CNC 3020 ATC-LE",
+      "dataCriacaoDB": "2024-12-11"
+    },
+    {
+      "id": 2963,
+      "empresa": "Dinalva Maria Toledo Ribeiro",
+      "equipamento": "Coladeira de Bordos Century 5GS",
+      "dataCriacaoDB": "2024-12-11"
+    },
+    {
+      "id": 2964,
+      "empresa": "Dinalva Maria Toledo Ribeiro",
+      "equipamento": "Roundern",
+      "dataCriacaoDB": "2024-12-11"
+    },
+    {
+      "id": 2965,
+      "empresa": "Marcenaria Cumaru",
+      "equipamento": "SVP 145 Revisada",
+      "dataCriacaoDB": "2024-12-18"
+    },
+    {
+      "id": 2966,
+      "empresa": "Escinter",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-01-12"
+    },
+    {
+      "id": 2967,
+      "empresa": "Joshua Adegas",
+      "equipamento": "Linha Nesting Master V1",
+      "dataCriacaoDB": "2025-01-22"
+    },
+    {
+      "id": 2968,
+      "empresa": "Marcenaria Barros",
+      "equipamento": "Linha Nesting Master V1",
+      "dataCriacaoDB": "2025-01-23"
+    },
+    {
+      "id": 2969,
+      "empresa": "Marcenaria Marvelar",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2025-01-26"
+    },
+    {
+      "id": 2970,
+      "empresa": "De Astro Indústria e Comércio de Móveis P/ Escritório",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-01-27"
+    },
+    {
+      "id": 2971,
+      "empresa": "De Astro Indústria e Comércio de Móveis P/ Escritório",
+      "equipamento": "Contour 2.0 Plus",
+      "dataCriacaoDB": "2025-01-27"
+    },
+    {
+      "id": 2972,
+      "empresa": "De Astro Indústria e Comércio de Móveis P/ Escritório",
+      "equipamento": "Roundern",
+      "dataCriacaoDB": "2025-01-27"
+    },
+    {
+      "id": 2973,
+      "empresa": "Nacional Indústria de Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-01-29"
+    },
+    {
+      "id": 2974,
+      "empresa": "Marcenaria Barros",
+      "equipamento": "Solda a Laser Roclas",
+      "dataCriacaoDB": "2025-01-30"
+    },
+    {
+      "id": 2975,
+      "empresa": "Guelplus",
+      "equipamento": "Coladeira de Bordos Astra 45°",
+      "dataCriacaoDB": "2025-02-02"
+    },
+    {
+      "id": 2976,
+      "empresa": "Marcenaria Canaã",
+      "equipamento": "Contour S Line",
+      "dataCriacaoDB": "2025-02-02"
+    },
+    {
+      "id": 2977,
+      "empresa": "Quartos etc",
+      "equipamento": "Contour S Line",
+      "dataCriacaoDB": "2025-02-04"
+    },
+    {
+      "id": 2978,
+      "empresa": "Equipa Group",
+      "equipamento": "Esquadrejadeira MJ 1132",
+      "dataCriacaoDB": "2025-02-06"
+    },
+    {
+      "id": 2979,
+      "empresa": "Luiz China",
+      "equipamento": "Univer 620",
+      "dataCriacaoDB": "2025-02-09"
+    },
+    {
+      "id": 2980,
+      "empresa": "Luiz China",
+      "equipamento": "Nesting CNC para canaletados",
+      "dataCriacaoDB": "2025-02-09"
+    },
+    {
+      "id": 2981,
+      "empresa": "Grupo Lopas S/A",
+      "equipamento": "Contour 2.0 Plus",
+      "dataCriacaoDB": "2025-02-10"
+    },
+    {
+      "id": 2982,
+      "empresa": "Flexform",
+      "equipamento": "Linha Nesting Master V1",
+      "dataCriacaoDB": "2025-02-10"
+    },
+    {
+      "id": 2983,
+      "empresa": "Flexform",
+      "equipamento": "Esquadrejadeira MJ 1132",
+      "dataCriacaoDB": "2025-02-10"
+    },
+    {
+      "id": 2984,
+      "empresa": "Flexform",
+      "equipamento": "Coladeira de Bordos Century 5GS",
+      "dataCriacaoDB": "2025-02-10"
+    },
+    {
+      "id": 2985,
+      "empresa": "Tecpron Engenharia",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": "2025-02-13"
+    },
+    {
+      "id": 2986,
+      "empresa": "Itacaré Componentes Ltda",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-02-16"
+    },
+    {
+      "id": 2987,
+      "empresa": "Grupo Lopas S/A",
+      "equipamento": "Coladeira de Bordos Astra Bumerangue",
+      "dataCriacaoDB": "2025-02-18"
+    },
+    {
+      "id": 2988,
+      "empresa": "Luazzu Comércio e Fabricação de Móveis",
+      "equipamento": "Prensa Térmica 4016 4PM",
+      "dataCriacaoDB": "2025-02-18"
+    },
+    {
+      "id": 2989,
+      "empresa": "SS Móveis Planejados",
+      "equipamento": "Coladeita de Bordos Prime 4GS",
+      "dataCriacaoDB": "2025-02-18"
+    },
+    {
+      "id": 2990,
+      "empresa": "Projeto K Studio",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-02-18"
+    },
+    {
+      "id": 2991,
+      "empresa": "Brazilian Host",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-02-19"
+    },
+    {
+      "id": 2992,
+      "empresa": "Móveis Bom Pastor",
+      "equipamento": "Contour 2.0 Plus",
+      "dataCriacaoDB": "2025-02-20"
+    },
+    {
+      "id": 2993,
+      "empresa": "Henrique Ferragens",
+      "equipamento": "SVP 145 Revisada",
+      "dataCriacaoDB": "2025-02-21"
+    },
+    {
+      "id": 2994,
+      "empresa": "Henrique Ferragens",
+      "equipamento": "Coladeira de Bordos Prime 4GS",
+      "dataCriacaoDB": "2025-02-21"
+    },
+    {
+      "id": 2995,
+      "empresa": "Dal Osto & Quagliato - Dalato",
+      "equipamento": "Centro de Furação PT6.5",
+      "dataCriacaoDB": "2025-02-21"
+    },
+    {
+      "id": 2996,
+      "empresa": "Gabriel Marcenaria",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": "2025-02-21"
+    },
+    {
+      "id": 2997,
+      "empresa": "Dal Osto & Quagliato - Dalato",
+      "equipamento": "Centro de Furação PT6",
+      "dataCriacaoDB": "2025-02-21"
+    },
+    {
+      "id": 2998,
+      "empresa": "Ciplafe Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-02-23"
+    },
+    {
+      "id": 2999,
+      "empresa": "Comercial Via Sônia Eireli",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-02-23"
+    },
+    {
+      "id": 3000,
+      "empresa": "Bela Madera Movelaria",
+      "equipamento": "Nesting3200 Marchiori",
+      "dataCriacaoDB": "2025-02-25"
+    },
+    {
+      "id": 3001,
+      "empresa": "Quartos etc",
+      "equipamento": "Linha Nesting Master V1",
+      "dataCriacaoDB": "2025-03-04"
+    },
+    {
+      "id": 3002,
+      "empresa": "Arte Futura",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-03-06"
+    },
+    {
+      "id": 3003,
+      "empresa": "Arte Futura",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2025-03-06"
+    },
+    {
+      "id": 3004,
+      "empresa": "Anfele Ambientes Planejados",
+      "equipamento": "Coladeira de Bordos Prime 4GS",
+      "dataCriacaoDB": "2025-03-06"
+    },
+    {
+      "id": 3005,
+      "empresa": "Anfele Ambientes Planejados",
+      "equipamento": "SVP 145 Revisada",
+      "dataCriacaoDB": "2025-03-06"
+    },
+    {
+      "id": 3006,
+      "empresa": "Comatus Móveis - Desideratum",
+      "equipamento": "Linha Nesting Master V2",
+      "dataCriacaoDB": "2025-03-06"
+    },
+    {
+      "id": 3007,
+      "empresa": "Fortline",
+      "equipamento": "Coladeira de Bordos Ultimate",
+      "dataCriacaoDB": "2025-03-09"
+    },
+    {
+      "id": 3008,
+      "empresa": "Oficina Brasileira de Marcenaria",
+      "equipamento": "Guilhotina MQJ320A",
+      "dataCriacaoDB": "2025-03-18"
+    },
+    {
+      "id": 3009,
+      "empresa": "Creative Móveis",
+      "equipamento": "Nesting CNC CutPro Lite",
+      "dataCriacaoDB": "2025-03-18"
+    },
+    {
+      "id": 3010,
+      "empresa": "Leroy Merlin - Vitória",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2025-03-19"
+    },
+    {
+      "id": 3011,
+      "empresa": "Leroy Merlin - Vitória",
+      "equipamento": "Univer 620",
+      "dataCriacaoDB": "2025-03-19"
+    },
+    {
+      "id": 3012,
+      "empresa": "Henrique Ferragens",
+      "equipamento": "Coladeira de Bordos Millenium 6GS",
+      "dataCriacaoDB": "2025-03-20"
+    },
+    {
+      "id": 3013,
+      "empresa": "Marcio Fernandes Maciel",
+      "equipamento": "Prensa HFPB 2010",
+      "dataCriacaoDB": "2025-03-30"
+    },
+    {
+      "id": 3014,
+      "empresa": "Movelcor",
+      "equipamento": "Nesting CNC (Over)",
+      "dataCriacaoDB": "2025-03-31"
+    },
+    {
+      "id": 3015,
+      "empresa": "School Center",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-04-09"
+    },
+    {
+      "id": 3016,
+      "empresa": "School Center",
+      "equipamento": "Contour 2.0 Plus",
+      "dataCriacaoDB": "2025-04-09"
+    },
+    {
+      "id": 3017,
+      "empresa": "School Center",
+      "equipamento": "Contour S line",
+      "dataCriacaoDB": "2025-04-09"
+    },
+    {
+      "id": 3018,
+      "empresa": "Roberto Marcenaria",
+      "equipamento": "Nesting Robust",
+      "dataCriacaoDB": "2025-04-14"
+    },
+    {
+      "id": 3019,
+      "empresa": "Centro Oeste Soluções Logísticas",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2025-04-16"
+    },
+    {
+      "id": 3020,
+      "empresa": "Centro Oeste Soluções Logísticas",
+      "equipamento": "Nesting Lexno",
+      "dataCriacaoDB": "2025-04-16"
+    },
+    {
+      "id": 3021,
+      "empresa": "Meta Mobilli",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-04-21"
+    },
+    {
+      "id": 3022,
+      "empresa": "Meta Mobilli",
+      "equipamento": "Contour S line",
+      "dataCriacaoDB": "2025-04-21"
+    },
+    {
+      "id": 3023,
+      "empresa": "Meta Indústria",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-04-23"
+    },
+    {
+      "id": 3024,
+      "empresa": "Hublo Móveis",
+      "equipamento": "Cutpro Plus",
+      "dataCriacaoDB": "2025-04-28"
+    },
+    {
+      "id": 3025,
+      "empresa": "Sampaio Ambientes Planejados",
+      "equipamento": "Nesting Lexno",
+      "dataCriacaoDB": "2025-04-29"
+    },
+    {
+      "id": 3026,
+      "empresa": "JRD Brandão",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-04-29"
+    },
+    {
+      "id": 3027,
+      "empresa": "Tersetec",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": "2025-05-01"
+    },
+    {
+      "id": 3028,
+      "empresa": "Lubrano",
+      "equipamento": "Contour S line",
+      "dataCriacaoDB": "2025-05-04"
+    },
+    {
+      "id": 3029,
+      "empresa": "Life Estofados",
+      "equipamento": "Esquadrejadeira",
+      "dataCriacaoDB": "2025-05-07"
+    },
+    {
+      "id": 3030,
+      "empresa": "JM Cadeiras",
+      "equipamento": "Contour S line",
+      "dataCriacaoDB": "2025-05-09"
+    },
+    {
+      "id": 3031,
+      "empresa": "Royal Brazil Ind e Com Ltda",
+      "equipamento": "SVP 420 Revisada",
+      "dataCriacaoDB": "2025-05-14"
+    },
+    {
+      "id": 3032,
+      "empresa": "Marcenaria Mooca",
+      "equipamento": "Nesting CNC CutPro Plus",
+      "dataCriacaoDB": "2025-05-15"
+    },
+    {
+      "id": 3033,
+      "empresa": "Piovezan Moveis",
+      "equipamento": "Cutpro Plus",
+      "dataCriacaoDB": "2025-05-18"
+    },
+    {
+      "id": 3034,
+      "empresa": "DW Móveis",
+      "equipamento": "Nesting Robust V1 com etiquetagem",
+      "dataCriacaoDB": "2025-05-21"
+    },
+    {
+      "id": 3035,
+      "empresa": "DW Móveis",
+      "equipamento": "Centro de Furação PT6",
+      "dataCriacaoDB": "2025-05-21"
+    },
+    {
+      "id": 3036,
+      "empresa": "Dal Osto & Quagliato - Dalato",
+      "equipamento": "Centro Versa 4º eixo",
+      "dataCriacaoDB": "2025-05-27"
+    },
+    {
+      "id": 3037,
+      "empresa": "Dal Osto & Quagliato - Dalato",
+      "equipamento": "Guilhotina MQJ320A",
+      "dataCriacaoDB": "2025-05-27"
+    },
+    {
+      "id": 3038,
+      "empresa": "Alves & Campos Móveis e Decorações",
+      "equipamento": "Nesting Lexno",
+      "dataCriacaoDB": "2025-05-27"
+    },
+    {
+      "id": 3039,
+      "empresa": "Di Madeira",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-06-01"
+    },
+    {
+      "id": 3040,
+      "empresa": "Di Madeira",
+      "equipamento": "Contour S line",
+      "dataCriacaoDB": "2025-06-01"
+    },
+    {
+      "id": 3041,
+      "empresa": "Eco Corte",
+      "equipamento": "Coladeira de Bordos Vectra",
+      "dataCriacaoDB": "2025-06-02"
+    },
+    {
+      "id": 3042,
+      "empresa": "Eco Corte",
+      "equipamento": "Nesting Master",
+      "dataCriacaoDB": "2025-06-02"
+    },
+    {
+      "id": 3043,
+      "empresa": "Ultrabases",
+      "equipamento": "Millenium",
+      "dataCriacaoDB": "2025-06-05"
+    },
+    {
+      "id": 3044,
+      "empresa": "Ultrabases",
+      "equipamento": "Contour S line",
+      "dataCriacaoDB": "2025-06-06"
+    },
+    {
+      "id": 3045,
+      "empresa": "Ultrabases",
+      "equipamento": "Vitap BC 92",
+      "dataCriacaoDB": "2025-06-07"
+    },
+    {
+      "id": 3046,
+      "empresa": "Ultrabases",
+      "equipamento": "SPL 3020",
+      "dataCriacaoDB": "2025-06-08"
+    },
+    {
+      "id": 3047,
+      "empresa": "Ultrabases",
+      "equipamento": "Point 1",
+      "dataCriacaoDB": "2025-06-09"
+    },
+    {
+      "id": 3048,
+      "empresa": "Eflex - Company",
+      "equipamento": "Coladeira de Bordos Astra Bumerangue",
+      "dataCriacaoDB": "2025-06-15"
+    },
+    {
+      "id": 3049,
+      "empresa": "Eflex - Company",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-06-15"
+    },
+    {
+      "id": 3050,
+      "empresa": "Eflex - Company",
+      "equipamento": "Cutpro",
+      "dataCriacaoDB": "2025-06-15"
+    },
+    {
+      "id": 3051,
+      "empresa": "Eflex - Company",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": "2025-06-15"
+    },
+    {
+      "id": 3052,
+      "empresa": "Eflex - Company",
+      "equipamento": "Nesting SPL 3020",
+      "dataCriacaoDB": "2025-06-15"
+    },
+    {
+      "id": 3053,
+      "empresa": "Eflex - Company",
+      "equipamento": "Point 2",
+      "dataCriacaoDB": "2025-06-15"
+    },
+    {
+      "id": 3054,
+      "empresa": "Juruá Estaleiros / José Welder",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": "2025-06-18"
+    },
+    {
+      "id": 3055,
+      "empresa": "Móveis Queiroz",
+      "equipamento": "Celula Nesting",
+      "dataCriacaoDB": "2025-06-26"
+    },
+    {
+      "id": 3056,
+      "empresa": "A Nova Marcenaria",
+      "equipamento": "Coladeira de Bordos Astra Bumerangue",
+      "dataCriacaoDB": "2025-07-02"
+    },
+    {
+      "id": 3057,
+      "empresa": "A Nova Marcenaria",
+      "equipamento": "Nesting Master",
+      "dataCriacaoDB": "2025-07-02"
+    },
+    {
+      "id": 3058,
+      "empresa": "A Nova Marcenaria",
+      "equipamento": "Esquadrejadeira MJ1132",
+      "dataCriacaoDB": "2025-07-02"
+    },
+    {
+      "id": 3059,
+      "empresa": "LYD Serviços",
+      "equipamento": "Nesting SPL 3020",
+      "dataCriacaoDB": "2025-07-02"
+    },
+    {
+      "id": 3060,
+      "empresa": "LYD Serviços",
+      "equipamento": "Point 2",
+      "dataCriacaoDB": "2025-07-02"
+    },
+    {
+      "id": 3061,
+      "empresa": "LYD Serviços",
+      "equipamento": "Nesting Versa",
+      "dataCriacaoDB": "2025-07-02"
+    },
+    {
+      "id": 3062,
+      "empresa": "Pizarro",
+      "equipamento": "Coladeira de Bordos Astra 30",
+      "dataCriacaoDB": "2025-07-12"
+    },
+    {
+      "id": 3063,
+      "empresa": "Smart Industria",
+      "equipamento": "Coladeira de Bordos Astra 45",
+      "dataCriacaoDB": "2025-07-21"
+    },
+    {
+      "id": 3064,
+      "empresa": "Smart Industria",
+      "equipamento": "Contour S Line",
+      "dataCriacaoDB": "2025-07-21"
+    },
+    {
+      "id": 3065,
+      "empresa": "Smart Industria",
+      "equipamento": "Coladeira de Bordos 4590 com arredondador",
+      "dataCriacaoDB": "2025-07-21"
+    },
+    {
+      "id": 3066,
+      "empresa": "Work Solution",
+      "equipamento": "Contour S Line",
+      "dataCriacaoDB": "2025-08-03"
+    },
+    {
+      "id": 3067,
+      "empresa": "Work Solution",
+      "equipamento": "Coladeira de Bordos Astra Bumerangue",
+      "dataCriacaoDB": "2025-08-03"
+    },
+    {
+      "id": 3068,
+      "empresa": "Work Solution",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2025-08-03"
+    },
+    {
+      "id": 3069,
+      "empresa": "Fábrica de Móveis Devitte",
+      "equipamento": "Contour S line",
+      "dataCriacaoDB": "2025-08-24"
+    },
+    {
+      "id": 3070,
+      "empresa": "Accord Lighting",
+      "equipamento": "Kit Prensa HFPB 1608 CH",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3071,
+      "empresa": "Ariarte",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3072,
+      "empresa": "Atacadão Madeiras",
+      "equipamento": "Nesting CNC",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3073,
+      "empresa": "Atacadão Madeiras",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3074,
+      "empresa": "BBB Madeiras",
+      "equipamento": "Centro de Furação HB611G",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3075,
+      "empresa": "BBB Madeiras",
+      "equipamento": "Linha Nesting",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3076,
+      "empresa": "BJG Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3077,
+      "empresa": "Coperflex Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3078,
+      "empresa": "Equipa Group",
+      "equipamento": "SVP 145 Plus",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3079,
+      "empresa": "GL Soluções em Marcenaria",
+      "equipamento": "Nesting CNC 3020 ATC-LE",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3080,
+      "empresa": "Innove Móveis Planejados",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3081,
+      "empresa": "Itália do Brasil Com. de Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3082,
+      "empresa": "Lider Fábrica de Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3083,
+      "empresa": "Madetec Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3084,
+      "empresa": "Marzo Vitorino",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3085,
+      "empresa": "Novo Espaço Móveis",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3086,
+      "empresa": "Ornare",
+      "equipamento": "Seccionadora Mecânica",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3087,
+      "empresa": "Rúpulo Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3088,
+      "empresa": "Tecama",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3089,
+      "empresa": "Marcenaria Marvelar",
+      "equipamento": "Guilhotina MQJ320A",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3090,
+      "empresa": "TS Móveis",
+      "equipamento": "Univer 620",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3091,
+      "empresa": "Disk Madeira",
+      "equipamento": "Coladeira de Bordos Astra 45°",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3092,
+      "empresa": "Work Solution",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3093,
+      "empresa": "PG Madeiras",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3094,
+      "empresa": "PG Madeiras",
+      "equipamento": "Astra 30",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3095,
+      "empresa": "PG Madeiras",
+      "equipamento": "Vectra",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3096,
+      "empresa": "PG Madeiras",
+      "equipamento": "Nesting Robust",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3097,
+      "empresa": "PG Madeiras",
+      "equipamento": "Linha Nesting Master V1",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3098,
+      "empresa": "Tersetec",
+      "equipamento": "Nesting Robust V1 com etiquetagem",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3099,
+      "empresa": "Marcenaria Impacto",
+      "equipamento": "Astra 45",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3100,
+      "empresa": "LCN Marcenaria",
+      "equipamento": "Coladeira de bordos Vectra",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3101,
+      "empresa": "LCN Marcenaria",
+      "equipamento": "Nesting CutPro Plus",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3102,
+      "empresa": "GF Indústria e Com. de Móveis",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3103,
+      "empresa": "WCN Móveis de Aço",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3104,
+      "empresa": "Dellart",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3105,
+      "empresa": "Panan Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3106,
+      "empresa": "Incomel Móveis p/ Escritório",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3107,
+      "empresa": "F.B. Móveis e Artefatos em Madeira",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3108,
+      "empresa": "Ferrix Com. Ind. De Ferragem",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3109,
+      "empresa": "Madú Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3110,
+      "empresa": "Cemafer",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3111,
+      "empresa": "Project Up",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3112,
+      "empresa": "Lab Linea do Brasil",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3113,
+      "empresa": "Soromóveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3114,
+      "empresa": "Beira Alta Industrial Ltda",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3115,
+      "empresa": "Bilhares Bola 7",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3116,
+      "empresa": "ALX Marcenaria",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3117,
+      "empresa": "Pandin Soluções em Ambiente",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3118,
+      "empresa": "Michele Móveis e Instalações Ltda",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3119,
+      "empresa": "IB Marcenaria",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3120,
+      "empresa": "Refrimov",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3121,
+      "empresa": "Móveis Rimo",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3122,
+      "empresa": "Moderna Móveis e Serviços",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3123,
+      "empresa": "Gabbinetto",
+      "equipamento": "Contour",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3124,
+      "empresa": "Itaúba Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3125,
+      "empresa": "Ultrabases",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3126,
+      "empresa": "Ricardo Goulart",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3127,
+      "empresa": "Santa Tereza Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3128,
+      "empresa": "Flexibase",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3129,
+      "empresa": "Jacauna Grupo",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3130,
+      "empresa": "Brasvac Industrial",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3131,
+      "empresa": "Móveis Viareggio",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3132,
+      "empresa": "Ricardo Pozzo - Cortes Sob Medida",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3133,
+      "empresa": "AES Fábrica",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3134,
+      "empresa": "Capricho Móveis Planejados",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3135,
+      "empresa": "Apform Ind e Com",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3136,
+      "empresa": "Wflex Ind e Com de Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3137,
+      "empresa": "Marcenaria Miqueias",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3138,
+      "empresa": "Belas Artes Cabinet Shop",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3139,
+      "empresa": "Home Office",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3140,
+      "empresa": "Mercado do Escritório",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3141,
+      "empresa": "Incabrás",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3142,
+      "empresa": "USE Móveis p/ Escritório",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3143,
+      "empresa": "Stima Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3144,
+      "empresa": "Alfamob Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3145,
+      "empresa": "J J Instalações Comerciais",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3146,
+      "empresa": "A Poderosa Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3147,
+      "empresa": "Belniaki & Belniaki",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3148,
+      "empresa": "Canaã Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3149,
+      "empresa": "Devant Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3150,
+      "empresa": "Funcional Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3151,
+      "empresa": "Incoflex Ind. E Com. Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3152,
+      "empresa": "Omega Design",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3153,
+      "empresa": "Qmovi",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3154,
+      "empresa": "Valle Expositores",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3155,
+      "empresa": "Senai Arapongas",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3156,
+      "empresa": "Famastil Taurus",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3157,
+      "empresa": "Lay Out Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3158,
+      "empresa": "Xalingo S/A Ind Com",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3159,
+      "empresa": "Diana Móveis",
+      "equipamento": "Eclipse",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3160,
+      "empresa": "Novo Espaço Móveis",
+      "equipamento": "Prensa",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3161,
+      "empresa": "GL Soluções em Marcenaria",
+      "equipamento": "Router CNC LE",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3162,
+      "empresa": "Atacadão Madeiras",
+      "equipamento": "Router CNC",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3163,
+      "empresa": "Atacadão Madeiras",
+      "equipamento": "Contour",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3164,
+      "empresa": "MRP Movelaria",
+      "equipamento": "Millenium 6GS",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3165,
+      "empresa": "Andrade Móveis Sob Medida",
+      "equipamento": "Nesting Cut Pro Plus",
+      "dataCriacaoDB": "2023-04-26"
+    },
+    {
+      "id": 3166,
+      "empresa": "B R Cantanhede Móveis",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2023-05-01"
+    },
+    {
+      "id": 3167,
+      "empresa": "Marcenaria Tanigushi",
+      "equipamento": "Coladeira de bordos Astra + R",
+      "dataCriacaoDB": "2023-05-08"
+    },
+    {
+      "id": 3168,
+      "empresa": "WNS Com. e Serviços - Casa do Marceneiro",
+      "equipamento": "Coladeira de Bordos Astra",
+      "dataCriacaoDB": "2023-07-06"
+    },
+    {
+      "id": 3169,
+      "empresa": "Bold Participações",
+      "equipamento": "Nesting 3020 Marchiori",
+      "dataCriacaoDB": "2024-03-27"
+    },
+    {
+      "id": 3170,
+      "empresa": "Eduplus Indústria e Comércio",
+      "equipamento": "Nesting 3020 Marchiori",
+      "dataCriacaoDB": "2024-04-22"
+    },
+    {
+      "id": 3171,
+      "empresa": "CasaPlan",
+      "equipamento": "Nesting 3020 Marchiori",
+      "dataCriacaoDB": "2024-07-14"
+    },
+    {
+      "id": 3172,
+      "empresa": "A. Menozzi Marcenaria Ltda",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": "2024-09-02"
+    },
+    {
+      "id": 3173,
+      "empresa": "Grupo Lopas S/A",
+      "equipamento": "Coladeira de Bordos Astra + R",
+      "dataCriacaoDB": "2025-02-18"
+    },
+    {
+      "id": 3174,
+      "empresa": "Bela Madera Movelaria",
+      "equipamento": "Nesting 3020 Marchiori",
+      "dataCriacaoDB": "2025-02-25"
+    },
+    {
+      "id": 3175,
+      "empresa": "PG Madeiras",
+      "equipamento": "Coladeira de Bordos Astra 30mm",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3176,
+      "empresa": "PG Madeiras",
+      "equipamento": "Coladeira de Bordos Vectra",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3177,
+      "empresa": "PG Madeiras",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3178,
+      "empresa": "Roberto Marcenaria",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": "2025-04-14"
+    },
+    {
+      "id": 3179,
+      "empresa": "Roberto Marcenaria",
+      "equipamento": "Furadeira Horizontal CNC",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3180,
+      "empresa": "Marcenaria Impacto",
+      "equipamento": "Coladeira de Bordos Astra 45°",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3181,
+      "empresa": "Marcenaria Mooca",
+      "equipamento": "Nesting CutPro Plus",
+      "dataCriacaoDB": "2025-05-15"
+    },
+    {
+      "id": 3182,
+      "empresa": "Primazzia Ambientes Planejados",
+      "equipamento": "Coladeira de Bordos Vectra",
+      "dataCriacaoDB": "2025-07-22"
+    },
+    {
+      "id": 3183,
+      "empresa": "Marcenaria Capixaba",
+      "equipamento": "Centro de Furação PT6.7",
+      "dataCriacaoDB": "2025-07-13"
+    },
+    {
+      "id": 3184,
+      "empresa": "HPT Comércio e Indústria de Móveis",
+      "equipamento": "Centro de Furação PT6.5",
+      "dataCriacaoDB": "2025-07-24"
+    },
+    {
+      "id": 3185,
+      "empresa": "HPT Comércio e Indústria de Móveis",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2025-07-24"
+    },
+    {
+      "id": 3186,
+      "empresa": "Ellan S/A",
+      "equipamento": "Coladeira de bordos BC92",
+      "dataCriacaoDB": "2025-04-28"
+    },
+    {
+      "id": 3187,
+      "empresa": "Ciplast",
+      "equipamento": "Centro Versa 4º eixo",
+      "dataCriacaoDB": "2025-04-09"
+    },
+    {
+      "id": 3188,
+      "empresa": "C.A F de Oliveira",
+      "equipamento": "Coladeira de Bordos Astra",
+      "dataCriacaoDB": "2025-07-30"
+    },
+    {
+      "id": 3189,
+      "empresa": "Estilo e Nobreza Marcenaria",
+      "equipamento": "Contour S line",
+      "dataCriacaoDB": "2025-08-01"
+    },
+    {
+      "id": 3190,
+      "empresa": "ANBI Marcenaria",
+      "equipamento": "Nesting CutPro Plus",
+      "dataCriacaoDB": "2025-08-06"
+    },
+    {
+      "id": 3191,
+      "empresa": "ANBI Marcenaria",
+      "equipamento": "Nesting Robust V1",
+      "dataCriacaoDB": "2025-08-06"
+    },
+    {
+      "id": 3192,
+      "empresa": "ANBI Marcenaria",
+      "equipamento": "Centro de Furação PT6",
+      "dataCriacaoDB": "2025-08-06"
+    },
+    {
+      "id": 3193,
+      "empresa": "Slik Móveis Automatizados",
+      "equipamento": "Contour S line",
+      "dataCriacaoDB": "2025-08-20"
+    },
+    {
+      "id": 3194,
+      "empresa": "Marcenaria A Vitoria",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2025-07-06"
+    },
+    {
+      "id": 3195,
+      "empresa": "Guilhem",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2025-08-21"
+    },
+    {
+      "id": 3196,
+      "empresa": "C.A F de Oliveira",
+      "equipamento": "Coladeira de Bordos Vectra",
+      "dataCriacaoDB": "2025-08-24"
+    },
+    {
+      "id": 3197,
+      "empresa": "Casa dos Parafusos",
+      "equipamento": "Coladeira T300 Tecmatic",
+      "dataCriacaoDB": "2025-08-25"
+    },
+    {
+      "id": 3198,
+      "empresa": "Anderson Montagem de Móveis",
+      "equipamento": "Coladeira T300 Tecmatic",
+      "dataCriacaoDB": "2025-08-25"
+    },
+    {
+      "id": 3199,
+      "empresa": "Guilhem Móveis e Decorações",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2025-08-24"
+    },
+    {
+      "id": 3200,
+      "empresa": "Tamara S SA Móveis Portas e Acessórios",
+      "equipamento": "Coladeira de Bordos Astra",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3201,
+      "empresa": "Tamara S SA Móveis Portas e Acessórios",
+      "equipamento": "Contour S Line",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3202,
+      "empresa": "Marlise Marcenaria",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2025-09-01"
+    },
+    {
+      "id": 3203,
+      "empresa": "Marlise Marcenaria",
+      "equipamento": "Nesting CutPro Plus",
+      "dataCriacaoDB": "2025-09-01"
+    },
+    {
+      "id": 3204,
+      "empresa": "TM Uffício Soluções Corporativas Ltda",
+      "equipamento": "Nesting CutPro Plus",
+      "dataCriacaoDB": "2025-09-28"
+    },
+    {
+      "id": 3205,
+      "empresa": "TM Uffício Soluções Corporativas Ltda",
+      "equipamento": "Nesting Robust V2",
+      "dataCriacaoDB": "2025-09-28"
+    },
+    {
+      "id": 3206,
+      "empresa": "Prime Marcenaria",
+      "equipamento": "Coladeira de Bordos Prime 4GS",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3207,
+      "empresa": "Prime Marcenaria",
+      "equipamento": "Linha Nesting Master V1",
+      "dataCriacaoDB": "2025-09-29"
+    },
+    {
+      "id": 3208,
+      "empresa": "Versátil Móveis",
+      "equipamento": "Centro de Furação PT6",
+      "dataCriacaoDB": "2025-09-29"
+    },
+    {
+      "id": 3209,
+      "empresa": "Versátil Móveis",
+      "equipamento": "Centro de Furação PT6.8",
+      "dataCriacaoDB": "2025-09-29"
+    },
+    {
+      "id": 3210,
+      "empresa": "Versátil Móveis",
+      "equipamento": "Coladeira de Bordos Astra 45°",
+      "dataCriacaoDB": "2025-09-29"
+    },
+    {
+      "id": 3211,
+      "empresa": "Tunary",
+      "equipamento": "Coladeira de bordos Vectra",
+      "dataCriacaoDB": "2025-09-30"
+    },
+    {
+      "id": 3212,
+      "empresa": "Tunary",
+      "equipamento": "Prensa Térmica 3013 2PM",
+      "dataCriacaoDB": "2025-09-30"
+    },
+    {
+      "id": 3213,
+      "empresa": "Calimazzo Madeiras",
+      "equipamento": "Nesting Robust V1 com etiquetagem",
+      "dataCriacaoDB": "2025-09-30"
+    },
+    {
+      "id": 3214,
+      "empresa": "Calimazzo Madeiras",
+      "equipamento": "Contour S line",
+      "dataCriacaoDB": "2025-09-30"
+    },
+    {
+      "id": 3215,
+      "empresa": "Tersetec",
+      "equipamento": "Nesting Robust V1 com descarga",
+      "dataCriacaoDB": "2025-10-01"
+    },
+    {
+      "id": 3216,
+      "empresa": "MRP Movelaria",
+      "equipamento": "Laser chapa e tubo",
+      "dataCriacaoDB": "2025-10-15"
+    },
+    {
+      "id": 3217,
+      "empresa": "MRP Movelaria",
+      "equipamento": "Centro de Furação PT6.7",
+      "dataCriacaoDB": "2025-10-15"
+    },
+    {
+      "id": 3218,
+      "empresa": "Marupá Móveis",
+      "equipamento": "Prensa Térmica 4016 2PM",
+      "dataCriacaoDB": "2025-10-12"
+    },
+    {
+      "id": 3219,
+      "empresa": "Marupá Móveis",
+      "equipamento": "Emendadora de Lâminas",
+      "dataCriacaoDB": "2025-10-12"
+    },
+    {
+      "id": 3220,
+      "empresa": "YK Móveis",
+      "equipamento": "Nesting Robust V1 com etiquetagem",
+      "dataCriacaoDB": "2025-10-15"
+    },
+    {
+      "id": 3221,
+      "empresa": "YK Móveis",
+      "equipamento": "Centro de Furação PT6.7",
+      "dataCriacaoDB": "2025-10-15"
+    },
+    {
+      "id": 3222,
+      "empresa": "Marzo Vitorino",
+      "equipamento": "Linha Dupla de Furação Automática",
+      "dataCriacaoDB": "2025-09-30"
+    },
+    {
+      "id": 3223,
+      "empresa": "Art House",
+      "equipamento": "Nesting CutPro Plus",
+      "dataCriacaoDB": "2025-10-05"
+    },
+    {
+      "id": 3224,
+      "empresa": "Breton",
+      "equipamento": "Prensa Térmica 4016 2PM",
+      "dataCriacaoDB": "2025-09-30"
+    },
+    {
+      "id": 3225,
+      "empresa": "Breton",
+      "equipamento": "Contour 2.0",
+      "dataCriacaoDB": "2025-09-30"
+    },
+    {
+      "id": 3226,
+      "empresa": "Segatto Móveis",
+      "equipamento": "Nesting Robust V1 com etiquetagem",
+      "dataCriacaoDB": "2025-10-15"
+    },
+    {
+      "id": 3227,
+      "empresa": "Segatto Móveis",
+      "equipamento": "Coladeira de Bordos Vectra",
+      "dataCriacaoDB": "2025-10-15"
+    },
+    {
+      "id": 3228,
+      "empresa": "Segatto Móveis",
+      "equipamento": "Coladeira de Bordos Astra 45°",
+      "dataCriacaoDB": "2025-10-15"
+    },
+    {
+      "id": 3229,
+      "empresa": "Almeida Neves Marcenaria Serrana Ltda",
+      "equipamento": "Centro de Furação PT6.7",
+      "dataCriacaoDB": "2025-10-20"
+    },
+    {
+      "id": 3230,
+      "empresa": "Pinheiro Laser Soluções em Personalizados",
+      "equipamento": "SVP 145 Revisada",
+      "dataCriacaoDB": "2025-10-01"
+    },
+    {
+      "id": 3231,
+      "empresa": "Dal Osto & Quagliato - Dalato",
+      "equipamento": "Centro de Furação PT6.7",
+      "dataCriacaoDB": "2025-10-20"
+    },
+    {
+      "id": 3232,
+      "empresa": "MN Naves",
+      "equipamento": "Nesting Robust V1 com etiquetagem",
+      "dataCriacaoDB": "2025-10-21"
+    },
+    {
+      "id": 3233,
+      "empresa": "MN Naves",
+      "equipamento": "Centro de Furação PT6.5",
+      "dataCriacaoDB": "2025-09-30"
+    },
+    {
+      "id": 3234,
+      "empresa": "MN Naves",
+      "equipamento": "Coladeira de Bordos Astra 45°",
+      "dataCriacaoDB": "2025-09-30"
+    },
+    {
+      "id": 3235,
+      "empresa": "MN Naves",
+      "equipamento": "Coladeira de Bordos Vectra",
+      "dataCriacaoDB": "2025-09-30"
+    },
+    {
+      "id": 3236,
+      "empresa": "Mac Planejados",
+      "equipamento": "Centro de Furação PT6.8",
+      "dataCriacaoDB": null
+    },
+    {
+      "id": 3237,
+      "empresa": "Mac Planejados",
+      "equipamento": "Nesting Robust V1 com etiquetagem",
+      "dataCriacaoDB": null
+    }
+  ],
+  "semDataNoPlanilha": []
+}

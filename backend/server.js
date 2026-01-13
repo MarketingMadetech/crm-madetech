@@ -212,6 +212,8 @@ app.post('/api/negocios', authenticateToken, (req, res) => {
   const {
     empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
     valor_produto, valor_oferta, valor_fabrica, valor_brasil,
+    valor_produto_usd, valor_oferta_usd, valor_fabrica_usd, valor_brasil_usd,
+    valor_produto_eur, valor_oferta_eur, valor_fabrica_eur, valor_brasil_eur,
     data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias
   } = req.body;
   
@@ -219,13 +221,17 @@ app.post('/api/negocios', authenticateToken, (req, res) => {
     INSERT INTO negocios (
       empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
       valor_produto, valor_oferta, valor_fabrica, valor_brasil,
+      valor_produto_usd, valor_oferta_usd, valor_fabrica_usd, valor_brasil_usd,
+      valor_produto_eur, valor_oferta_eur, valor_fabrica_eur, valor_brasil_eur,
       data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
   
   db.run(query, [
     empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
     valor_produto, valor_oferta, valor_fabrica, valor_brasil,
+    valor_produto_usd, valor_oferta_usd, valor_fabrica_usd, valor_brasil_usd,
+    valor_produto_eur, valor_oferta_eur, valor_fabrica_eur, valor_brasil_eur,
     data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias || ''
   ], function(err) {
     if (err) {
@@ -250,6 +256,8 @@ app.put('/api/negocios/:id', authenticateToken, (req, res) => {
   const {
     empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
     valor_produto, valor_oferta, valor_fabrica, valor_brasil,
+    valor_produto_usd, valor_oferta_usd, valor_fabrica_usd, valor_brasil_usd,
+    valor_produto_eur, valor_oferta_eur, valor_fabrica_eur, valor_brasil_eur,
     data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias
   } = req.body;
   
@@ -266,6 +274,8 @@ app.put('/api/negocios/:id', authenticateToken, (req, res) => {
       UPDATE negocios SET
         empresa = ?, pessoa_contato = ?, telefone = ?, email = ?, equipamento = ?, tipo_maquina = ?, tipo_negociacao = ?,
         valor_produto = ?, valor_oferta = ?, valor_fabrica = ?, valor_brasil = ?,
+        valor_produto_usd = ?, valor_oferta_usd = ?, valor_fabrica_usd = ?, valor_brasil_usd = ?,
+        valor_produto_eur = ?, valor_oferta_eur = ?, valor_fabrica_eur = ?, valor_brasil_eur = ?,
         data_criacao = ?, data_fechamento = ?, etapa = ?, status = ?, origem = ?, observacao = ?, ocorrencias = ?,
         updated_at = CURRENT_TIMESTAMP
       WHERE id = ?
@@ -274,6 +284,8 @@ app.put('/api/negocios/:id', authenticateToken, (req, res) => {
     db.run(query, [
       empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
       valor_produto, valor_oferta, valor_fabrica, valor_brasil,
+      valor_produto_usd, valor_oferta_usd, valor_fabrica_usd, valor_brasil_usd,
+      valor_produto_eur, valor_oferta_eur, valor_fabrica_eur, valor_brasil_eur,
       data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias || '',
       req.params.id
     ], function(err) {
@@ -426,8 +438,8 @@ app.get('/api/dashboard/stats', authenticateToken, (req, res) => {
   
   // Negócios em Risco (parados há 30+ dias) - filtrado por período
   const filtroRisco = filtroData 
-    ? `WHERE status != 'Venda Confirmada' AND status != 'Perdido' AND etapa NOT IN ('Cliente contatado', 'Proposta enviada') AND data_criacao >= ?`
-    : `WHERE status != 'Venda Confirmada' AND status != 'Perdido' AND etapa NOT IN ('Cliente contatado', 'Proposta enviada')`;
+    ? `WHERE status != 'VENDA CONFIRMADA' AND status != 'Perdido' AND etapa NOT IN ('Cliente contatado', 'Proposta enviada') AND data_criacao >= ?`
+    : `WHERE status != 'VENDA CONFIRMADA' AND status != 'Perdido' AND etapa NOT IN ('Cliente contatado', 'Proposta enviada')`;
   db.get(`
     SELECT 
       COUNT(*) as count,
@@ -444,7 +456,7 @@ app.get('/api/dashboard/stats', authenticateToken, (req, res) => {
   db.get(`
     SELECT 
       COUNT(*) as total,
-      SUM(CASE WHEN status = 'Venda Confirmada' THEN 1 ELSE 0 END) as fechados,
+      SUM(CASE WHEN status = 'VENDA CONFIRMADA' THEN 1 ELSE 0 END) as fechados,
       SUM(CASE WHEN status = 'Proposta enviada' THEN 1 ELSE 0 END) as propostas,
       SUM(CASE WHEN status = 'Proposta enviada' THEN valor_oferta ELSE 0 END) as valor_propostas
     FROM negocios

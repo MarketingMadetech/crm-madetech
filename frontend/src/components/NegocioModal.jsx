@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { formatarDataBrasileira } from '../utils/dateUtils'
 
 function NegocioModal({ negocio, onClose }) {
   const [historico, setHistorico] = useState([])
@@ -33,19 +34,8 @@ function NegocioModal({ negocio, onClose }) {
     }).format(value)
   }
 
-  const formatarData = (dataStr) => {
-    if (!dataStr) return '-'
-    // Se já está em formato brasileiro (DD/MM/YYYY)
-    if (dataStr.includes('/')) return dataStr
-    // Se está em formato SQL (YYYY-MM-DD HH:MM:SS)
-    if (dataStr.includes('-')) {
-      const data = new Date(dataStr.split(' ')[0])
-      if (!isNaN(data.getTime())) {
-        return data.toLocaleDateString('pt-BR')
-      }
-    }
-    return dataStr
-  }
+  // Usar função importada de dateUtils
+  const formatarData = formatarDataBrasileira
 
   const getStatusColor = (status) => {
     const colors = {

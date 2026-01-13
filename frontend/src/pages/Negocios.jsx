@@ -6,6 +6,7 @@ import NegocioModal from '../components/NegocioModal'
 import EmailModal from '../components/EmailModal'
 import cacheService from '../utils/cacheService'
 import EQUIPAMENTOS from '../config/equipamentos'
+import { formatarDataBrasileira } from '../utils/dateUtils'
 
 // Componente para mostrar última atividade
 const UltimaAtividade = ({ negocioId }) => {
@@ -85,20 +86,8 @@ function Negocios() {
   const [confirmDelete, setConfirmDelete] = useState(null)
   const [deletando, setDeletando] = useState(false)
 
-  // Helper para formatar datas SQL para formato brasileiro
-  const formatarData = (dataStr) => {
-    if (!dataStr) return '-'
-    // Se já está em formato brasileiro (DD/MM/YYYY)
-    if (dataStr.includes('/')) return dataStr
-    // Se está em formato SQL (YYYY-MM-DD HH:MM:SS)
-    if (dataStr.includes('-')) {
-      const data = new Date(dataStr.split(' ')[0])
-      if (!isNaN(data.getTime())) {
-        return data.toLocaleDateString('pt-BR')
-      }
-    }
-    return dataStr
-  }
+  // Helper para formatar datas SQL para formato brasileiro (importado de dateUtils)
+  const formatarData = formatarDataBrasileira
 
   // Helper para converter data para objeto Date
   const parseData = (dataStr) => {
@@ -402,8 +391,8 @@ function Negocios() {
       'Valor Oferta': n.valor_oferta || 0,
       'Valor Fábrica': n.valor_fabrica || 0,
       'Valor Brasil': n.valor_brasil || 0,
-      'Data Criação': n.data_criacao || '',
-      'Data Fechamento': n.data_fechamento || '',
+      'Data Criação': formatarData(n.data_criacao),
+      'Data Fechamento': formatarData(n.data_fechamento),
       'Etapa': n.etapa || '',
       'Status': n.status || '',
       'Origem': n.origem || '',
