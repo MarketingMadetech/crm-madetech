@@ -212,8 +212,7 @@ app.post('/api/negocios', authenticateToken, (req, res) => {
   const {
     empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
     valor_produto, valor_oferta, valor_fabrica, valor_brasil,
-    valor_produto_usd, valor_oferta_usd, valor_fabrica_usd, valor_brasil_usd,
-    valor_produto_eur, valor_oferta_eur, valor_fabrica_eur, valor_brasil_eur,
+    valor_produto_moeda, valor_fabrica_moeda, valor_brasil_moeda,
     data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias
   } = req.body;
   
@@ -221,17 +220,15 @@ app.post('/api/negocios', authenticateToken, (req, res) => {
     INSERT INTO negocios (
       empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
       valor_produto, valor_oferta, valor_fabrica, valor_brasil,
-      valor_produto_usd, valor_oferta_usd, valor_fabrica_usd, valor_brasil_usd,
-      valor_produto_eur, valor_oferta_eur, valor_fabrica_eur, valor_brasil_eur,
+      valor_produto_moeda, valor_fabrica_moeda, valor_brasil_moeda,
       data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
   
   db.run(query, [
     empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
     valor_produto, valor_oferta, valor_fabrica, valor_brasil,
-    valor_produto_usd, valor_oferta_usd, valor_fabrica_usd, valor_brasil_usd,
-    valor_produto_eur, valor_oferta_eur, valor_fabrica_eur, valor_brasil_eur,
+    valor_produto_moeda || 'BRL', valor_fabrica_moeda || 'BRL', valor_brasil_moeda || 'BRL',
     data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias || ''
   ], function(err) {
     if (err) {
@@ -256,8 +253,7 @@ app.put('/api/negocios/:id', authenticateToken, (req, res) => {
   const {
     empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
     valor_produto, valor_oferta, valor_fabrica, valor_brasil,
-    valor_produto_usd, valor_oferta_usd, valor_fabrica_usd, valor_brasil_usd,
-    valor_produto_eur, valor_oferta_eur, valor_fabrica_eur, valor_brasil_eur,
+    valor_produto_moeda, valor_fabrica_moeda, valor_brasil_moeda,
     data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias
   } = req.body;
   
@@ -274,8 +270,7 @@ app.put('/api/negocios/:id', authenticateToken, (req, res) => {
       UPDATE negocios SET
         empresa = ?, pessoa_contato = ?, telefone = ?, email = ?, equipamento = ?, tipo_maquina = ?, tipo_negociacao = ?,
         valor_produto = ?, valor_oferta = ?, valor_fabrica = ?, valor_brasil = ?,
-        valor_produto_usd = ?, valor_oferta_usd = ?, valor_fabrica_usd = ?, valor_brasil_usd = ?,
-        valor_produto_eur = ?, valor_oferta_eur = ?, valor_fabrica_eur = ?, valor_brasil_eur = ?,
+        valor_produto_moeda = ?, valor_fabrica_moeda = ?, valor_brasil_moeda = ?,
         data_criacao = ?, data_fechamento = ?, etapa = ?, status = ?, origem = ?, observacao = ?, ocorrencias = ?,
         updated_at = CURRENT_TIMESTAMP
       WHERE id = ?
@@ -284,8 +279,7 @@ app.put('/api/negocios/:id', authenticateToken, (req, res) => {
     db.run(query, [
       empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
       valor_produto, valor_oferta, valor_fabrica, valor_brasil,
-      valor_produto_usd, valor_oferta_usd, valor_fabrica_usd, valor_brasil_usd,
-      valor_produto_eur, valor_oferta_eur, valor_fabrica_eur, valor_brasil_eur,
+      valor_produto_moeda || 'BRL', valor_fabrica_moeda || 'BRL', valor_brasil_moeda || 'BRL',
       data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias || '',
       req.params.id
     ], function(err) {

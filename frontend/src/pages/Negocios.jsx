@@ -8,6 +8,68 @@ import cacheService from '../utils/cacheService'
 import EQUIPAMENTOS from '../config/equipamentos'
 import { formatarDataBrasileira } from '../utils/dateUtils'
 
+// Componente de Progresso de Recategorização
+const ProgressoRecategorizacao = ({ negocios }) => {
+  const etapasNovas = ['Contato Inicial', 'Cliente Contatado', 'Proposta Enviada', 'Prospecção']
+  const statusNovos = ['Em Andamento', 'Parado', 'Perdido', 'Venda Confirmada', 'Encerrado', 'Suspenso']
+
+  const totalNegocios = negocios.length
+  const etapasAtualizadas = negocios.filter(n => etapasNovas.includes(n.etapa)).length
+  const statusAtualizados = negocios.filter(n => statusNovos.includes(n.status)).length
+
+  const percentualEtapa = totalNegocios > 0 ? (etapasAtualizadas / totalNegocios * 100).toFixed(1) : 0
+  const percentualStatus = totalNegocios > 0 ? (statusAtualizados / totalNegocios * 100).toFixed(1) : 0
+
+  const totalPendentes = totalNegocios - Math.min(etapasAtualizadas, statusAtualizados)
+
+  if (totalPendentes === 0) return null // Não mostra quando tudo está atualizado
+
+  return (
+    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
+      <div className="flex items-start justify-between">
+        <div className="flex-1">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+            📊 Progresso de Recategorização
+          </h3>
+          
+          <div className="space-y-3">
+            <div>
+              <div className="flex justify-between text-sm mb-1">
+                <span className="text-gray-700 dark:text-gray-300">Etapa</span>
+                <span className="font-semibold text-gray-900 dark:text-white">{etapasAtualizadas}/{totalNegocios} ({percentualEtapa}%)</span>
+              </div>
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                <div 
+                  className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${percentualEtapa}%` }}
+                ></div>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex justify-between text-sm mb-1">
+                <span className="text-gray-700 dark:text-gray-300">Status</span>
+                <span className="font-semibold text-gray-900 dark:text-white">{statusAtualizados}/{totalNegocios} ({percentualStatus}%)</span>
+              </div>
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                <div 
+                  className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${percentualStatus}%` }}
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <p className="mt-3 text-sm text-amber-700 dark:text-amber-400 flex items-center gap-2">
+            <span>⚠️</span>
+            <span><strong>{totalPendentes}</strong> negócios ainda precisam ser atualizados</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // Componente para mostrar última atividade
 const UltimaAtividade = ({ negocioId }) => {
   const [atividade, setAtividade] = useState(null)
@@ -482,6 +544,9 @@ function Negocios() {
           </div>
         </div>
       )}
+
+      {/* Indicador de Progresso de Recategorização */}
+      <ProgressoRecategorizacao negocios={negociosFiltrados} />
 
       <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
         <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Filtros</h3>

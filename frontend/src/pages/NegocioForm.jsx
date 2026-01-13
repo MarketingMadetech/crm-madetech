@@ -20,14 +20,9 @@ function NegocioForm() {
     valor_oferta: '',
     valor_fabrica: '',
     valor_brasil: '',
-    valor_produto_usd: '',
-    valor_oferta_usd: '',
-    valor_fabrica_usd: '',
-    valor_brasil_usd: '',
-    valor_produto_eur: '',
-    valor_oferta_eur: '',
-    valor_fabrica_eur: '',
-    valor_brasil_eur: '',
+    valor_produto_moeda: 'BRL',
+    valor_fabrica_moeda: 'BRL',
+    valor_brasil_moeda: 'BRL',
     data_criacao: '',
     data_fechamento: '',
     etapa: '',
@@ -112,6 +107,16 @@ function NegocioForm() {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     })
+  }
+
+  // Função para obter símbolo da moeda
+  const getSimboloMoeda = (moeda) => {
+    const simbolos = {
+      'BRL': 'R$',
+      'USD': '$',
+      'EUR': '€'
+    }
+    return simbolos[moeda] || 'R$'
   }
 
   const adicionarOcorrencia = () => {
@@ -283,200 +288,159 @@ function NegocioForm() {
             </select>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Valor do Produto (BRL)</label>
-            <div className="relative">
-              <span className="absolute left-3 top-2 text-gray-500">R$</span>
-              <input
-                type="text"
-                name="valor_produto"
-                value={exibirValorFormatado(formData.valor_produto)}
-                onChange={handleValorChange}
-                placeholder="0,00"
-                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+          {formData.tipo_negociacao !== 'Importação Direta' && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Valor do Produto</label>
+              <div className="relative">
+                <span className="absolute left-3 top-2 text-gray-500">R$</span>
+                <input
+                  type="text"
+                  name="valor_produto"
+                  value={exibirValorFormatado(formData.valor_produto)}
+                  onChange={handleValorChange}
+                  placeholder="0,00"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
             </div>
-          </div>
-
-          {formData.tipo_negociacao === 'Importação Direta' && (
-            <>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Valor do Produto (USD)</label>
-                <div className="relative">
-                  <span className="absolute left-3 top-2 text-gray-500">$</span>
-                  <input
-                    type="text"
-                    name="valor_produto_usd"
-                    value={exibirValorFormatado(formData.valor_produto_usd)}
-                    onChange={handleValorChange}
-                    placeholder="0.00"
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Valor do Produto (EUR)</label>
-                <div className="relative">
-                  <span className="absolute left-3 top-2 text-gray-500">€</span>
-                  <input
-                    type="text"
-                    name="valor_produto_eur"
-                    value={exibirValorFormatado(formData.valor_produto_eur)}
-                    onChange={handleValorChange}
-                    placeholder="0.00"
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-            </>
           )}
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Valor da Oferta (BRL)</label>
-            <div className="relative">
-              <span className="absolute left-3 top-2 text-gray-500">R$</span>
-              <input
-                type="text"
-                name="valor_oferta"
-                value={exibirValorFormatado(formData.valor_oferta)}
-                onChange={handleValorChange}
-                placeholder="0,00"
-                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-          </div>
-
           {formData.tipo_negociacao === 'Importação Direta' && (
-            <>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Valor da Oferta (USD)</label>
-                <div className="relative">
-                  <span className="absolute left-3 top-2 text-gray-500">$</span>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Valor do Produto</label>
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <span className="absolute left-3 top-2 text-gray-500">{getSimboloMoeda(formData.valor_produto_moeda)}</span>
                   <input
                     type="text"
-                    name="valor_oferta_usd"
-                    value={exibirValorFormatado(formData.valor_oferta_usd)}
+                    name="valor_produto"
+                    value={exibirValorFormatado(formData.valor_produto)}
                     onChange={handleValorChange}
-                    placeholder="0.00"
+                    placeholder="0,00"
                     className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
+                <select
+                  name="valor_produto_moeda"
+                  value={formData.valor_produto_moeda}
+                  onChange={handleChange}
+                  className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="BRL">BRL</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                </select>
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Valor da Oferta (EUR)</label>
-                <div className="relative">
-                  <span className="absolute left-3 top-2 text-gray-500">€</span>
-                  <input
-                    type="text"
-                    name="valor_oferta_eur"
-                    value={exibirValorFormatado(formData.valor_oferta_eur)}
-                    onChange={handleValorChange}
-                    placeholder="0.00"
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-            </>
+            </div>
           )}
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Valor Fábrica (BRL)</label>
-            <div className="relative">
-              <span className="absolute left-3 top-2 text-gray-500">R$</span>
-              <input
-                type="text"
-                name="valor_fabrica"
-                value={exibirValorFormatado(formData.valor_fabrica)}
-                onChange={handleValorChange}
-                placeholder="0,00"
-                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+          {formData.tipo_negociacao !== 'Importação Direta' && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Valor da Oferta</label>
+              <div className="relative">
+                <span className="absolute left-3 top-2 text-gray-500">R$</span>
+                <input
+                  type="text"
+                  name="valor_oferta"
+                  value={exibirValorFormatado(formData.valor_oferta)}
+                  onChange={handleValorChange}
+                  placeholder="0,00"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
             </div>
-          </div>
-
-          {formData.tipo_negociacao === 'Importação Direta' && (
-            <>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Valor Fábrica (USD)</label>
-                <div className="relative">
-                  <span className="absolute left-3 top-2 text-gray-500">$</span>
-                  <input
-                    type="text"
-                    name="valor_fabrica_usd"
-                    value={exibirValorFormatado(formData.valor_fabrica_usd)}
-                    onChange={handleValorChange}
-                    placeholder="0.00"
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Valor Fábrica (EUR)</label>
-                <div className="relative">
-                  <span className="absolute left-3 top-2 text-gray-500">€</span>
-                  <input
-                    type="text"
-                    name="valor_fabrica_eur"
-                    value={exibirValorFormatado(formData.valor_fabrica_eur)}
-                    onChange={handleValorChange}
-                    placeholder="0.00"
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-            </>
           )}
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Valor Brasil (BRL)</label>
-            <div className="relative">
-              <span className="absolute left-3 top-2 text-gray-500">R$</span>
-              <input
-                type="text"
-                name="valor_brasil"
-                value={exibirValorFormatado(formData.valor_brasil)}
-                onChange={handleValorChange}
-                placeholder="0,00"
-                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+          {formData.tipo_negociacao !== 'Importação Direta' && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Valor Fábrica</label>
+              <div className="relative">
+                <span className="absolute left-3 top-2 text-gray-500">R$</span>
+                <input
+                  type="text"
+                  name="valor_fabrica"
+                  value={exibirValorFormatado(formData.valor_fabrica)}
+                  onChange={handleValorChange}
+                  placeholder="0,00"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
             </div>
-          </div>
+          )}
 
           {formData.tipo_negociacao === 'Importação Direta' && (
-            <>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Valor Brasil (USD)</label>
-                <div className="relative">
-                  <span className="absolute left-3 top-2 text-gray-500">$</span>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Valor Fábrica</label>
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <span className="absolute left-3 top-2 text-gray-500">{getSimboloMoeda(formData.valor_fabrica_moeda)}</span>
                   <input
                     type="text"
-                    name="valor_brasil_usd"
-                    value={exibirValorFormatado(formData.valor_brasil_usd)}
+                    name="valor_fabrica"
+                    value={exibirValorFormatado(formData.valor_fabrica)}
                     onChange={handleValorChange}
-                    placeholder="0.00"
+                    placeholder="0,00"
                     className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
+                <select
+                  name="valor_fabrica_moeda"
+                  value={formData.valor_fabrica_moeda}
+                  onChange={handleChange}
+                  className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="BRL">BRL</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                </select>
               </div>
+            </div>
+          )}
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Valor Brasil (EUR)</label>
-                <div className="relative">
-                  <span className="absolute left-3 top-2 text-gray-500">€</span>
+          {formData.tipo_negociacao !== 'Importação Direta' && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Valor Brasil</label>
+              <div className="relative">
+                <span className="absolute left-3 top-2 text-gray-500">R$</span>
+                <input
+                  type="text"
+                  name="valor_brasil"
+                  value={exibirValorFormatado(formData.valor_brasil)}
+                  onChange={handleValorChange}
+                  placeholder="0,00"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+          )}
+
+          {formData.tipo_negociacao === 'Importação Direta' && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Valor Brasil</label>
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <span className="absolute left-3 top-2 text-gray-500">{getSimboloMoeda(formData.valor_brasil_moeda)}</span>
                   <input
                     type="text"
-                    name="valor_brasil_eur"
-                    value={exibirValorFormatado(formData.valor_brasil_eur)}
+                    name="valor_brasil"
+                    value={exibirValorFormatado(formData.valor_brasil)}
                     onChange={handleValorChange}
-                    placeholder="0.00"
+                    placeholder="0,00"
                     className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
+                <select
+                  name="valor_brasil_moeda"
+                  value={formData.valor_brasil_moeda}
+                  onChange={handleChange}
+                  className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="BRL">BRL</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                </select>
               </div>
-            </>
+            </div>
           )}
 
 
@@ -506,13 +470,29 @@ function NegocioForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Etapa</label>
-            <input
-              type="text"
+            <select
               name="etapa"
               value={formData.etapa}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            >
+              <option value="">Selecione</option>
+              <optgroup label="✨ NOVO PADRÃO">
+                <option value="Contato Inicial">Contato Inicial</option>
+                <option value="Cliente Contatado">Cliente Contatado</option>
+                <option value="Proposta Enviada">Proposta Enviada</option>
+                <option value="Prospecção">Prospecção</option>
+              </optgroup>
+              <optgroup label="⚠️ LEGADO (atualizar)">
+                <option value="Contato inicial">Contato inicial</option>
+                <option value="Cliente contatado">Cliente contatado</option>
+                <option value="Proposta enviada">Proposta enviada</option>
+                <option value="CANCELADO">CANCELADO</option>
+                <option value="SUSPENSO">SUSPENSO</option>
+                <option value="Parado">Parado</option>
+                <option value="Sem etapa">Sem etapa</option>
+              </optgroup>
+            </select>
           </div>
 
           <div>
@@ -524,13 +504,25 @@ function NegocioForm() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Selecione</option>
-              <option value="Em andamento">Em andamento</option>
-              <option value="Contato inicial">Contato inicial</option>
-              <option value="Proposta enviada">Proposta enviada</option>
-              <option value="VENDA CONFIRMADA">VENDA CONFIRMADA</option>
-              <option value="PERDIDO">PERDIDO</option>
-              <option value="SUSPENSO">SUSPENSO</option>
-              <option value="CANCELADO">CANCELADO</option>
+              <optgroup label="✨ NOVO PADRÃO">
+                <option value="Em Andamento">Em Andamento</option>
+                <option value="Parado">Parado</option>
+                <option value="Perdido">Perdido</option>
+                <option value="Venda Confirmada">Venda Confirmada</option>
+                <option value="Encerrado">Encerrado</option>
+                <option value="Suspenso">Suspenso</option>
+              </optgroup>
+              <optgroup label="⚠️ LEGADO (atualizar)">
+                <option value="Em andamento">Em andamento</option>
+                <option value="Contato inicial">Contato inicial</option>
+                <option value="Proposta enviada">Proposta enviada</option>
+                <option value="VENDA CONFIRMADA">VENDA CONFIRMADA</option>
+                <option value="PERDIDO">PERDIDO</option>
+                <option value="SUSPENSO">SUSPENSO</option>
+                <option value="CANCELADO">CANCELADO</option>
+                <option value="Em aberto">Em aberto</option>
+                <option value="Prospecção">Prospecção</option>
+              </optgroup>
             </select>
           </div>
 
