@@ -443,7 +443,12 @@ function Negocios() {
   }
 
   const exportarExcel = () => {
-    const dadosExport = negociosFiltrados.map(n => ({
+    // Exporta os negócios atualmente visíveis (após filtros e ordenação)
+    const negociosFiltradosPorData = filtrarPorData(negocios)
+    const negociosFiltradosPorEquipamento = filtrarPorEquipamento(negociosFiltradosPorData)
+    const negociosParaExportar = ordenarNegocios(negociosFiltradosPorEquipamento)
+    
+    const dadosExport = negociosParaExportar.map(n => ({
       'Empresa': n.empresa,
       'Pessoa de Contato': n.pessoa_contato || '',
       'Equipamento': n.equipamento || '',
@@ -546,7 +551,7 @@ function Negocios() {
       )}
 
       {/* Indicador de Progresso de Recategorização */}
-      <ProgressoRecategorizacao negocios={negociosFiltrados} />
+      <ProgressoRecategorizacao negocios={negocios} />
 
       <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
         <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Filtros</h3>
