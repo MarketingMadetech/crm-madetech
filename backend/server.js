@@ -6,6 +6,7 @@ const path = require('path');
 const transporter = require('./config/email');
 const { router: authRouter, authenticateToken } = require('./auth');
 const { createBackup, listBackups, restoreBackup, deleteBackup, BACKUP_DIR } = require('./backup');
+const { initUsuarios } = require('./init-usuarios');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -772,9 +773,18 @@ app.get('*', (req, res) => {
 
 // ========== INICIAR SERVIDOR ========== 
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Servidor CRM rodando na porta ${PORT}`);
-  console.log(`📊 Banco de dados: ${path.join(__dirname, 'crm.db')}`);
+// Inicializar usuários antes de iniciar o servidor
+initUsuarios().then(() => {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Servidor CRM rodando na porta ${PORT}`);
+    console.log(`📊 Banco de dados: ${path.join(__dirname, 'crm.db')}`);
+  });
+}).catch((err) => {
+  console.error('❌ Erro ao inicializar usuários:', err);
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Servidor CRM rodando na porta ${PORT} (com erro na inicialização de usuários)`);
+    console.log(`📊 Banco de dados: ${path.join(__dirname, 'crm.db')}`);
+  });
 });
 
 process.on('SIGINT', () => {
