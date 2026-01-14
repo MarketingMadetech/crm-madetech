@@ -10,12 +10,18 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-transporter.verify((error, success) => {
-  if (error) {
-    console.log('❌ Erro na configuração de e-mail:', error.message);
-  } else {
-    console.log('✅ Servidor de e-mail pronto');
-  }
-});
+// Verificação desabilitada para não causar crash em produção
+// transporter.verify será feito apenas quando enviar email
+if (process.env.SMTP_PASS) {
+  transporter.verify((error, success) => {
+    if (error) {
+      console.log('⚠️  Aviso: Configuração de e-mail com problema:', error.message);
+    } else {
+      console.log('✅ Servidor de e-mail pronto');
+    }
+  });
+} else {
+  console.log('ℹ️  Email não configurado (opcional)');
+}
 
 module.exports = transporter;
