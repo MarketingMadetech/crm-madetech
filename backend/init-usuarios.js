@@ -5,13 +5,24 @@ const path = require('path');
 const dbPath = path.join(__dirname, 'crm.db');
 const db = new sqlite3.Database(dbPath);
 
-// Função auxiliar para promisificar db.run
+// Função auxiliar para promisificar db.run com tratamento completo de erros
 function dbRun(query, params = []) {
     return new Promise((resolve, reject) => {
-        db.run(query, params, function(err) {
-            if (err) reject(err);
-            else resolve(this);
+        const statement = db.run(query, params, function(err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(this);
+            }
         });
+        
+        // Adicionar handler explícito para eventos de erro do Statement
+        // Isso previne crashes por "Unhandled 'error' event"
+        if (statement) {
+            statement.on('error', (err) => {
+                reject(err);
+            });
+        }
     });
 }
 
