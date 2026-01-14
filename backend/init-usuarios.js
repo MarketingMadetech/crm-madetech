@@ -89,28 +89,28 @@ async function initUsuarios() {
 
         for (const usuario of usuarios) {
             try {
-                // Verificar se o usuário já existe
-                const exists = await dbGet('SELECT id FROM usuarios WHERE username = ?', [usuario.username]);
-
-                if (exists) {
-                    console.log(`ℹ️  Usuário já existe: ${usuario.username}`);
-                    skippedCount++;
-                    continue;
-                }
-
-                // Criar usuário
+                // Gerar hash da senha
                 const hashedPassword = await bcrypt.hash(usuario.senha, 10);
 
-                await dbRun(
-                    'INSERT INTO usuarios (username, senha, nome, email, role) VALUES (?, ?, ?, ?, ?)',
+                // Usar INSERT OR IGNORE para evitar erros de duplicação
+                // Se o usuário já existe, o SQLite simplesmente ignora a inserção
+                const result = await dbRun(
+                    'INSERT OR IGNORE INTO usuarios (username, senha, nome, email, role) VALUES (?, ?, ?, ?, ?)',
                     [usuario.username, hashedPassword, usuario.nome, usuario.email, usuario.role]
                 );
 
-                console.log(`✅ Usuário criado: ${usuario.username} (${usuario.role})`);
-                createdCount++;
+                // changes > 0 significa que o INSERT foi bem-sucedido (usuário criado)
+                // changes = 0 significa que foi ignorado (usuário já existia)
+                if (result.changes > 0) {
+                    console.log(`✅ Usuário criado: ${usuario.username} (${usuario.role})`);
+                    createdCount++;
+                } else {
+                    console.log(`ℹ️  Usuário já existe: ${usuario.username}`);
+                    skippedCount++;
+                }
 
             } catch (error) {
-                // Captura qualquer erro e apenas loga, sem interromper
+                // Captura qualquer erro inesperado e apenas loga, sem interromper
                 console.error(`⚠️  Erro ao processar usuário ${usuario.username}:`, error.message);
                 skippedCount++;
                 // Continua para o próximo usuário sem travar
