@@ -22,7 +22,7 @@ const ProgressoRecategorizacao = ({ negocios }) => {
 
   const totalPendentes = totalNegocios - Math.min(etapasAtualizadas, statusAtualizados)
 
-  if (totalPendentes === 0) return null // Não mostra quando tudo está atualizado
+  if (totalPendentes === 0) return null
 
   return (
     <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
@@ -443,12 +443,7 @@ function Negocios() {
   }
 
   const exportarExcel = () => {
-    // Exporta os negócios atualmente visíveis (após filtros e ordenação)
-    const negociosFiltradosPorData = filtrarPorData(negocios)
-    const negociosFiltradosPorEquipamento = filtrarPorEquipamento(negociosFiltradosPorData)
-    const negociosParaExportar = ordenarNegocios(negociosFiltradosPorEquipamento)
-    
-    const dadosExport = negociosParaExportar.map(n => ({
+    const dadosExport = negociosFiltrados.map(n => ({
       'Empresa': n.empresa,
       'Pessoa de Contato': n.pessoa_contato || '',
       'Equipamento': n.equipamento || '',
@@ -603,18 +598,6 @@ function Negocios() {
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Etapa</label>
-            <select
-              value={filtroAtivo.etapa}
-              onChange={(e) => handleFiltroChange('etapa', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Todas</option>
-              {filtros.etapas?.map(e => <option key={e} value={e}>{e}</option>)}
-            </select>
-          </div>
-
-          <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
             <select
               value={filtroAtivo.status}
@@ -623,6 +606,18 @@ function Negocios() {
             >
               <option value="">Todos</option>
               {filtros.status?.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Etapa</label>
+            <select
+              value={filtroAtivo.etapa}
+              onChange={(e) => handleFiltroChange('etapa', e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Todas</option>
+              {filtros.etapas?.map(e => <option key={e} value={e}>{e}</option>)}
             </select>
           </div>
 

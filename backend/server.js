@@ -210,12 +210,24 @@ app.get('/api/negocios/:id', authenticateToken, (req, res) => {
 
 // Criar novo negócio
 app.post('/api/negocios', authenticateToken, (req, res) => {
+  console.log('📝 [POST /api/negocios] Requisição recebida');
+  console.log('👤 Usuário:', req.user?.username || 'desconhecido');
+  console.log('📦 Body recebido:', JSON.stringify(req.body, null, 2));
+  
   const {
     empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
     valor_produto, valor_oferta, valor_fabrica, valor_brasil,
     valor_produto_moeda, valor_fabrica_moeda, valor_brasil_moeda,
     data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias
   } = req.body;
+  
+  // Validação de campos obrigatórios
+  if (!empresa) {
+    console.error('❌ Erro: Campo "empresa" é obrigatório');
+    return res.status(400).json({ error: 'Campo "empresa" é obrigatório' });
+  }
+  
+  console.log('✅ Validação inicial passou');
   
   const query = `
     INSERT INTO negocios (
@@ -226,23 +238,37 @@ app.post('/api/negocios', authenticateToken, (req, res) => {
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
   
-  db.run(query, [
+  const params = [
     empresa, pessoa_contato, telefone, email, equipamento, tipo_maquina, tipo_negociacao,
     valor_produto, valor_oferta, valor_fabrica, valor_brasil,
     valor_produto_moeda || 'BRL', valor_fabrica_moeda || 'BRL', valor_brasil_moeda || 'BRL',
     data_criacao, data_fechamento, etapa, status, origem, observacao, ocorrencias || ''
-  ], function(err) {
+  ];
+  
+  console.log('🗄️ Executando INSERT com parâmetros:', params);
+  
+  db.run(query, params, function(err) {
     if (err) {
+      console.error('❌ Erro ao inserir no banco:', err.message);
+      console.error('❌ Stack trace:', err.stack);
       return res.status(500).json({ error: err.message });
     }
     
     const negocioId = this.lastID;
+    console.log(`✅ Negócio criado com sucesso! ID: ${negocioId}`);
     
     // Registrar criação no histórico
     db.run(
       `INSERT INTO historico (negocio_id, tipo_acao, campo_alterado, valor_novo)
        VALUES (?, ?, ?, ?)`,
-      [negocioId, 'criacao', 'negocio', empresa]
+      [negocioId, 'criacao', 'negocio', empresa],
+      (histErr) => {
+        if (histErr) {
+          console.warn('⚠️ Erro ao registrar histórico (não crítico):', histErr.message);
+        } else {
+          console.log('✅ Histórico registrado');
+        }
+      }
     );
     
     res.json({ id: negocioId, message: 'Negócio criado com sucesso' });

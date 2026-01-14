@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { formatarDataBrasileira, converterParaISO } from '../utils/dateUtils'
 import EQUIPAMENTOS from '../config/equipamentos'
-import ORIGENS from '../config/origens'
 
 function NegocioForm() {
   const navigate = useNavigate()
@@ -37,6 +36,7 @@ function NegocioForm() {
   const [loading, setLoading] = useState(isEditing)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
+  const [origensDisponiveis, setOrigensDisponiveis] = useState([])
   
   // Estado para nova ocorrência
   const [novaOcorrencia, setNovaOcorrencia] = useState({
@@ -45,10 +45,20 @@ function NegocioForm() {
   })
 
   useEffect(() => {
+    loadOrigens()
     if (isEditing) {
       loadNegocio()
     }
   }, [id])
+
+  const loadOrigens = async () => {
+    try {
+      const res = await axios.get('/api/filtros')
+      setOrigensDisponiveis(res.data.origens || [])
+    } catch (error) {
+      console.error('Erro ao carregar origens:', error)
+    }
+  }
 
   const loadNegocio = async () => {
     try {
@@ -156,6 +166,10 @@ function NegocioForm() {
     setError(null)
     setSubmitting(true)
     
+    console.log('📝 [FRONTEND] Iniciando submit do formulário');
+    console.log('📝 [FRONTEND] Modo:', isEditing ? 'EDIÇÃO' : 'CRIAÇÃO');
+    console.log('📝 [FRONTEND] Dados do formulário:', formData);
+    
     try {
       // Converter datas brasileiras para formato ISO antes de enviar
       const dadosParaEnviar = {
@@ -164,15 +178,31 @@ function NegocioForm() {
         data_fechamento: converterParaISO(formData.data_fechamento)
       }
       
+      console.log('📝 [FRONTEND] Dados convertidos para envio:', dadosParaEnviar);
+      
       if (isEditing) {
+        console.log(`📝 [FRONTEND] Enviando PUT para /api/negocios/${id}`);
         await axios.put(`/api/negocios/${id}`, dadosParaEnviar)
+        console.log('✅ [FRONTEND] PUT bem-sucedido');
       } else {
-        await axios.post('/api/negocios', dadosParaEnviar)
+        console.log('📝 [FRONTEND] Enviando POST para /api/negocios');
+        const response = await axios.post('/api/negocios', dadosParaEnviar)
+        console.log('✅ [FRONTEND] POST bem-sucedido. Resposta:', response.data);
       }
+      
+      console.log('✅ [FRONTEND] Redirecionando para /negocios');
       navigate('/negocios')
     } catch (error) {
-      console.error('Erro ao salvar:', error)
-      setError('Erro ao salvar negócio. Tente novamente.')
+      console.error('❌ [FRONTEND] Erro ao salvar:', error);
+      console.error('❌ [FRONTEND] Detalhes do erro:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+        stack: error.stack
+      });
+      
+      const errorMessage = error.response?.data?.error || 'Erro ao salvar negócio. Tente novamente.';
+      setError(errorMessage)
     } finally {
       setSubmitting(false)
     }
@@ -543,7 +573,7 @@ function NegocioForm() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Selecione a origem</option>
-              {ORIGENS.map((origem) => (
+              {origensDisponiveis.map((origem) => (
                 <option key={origem} value={origem}>
                   {origem}
                 </option>
