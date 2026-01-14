@@ -99,7 +99,10 @@ async function initUsuarios() {
                 createdCount++;
 
             } catch (error) {
-                console.error(`❌ Erro ao processar usuário ${usuario.username}:`, error.message);
+                // Captura qualquer erro e apenas loga, sem interromper
+                console.error(`⚠️  Erro ao processar usuário ${usuario.username}:`, error.message);
+                skippedCount++;
+                // Continua para o próximo usuário sem travar
             }
         }
 
