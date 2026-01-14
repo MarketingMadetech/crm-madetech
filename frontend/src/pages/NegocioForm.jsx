@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { formatarDataBrasileira, converterParaISO } from '../utils/dateUtils'
+import EQUIPAMENTOS from '../config/equipamentos'
+import ORIGENS from '../config/origens'
 
 function NegocioForm() {
   const navigate = useNavigate()
@@ -251,13 +253,19 @@ function NegocioForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Equipamento</label>
-            <input
-              type="text"
+            <select
               name="equipamento"
               value={formData.equipamento}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            >
+              <option value="">Selecione um equipamento</option>
+              {EQUIPAMENTOS.map((equip) => (
+                <option key={equip} value={equip}>
+                  {equip}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div>
@@ -528,13 +536,19 @@ function NegocioForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Origem da Negociação</label>
-            <input
-              type="text"
+            <select
               name="origem"
               value={formData.origem}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            >
+              <option value="">Selecione a origem</option>
+              {ORIGENS.map((origem) => (
+                <option key={origem} value={origem}>
+                  {origem}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
