@@ -118,3 +118,31 @@ export default {
   parseData,
   formatarParaInput
 }
+
+/**
+ * Auto-formata data enquanto o usuário digita
+ * Exemplo: 150120205 vira 15/01/2025
+ * @param {string} valor - String digitada pelo usuário
+ * @returns {string} Data formatada em DD/MM/YYYY
+ */
+export const autoFormatarData = (valor) => {
+  if (!valor) return ''
+  
+  // Remove tudo que não é número
+  const apenasNumeros = valor.replace(/\D/g, '')
+  
+  // Se não tem nada, retorna vazio
+  if (apenasNumeros.length === 0) return ''
+  
+  // Limita a 8 dígitos (DDMMYYYY)
+  const limitado = apenasNumeros.slice(0, 8)
+  
+  // Formata conforme vai digitando
+  if (limitado.length <= 2) {
+    return limitado // DD
+  } else if (limitado.length <= 4) {
+    return `${limitado.slice(0, 2)}/${limitado.slice(2)}` // DD/MM
+  } else {
+    return `${limitado.slice(0, 2)}/${limitado.slice(2, 4)}/${limitado.slice(4)}` // DD/MM/YYYY
+  }
+}

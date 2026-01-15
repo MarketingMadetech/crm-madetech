@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
-import { formatarDataBrasileira, converterParaISO } from '../utils/dateUtils'
+import { formatarDataBrasileira, converterParaISO, autoFormatarData } from '../utils/dateUtils'
 import EQUIPAMENTOS from '../config/equipamentos'
 
 function NegocioForm() {
@@ -518,8 +518,12 @@ function NegocioForm() {
               type="text"
               name="data_criacao"
               value={formData.data_criacao}
-              onChange={handleChange}
+              onChange={(e) => {
+                const formatado = autoFormatarData(e.target.value)
+                handleChange({ target: { name: 'data_criacao', value: formatado } })
+              }}
               placeholder="DD/MM/YYYY"
+              maxLength="10"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -530,8 +534,12 @@ function NegocioForm() {
               type="text"
               name="data_fechamento"
               value={formData.data_fechamento}
-              onChange={handleChange}
+              onChange={(e) => {
+                const formatado = autoFormatarData(e.target.value)
+                handleChange({ target: { name: 'data_fechamento', value: formatado } })
+              }}
               placeholder="DD/MM/YYYY"
+              maxLength="10"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
