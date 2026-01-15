@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
-import { formatarDataBrasileira, converterParaISO, autoFormatarData } from '../utils/dateUtils'
+import { formatarDataBrasileira, converterParaISO, autoFormatarData, autoFormatarTelefone } from '../utils/dateUtils'
 import EQUIPAMENTOS from '../config/equipamentos'
 
 function NegocioForm() {
@@ -293,8 +293,12 @@ function NegocioForm() {
               type="tel"
               name="telefone"
               value={formData.telefone}
-              onChange={handleChange}
+              onChange={(e) => {
+                const formatado = autoFormatarTelefone(e.target.value)
+                handleChange({ target: { name: 'telefone', value: formatado } })
+              }}
               placeholder="(11) 99999-9999"
+              maxLength="15"
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>

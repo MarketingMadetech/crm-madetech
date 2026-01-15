@@ -112,11 +112,40 @@ export const formatarParaInput = (dataStr) => {
   return ''
 }
 
+/**
+ * Auto-formata telefone enquanto o usuário digita
+ * Exemplo: 11947835912 vira (11) 94783-5912
+ * @param {string} valor - String digitada pelo usuário
+ * @returns {string} Telefone formatado em (DD) 99999-0000
+ */
+export const autoFormatarTelefone = (valor) => {
+  if (!valor) return ''
+  
+  // Remove tudo que não é número
+  const apenasNumeros = valor.replace(/\D/g, '')
+  
+  // Se não tem nada, retorna vazio
+  if (apenasNumeros.length === 0) return ''
+  
+  // Limita a 11 dígitos (DDD + 9 dígitos do telefone)
+  const limitado = apenasNumeros.slice(0, 11)
+  
+  // Formata conforme vai digitando
+  if (limitado.length <= 2) {
+    return limitado // DD
+  } else if (limitado.length <= 6) {
+    return `(${limitado.slice(0, 2)}) ${limitado.slice(2)}` // (DD) NNNNN
+  } else {
+    return `(${limitado.slice(0, 2)}) ${limitado.slice(2, 7)}-${limitado.slice(7)}` // (DD) NNNNN-NNNN
+  }
+}
+
 export default {
   formatarDataBrasileira,
   converterParaISO,
   parseData,
-  formatarParaInput
+  formatarParaInput,
+  autoFormatarTelefone
 }
 
 /**
