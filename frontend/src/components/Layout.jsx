@@ -16,7 +16,7 @@ function Layout({ children }) {
     { path: '/negocios', label: 'Negócios', icon: '💼' },
     { path: '/funil', label: 'Funil', icon: '🎯' },
     { path: '/relatorios', label: 'Relatórios', icon: '📈' },
-    { path: '/lembretes', label: 'Lembretes', icon: '🔔' },
+    // { path: '/lembretes', label: 'Lembretes', icon: '🔔' }, // Temporariamente oculto do menu (tela pequena)
     { path: '/backup', label: 'Backup', icon: '💾' }
   ]
   
