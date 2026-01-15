@@ -166,22 +166,30 @@ function NegocioModal({ negocio, onClose }) {
 
           {/* Histórico de Ocorrências */}
           {negocio.ocorrencias && (
-            <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4">
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-3">📋 Histórico de Ocorrências</h3>
+            <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                <span className="text-xl">📋</span> Ocorrências Registradas
+              </h3>
               <div className="space-y-2">
                 {negocio.ocorrencias.split('\n').filter(o => o.trim()).map((ocorrencia, index) => {
                   const match = ocorrencia.match(/\[(\d{2}\/\d{2}\/\d{4})\]\s*(.+)/);
                   if (match) {
                     const [, data, descricao] = match;
                     return (
-                      <div key={index} className="flex gap-3 items-start border-l-2 border-purple-300 dark:border-purple-700 pl-3 py-1">
-                        <span className="text-xs font-semibold text-purple-600 dark:text-purple-400 whitespace-nowrap">{data}</span>
-                        <span className="text-sm text-gray-700 dark:text-gray-300">{descricao}</span>
+                      <div key={index} className="flex gap-3 items-start bg-white dark:bg-gray-800 rounded p-3 border-l-4 border-purple-400 dark:border-purple-600">
+                        <span className="text-lg">📌</span>
+                        <div className="flex-1">
+                          <p className="text-sm text-gray-700 dark:text-gray-300 font-medium">{descricao}</p>
+                          <span className="text-xs text-purple-600 dark:text-purple-400 font-semibold">{data}</span>
+                        </div>
                       </div>
                     );
                   }
                   return (
-                    <div key={index} className="text-sm text-gray-700 dark:text-gray-300 pl-3">{ocorrencia}</div>
+                    <div key={index} className="flex gap-3 items-start bg-white dark:bg-gray-800 rounded p-3 border-l-4 border-purple-400 dark:border-purple-600">
+                      <span className="text-lg">📌</span>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">{ocorrencia}</p>
+                    </div>
                   );
                 })}
               </div>
@@ -189,50 +197,48 @@ function NegocioModal({ negocio, onClose }) {
           )}
 
           {/* Histórico de Atividades */}
-          <div className="bg-gray-50 dark:bg-gray-900/20 rounded-lg p-4">
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-3">📜 Histórico de Atividades</h3>
+          <div className="bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-800 rounded-lg p-4">
+            <h3 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <span className="text-xl">📜</span> Histórico de Atividades
+            </h3>
             {carregandoHistorico ? (
               <p className="text-gray-500 dark:text-gray-400 text-sm">Carregando histórico...</p>
             ) : historico.length === 0 ? (
               <p className="text-gray-500 dark:text-gray-400 text-sm">Nenhuma atividade registrada ainda.</p>
             ) : (
-              <div className="space-y-3 max-h-60 overflow-y-auto">
+              <div className="space-y-2 max-h-72 overflow-y-auto">
                 {historico.map((item, index) => {
                   const isUltimo = index === historico.length - 1
                   const icone = item.tipo_acao === 'criacao' ? '🆕' : 
                                item.tipo_acao === 'atualizacao' ? '✏️' : 
                                item.tipo_acao === 'exclusao' ? '🗑️' : '📝'
-                  const cor = item.tipo_acao === 'criacao' ? 'text-green-600 dark:text-green-400' : 
-                             item.tipo_acao === 'atualizacao' ? 'text-blue-600 dark:text-blue-400' : 
-                             item.tipo_acao === 'exclusao' ? 'text-red-600 dark:text-red-400' : 
-                             'text-gray-600 dark:text-gray-400'
                   
                   return (
-                    <div key={item.id} className="flex gap-3">
-                      <div className="flex flex-col items-center">
-                        <span className="text-lg">{icone}</span>
-                        {!isUltimo && <div className="w-px h-full bg-gray-300 dark:bg-gray-600 mt-1"></div>}
-                      </div>
-                      <div className="flex-1 pb-2">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <p className={`text-sm font-medium ${cor}`}>
-                              {item.tipo_acao === 'criacao' && 'Negócio criado'}
-                              {item.tipo_acao === 'atualizacao' && `${item.campo_alterado} alterado`}
-                              {item.tipo_acao === 'exclusao' && 'Negócio excluído'}
-                            </p>
-                            {item.tipo_acao === 'atualizacao' && (
-                              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                                <span className="line-through">{item.valor_anterior || '-'}</span>
-                                {' → '}
-                                <span className="font-medium">{item.valor_novo || '-'}</span>
-                              </p>
-                            )}
-                          </div>
-                          <span className="text-xs text-gray-500 dark:text-gray-400">
-                            {new Date(item.data_hora).toLocaleString('pt-BR')}
-                          </span>
-                        </div>
+                    <div key={item.id} className="flex gap-3 bg-white dark:bg-gray-800 rounded p-3 border-l-4 border-blue-400 dark:border-blue-600 hover:shadow-sm transition-shadow">
+                      <span className="text-lg flex-shrink-0">{icone}</span>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">
+                          {item.tipo_acao === 'criacao' && '✨ Negócio criado'}
+                          {item.tipo_acao === 'atualizacao' && `📝 ${item.campo_alterado || 'Campo'} alterado`}
+                          {item.tipo_acao === 'exclusao' && '❌ Negócio excluído'}
+                        </p>
+                        {item.tipo_acao === 'atualizacao' && item.valor_anterior !== null && (
+                          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                            <span className="line-through text-gray-500">{item.valor_anterior || '-'}</span>
+                            {' → '}
+                            <span className="font-semibold text-blue-600 dark:text-blue-400">{item.valor_novo || '-'}</span>
+                          </p>
+                        )}
+                        <span className="text-xs text-gray-500 dark:text-gray-500 mt-1 block">
+                          {new Date(item.data_hora).toLocaleString('pt-BR', { 
+                            year: 'numeric', 
+                            month: '2-digit', 
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit'
+                          })}
+                        </span>
                       </div>
                     </div>
                   )
