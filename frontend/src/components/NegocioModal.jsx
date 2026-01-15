@@ -4,14 +4,30 @@ import axios from 'axios'
 import { formatarDataBrasileira } from '../utils/dateUtils'
 
 function NegocioModal({ negocio, onClose }) {
+  const [negocioAtualizado, setNegocioAtualizado] = useState(negocio)
   const [historico, setHistorico] = useState([])
   const [carregandoHistorico, setCarregandoHistorico] = useState(true)
+  const [carregandoNegocio, setCarregandoNegocio] = useState(false)
 
   useEffect(() => {
     if (negocio?.id) {
+      // Recarrega os dados do negócio quando abre o modal
+      recarregarNegocio()
       carregarHistorico()
     }
   }, [negocio?.id])
+
+  const recarregarNegocio = async () => {
+    try {
+      setCarregandoNegocio(true)
+      const res = await axios.get(`/api/negocios/${negocio.id}`)
+      setNegocioAtualizado(res.data)
+    } catch (error) {
+      console.error('Erro ao recarregar negócio:', error)
+    } finally {
+      setCarregandoNegocio(false)
+    }
+  }
 
   const carregarHistorico = async () => {
     try {
@@ -24,7 +40,9 @@ function NegocioModal({ negocio, onClose }) {
     }
   }
 
-  if (!negocio) return null
+  if (!negocioAtualizado) return null
+
+  const negocioExibir = negocioAtualizado || negocio
 
   const formatCurrency = (value) => {
     if (!value) return '-'
@@ -52,7 +70,7 @@ function NegocioModal({ negocio, onClose }) {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" onClick={onClose}>
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex justify-between items-center">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{negocio.empresa}</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{negocioExibir.empresa}</h2>
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-2xl leading-none"
@@ -64,12 +82,12 @@ function NegocioModal({ negocio, onClose }) {
         <div className="p-6 space-y-6">
           {/* Status e Etapa */}
           <div className="flex gap-3">
-            <span className={`px-3 py-1 rounded-full text-sm font-semibold border ${getStatusColor(negocio.status)}`}>
-              {negocio.status || 'Sem status'}
+            <span className={`px-3 py-1 rounded-full text-sm font-semibold border ${getStatusColor(negocioExibir.status)}`}>
+              {negocioExibir.status || 'Sem status'}
             </span>
-            {negocio.etapa && (
+            {negocioExibir.etapa && (
               <span className="px-3 py-1 rounded-full text-sm font-semibold bg-purple-100 text-purple-800 border border-purple-200">
-                {negocio.etapa}
+                {negocioExibir.etapa}
               </span>
             )}
           </div>
@@ -80,21 +98,21 @@ function NegocioModal({ negocio, onClose }) {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <span className="text-sm text-gray-600 dark:text-gray-400">Pessoa de Contato:</span>
-                <p className="text-gray-900 dark:text-white font-medium">{negocio.pessoa_contato || '-'}</p>
+                <p className="text-gray-900 dark:text-white font-medium">{negocioExibir.pessoa_contato || '-'}</p>
               </div>
               <div>
                 <span className="text-sm text-gray-600 dark:text-gray-400">Telefone:</span>
                 <p className="text-gray-900 dark:text-white font-medium">
-                  {negocio.telefone ? (
-                    <a href={`tel:${negocio.telefone}`} className="text-blue-600 dark:text-blue-400 hover:underline">
-                      {negocio.telefone}
+                  {negocioExibir.telefone ? (
+                    <a href={`tel:${negocioExibir.telefone}`} className="text-blue-600 dark:text-blue-400 hover:underline">
+                      {negocioExibir.telefone}
                     </a>
                   ) : '-'}
                 </p>
               </div>
               <div>
                 <span className="text-sm text-gray-600 dark:text-gray-400">Origem:</span>
-                <p className="text-gray-900 dark:text-white font-medium">{negocio.origem || '-'}</p>
+                <p className="text-gray-900 dark:text-white font-medium">{negocioExibir.origem || '-'}</p>
               </div>
             </div>
           </div>
@@ -105,15 +123,15 @@ function NegocioModal({ negocio, onClose }) {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <span className="text-sm text-gray-600 dark:text-gray-400">Equipamento:</span>
-                <p className="text-gray-900 dark:text-white font-medium">{negocio.equipamento || '-'}</p>
+                <p className="text-gray-900 dark:text-white font-medium">{negocioExibir.equipamento || '-'}</p>
               </div>
               <div>
                 <span className="text-sm text-gray-600 dark:text-gray-400">Tipo da Máquina:</span>
-                <p className="text-gray-900 dark:text-white font-medium">{negocio.tipo_maquina || '-'}</p>
+                <p className="text-gray-900 dark:text-white font-medium">{negocioExibir.tipo_maquina || '-'}</p>
               </div>
               <div className="col-span-2">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Tipo de Negociação:</span>
-                <p className="text-gray-900 dark:text-white font-medium">{negocio.tipo_negociacao || '-'}</p>
+                <p className="text-gray-900 dark:text-white font-medium">{negocioExibir.tipo_negociacao || '-'}</p>
               </div>
             </div>
           </div>
@@ -124,19 +142,19 @@ function NegocioModal({ negocio, onClose }) {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <span className="text-sm text-gray-600 dark:text-gray-400">Valor do Produto:</span>
-                <p className="text-gray-900 dark:text-white font-semibold text-lg">{formatCurrency(negocio.valor_produto)}</p>
+                <p className="text-gray-900 dark:text-white font-semibold text-lg">{formatCurrency(negocioExibir.valor_produto)}</p>
               </div>
               <div>
                 <span className="text-sm text-gray-600 dark:text-gray-400">Valor da Oferta:</span>
-                <p className="text-blue-600 dark:text-blue-400 font-semibold text-lg">{formatCurrency(negocio.valor_oferta)}</p>
+                <p className="text-blue-600 dark:text-blue-400 font-semibold text-lg">{formatCurrency(negocioExibir.valor_oferta)}</p>
               </div>
               <div>
                 <span className="text-sm text-gray-600 dark:text-gray-400">Valor Fábrica:</span>
-                <p className="text-gray-900 dark:text-white font-medium">{formatCurrency(negocio.valor_fabrica)}</p>
+                <p className="text-gray-900 dark:text-white font-medium">{formatCurrency(negocioExibir.valor_fabrica)}</p>
               </div>
               <div>
                 <span className="text-sm text-gray-600 dark:text-gray-400">Valor Brasil:</span>
-                <p className="text-gray-900 dark:text-white font-medium">{formatCurrency(negocio.valor_brasil)}</p>
+                <p className="text-gray-900 dark:text-white font-medium">{formatCurrency(negocioExibir.valor_brasil)}</p>
               </div>
             </div>
           </div>
@@ -147,31 +165,31 @@ function NegocioModal({ negocio, onClose }) {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <span className="text-sm text-gray-600 dark:text-gray-400">Negócio Criado em:</span>
-                <p className="text-gray-900 dark:text-white font-medium">{formatarData(negocio.data_criacao)}</p>
+                <p className="text-gray-900 dark:text-white font-medium">{formatarData(negocioExibir.data_criacao)}</p>
               </div>
               <div>
                 <span className="text-sm text-gray-600 dark:text-gray-400">Fechamento Esperado:</span>
-                <p className="text-gray-900 dark:text-white font-medium">{formatarData(negocio.data_fechamento)}</p>
+                <p className="text-gray-900 dark:text-white font-medium">{formatarData(negocioExibir.data_fechamento)}</p>
               </div>
             </div>
           </div>
 
           {/* Observações */}
-          {negocio.observacao && (
+          {negocioExibir.observacao && (
             <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4">
               <h3 className="font-semibold text-gray-900 dark:text-white mb-3">📝 Observações</h3>
-              <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{negocio.observacao}</p>
+              <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{negocioExibir.observacao}</p>
             </div>
           )}
 
           {/* Histórico de Ocorrências */}
-          {negocio.ocorrencias && (
+          {negocioExibir.ocorrencias && (
             <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
               <h3 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <span className="text-xl">📋</span> Ocorrências Registradas
               </h3>
               <div className="space-y-2">
-                {negocio.ocorrencias.split('\n').filter(o => o.trim()).map((ocorrencia, index) => {
+                {negocioExibir.ocorrencias.split('\n').filter(o => o.trim()).map((ocorrencia, index) => {
                   const match = ocorrencia.match(/\[(\d{2}\/\d{2}\/\d{4})\]\s*(.+)/);
                   if (match) {
                     const [, data, descricao] = match;
@@ -256,7 +274,7 @@ function NegocioModal({ negocio, onClose }) {
               Fechar
             </button>
             <Link
-              to={`/negocios/${negocio.id}/editar`}
+              to={`/negocios/${negocioExibir.id}/editar`}
               className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center gap-2"
             >
               ✏️ Editar Negócio
