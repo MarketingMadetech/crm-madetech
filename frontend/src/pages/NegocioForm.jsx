@@ -78,21 +78,9 @@ function NegocioForm() {
       const res = await axios.get('/api/filtros')
       const origensRaw = res.data.origens || []
       
-      // Normalizar para Title Case e remover duplicados (case-insensitive)
-      const origensMap = new Map()
-      origensRaw.forEach(origem => {
-        if (origem) {
-          const normalizada = toTitleCase(origem)
-          const chave = normalizada.toLowerCase()
-          // Mantém a versão normalizada, evitando duplicados
-          if (!origensMap.has(chave)) {
-            origensMap.set(chave, normalizada)
-          }
-        }
-      })
-      
-      // Converter para array e ordenar alfabeticamente
-      const origensUnicas = Array.from(origensMap.values()).sort((a, b) => 
+      // NÃO normalizar - manter TODOS os dados do banco como estão
+      // (O dropdown mostra as opções existentes, o input permite criar novas)
+      const origensUnicas = (origensRaw || []).sort((a, b) => 
         a.localeCompare(b, 'pt-BR', { sensitivity: 'base' })
       )
       
@@ -607,34 +595,51 @@ function NegocioForm() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Origem da Negociação
-              <span className="ml-2 text-xs text-amber-600" title="Padrão: Primeira letra maiúscula (exceto preposições como de, da, do, para, etc.)">
-                ⚠️ Texto livre - siga o padrão existente
-              </span>
-            </label>
-            <input
-              type="text"
-              list="origens-sugestoes"
-              name="origem"
+            <label className="block text-sm font-medium text-gray-700 mb-2">Origem da Negociação</label>
+            
+            {/* Dropdown com as origens existentes */}
+            <select
               value={formData.origem}
-              onChange={handleChange}
-              onBlur={(e) => {
-                const valorFormatado = toTitleCase(e.target.value);
-                if (valorFormatado !== e.target.value) {
-                  handleChange({ target: { name: 'origem', value: valorFormatado } });
-                }
-              }}
-              placeholder="Digite ou selecione a origem..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <datalist id="origens-sugestoes">
+              onChange={(e) => handleChange({ target: { name: 'origem', value: e.target.value } })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2"
+            >
+              <option value="">Selecionar origem existente...</option>
               {origensDisponiveis.map((origem) => (
-                <option key={origem} value={origem} />
+                <option key={origem} value={origem}>
+                  {origem}
+                </option>
               ))}
-            </datalist>
-            <p className="text-xs text-gray-500 mt-1">
-              💡 Sugestões aparecem ao digitar. Use formato "Título" (ex: "Indicação de Cliente", "Whatsapp Ativo")
+            </select>
+
+            {/* OU - Input para criar nova origem */}
+            <div className="relative">
+              <input
+                type="text"
+                list="origens-sugestoes"
+                placeholder="OU digite para criar nova origem..."
+                onInput={(e) => {
+                  if (e.target.value) {
+                    handleChange({ target: { name: 'origem', value: e.target.value } })
+                  }
+                }}
+                onBlur={(e) => {
+                  const valorFormatado = toTitleCase(e.target.value)
+                  if (valorFormatado && valorFormatado !== e.target.value) {
+                    handleChange({ target: { name: 'origem', value: valorFormatado } })
+                  }
+                }}
+                className="w-full px-3 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+              />
+              <datalist id="origens-sugestoes">
+                {origensDisponiveis.map((origem) => (
+                  <option key={origem} value={origem} />
+                ))}
+              </datalist>
+            </div>
+
+            <p className="text-xs text-amber-600 mt-2 flex items-center gap-1">
+              <span>⚠️</span>
+              <span>Selecione acima OU digite uma nova origem. Formato recomendado: "Primeira Letra Maiúscula"</span>
             </p>
           </div>
         </div>
