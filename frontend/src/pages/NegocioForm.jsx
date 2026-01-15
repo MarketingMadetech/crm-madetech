@@ -167,7 +167,9 @@ function NegocioForm() {
       return
     }
     
-    const dataFormatada = new Date(novaOcorrencia.data).toLocaleDateString('pt-BR')
+    // Evita bug de timezone: passa a data como "YYYY-MM-DD" e formata corretamente
+    const [ano, mes, dia] = novaOcorrencia.data.split('-')
+    const dataFormatada = `${dia}/${mes}/${ano}`
     const textoOcorrencia = `[${dataFormatada}] ${novaOcorrencia.descricao}`
     
     setFormData(prev => ({
