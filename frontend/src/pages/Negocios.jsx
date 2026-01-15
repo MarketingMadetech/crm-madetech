@@ -168,6 +168,43 @@ function Negocios() {
     loadNegocios()
   }, [])
 
+  // Preposições que devem ficar em minúsculo
+  const preposicoes = ['a', 'à', 'ao', 'aos', 'as', 'com', 'contra', 'da', 'das', 'de', 'do', 'dos', 'em', 'e', 'na', 'nas', 'no', 'nos', 'o', 'os', 'para', 'pelo', 'pela', 'pelos', 'pelas', 'por', 'um', 'uma', 'uns', 'umas']
+
+  // Função para converter para Title Case respeitando preposições
+  const toTitleCase = (str) => {
+    if (!str) return ''
+    const palavras = str.trim().split(/\s+/)
+    return palavras.map((palavra, index) => {
+      const palavraLower = palavra.toLowerCase()
+      if (index === 0) {
+        return palavra.charAt(0).toUpperCase() + palavra.slice(1).toLowerCase()
+      }
+      if (preposicoes.includes(palavraLower)) {
+        return palavraLower
+      }
+      return palavra.charAt(0).toUpperCase() + palavra.slice(1).toLowerCase()
+    }).join(' ')
+  }
+
+  // Função para normalizar e remover duplicados de uma lista
+  const normalizarLista = (lista) => {
+    if (!lista || !Array.isArray(lista)) return []
+    const mapa = new Map()
+    lista.forEach(item => {
+      if (item) {
+        const normalizado = toTitleCase(item)
+        const chave = normalizado.toLowerCase()
+        if (!mapa.has(chave)) {
+          mapa.set(chave, normalizado)
+        }
+      }
+    })
+    return Array.from(mapa.values()).sort((a, b) => 
+      a.localeCompare(b, 'pt-BR', { sensitivity: 'base' })
+    )
+  }
+
   const loadFiltros = useCallback(async () => {
     try {
       // Verifica cache
@@ -178,8 +215,16 @@ function Negocios() {
       }
 
       const res = await api.get('/filtros')
-      cacheService.set('filtros', res.data, 10 * 60 * 1000) // 10 min cache
-      setFiltros(res.data)
+      
+      // Normalizar origens e equipamentos (remover duplicados, Title Case)
+      const filtrosNormalizados = {
+        ...res.data,
+        origens: normalizarLista(res.data.origens),
+        equipamentos: normalizarLista(res.data.equipamentos)
+      }
+      
+      cacheService.set('filtros', filtrosNormalizados, 10 * 60 * 1000) // 10 min cache
+      setFiltros(filtrosNormalizados)
     } catch (error) {
       console.error('Erro ao carregar filtros:', error)
     }

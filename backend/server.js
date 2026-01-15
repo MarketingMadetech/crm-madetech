@@ -91,6 +91,9 @@ db.serialize(() => {
     valor_oferta REAL,
     valor_fabrica REAL,
     valor_brasil REAL,
+    valor_produto_moeda TEXT DEFAULT 'BRL',
+    valor_fabrica_moeda TEXT DEFAULT 'BRL',
+    valor_brasil_moeda TEXT DEFAULT 'BRL',
     data_criacao DATE,
     data_fechamento DATE,
     etapa TEXT,
@@ -101,11 +104,18 @@ db.serialize(() => {
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )`);
 
-  // Adicionar coluna ocorrencias se não existir (migração)
-  db.run(`ALTER TABLE negocios ADD COLUMN ocorrencias TEXT`, (err) => {
-    if (err && !err.message.includes('duplicate column')) {
-      console.log('Erro ao adicionar coluna ocorrencias:', err.message);
-    }
+  // Migrações - adicionar colunas que podem não existir em DBs antigos
+  const migracoesSQL = [
+    'ALTER TABLE negocios ADD COLUMN ocorrencias TEXT',
+    "ALTER TABLE negocios ADD COLUMN valor_produto_moeda TEXT DEFAULT 'BRL'",
+    "ALTER TABLE negocios ADD COLUMN valor_fabrica_moeda TEXT DEFAULT 'BRL'",
+    "ALTER TABLE negocios ADD COLUMN valor_brasil_moeda TEXT DEFAULT 'BRL'"
+  ];
+  
+  migracoesSQL.forEach(sql => {
+    db.run(sql, (err) => {
+      // Ignora erros de coluna duplicada (já existe)
+    });
   });
 
   // Tabela de histórico

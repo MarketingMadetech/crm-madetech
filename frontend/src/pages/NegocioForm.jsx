@@ -51,10 +51,52 @@ function NegocioForm() {
     }
   }, [id])
 
+  // Preposições que devem ficar em minúsculo
+  const preposicoes = ['a', 'à', 'ao', 'aos', 'as', 'com', 'contra', 'da', 'das', 'de', 'do', 'dos', 'em', 'e', 'na', 'nas', 'no', 'nos', 'o', 'os', 'para', 'pelo', 'pela', 'pelos', 'pelas', 'por', 'um', 'uma', 'uns', 'umas']
+
+  // Função para converter para Title Case respeitando preposições
+  const toTitleCase = (str) => {
+    if (!str) return ''
+    const palavras = str.trim().split(/\s+/)
+    return palavras.map((palavra, index) => {
+      const palavraLower = palavra.toLowerCase()
+      // Primeira palavra sempre com maiúscula
+      if (index === 0) {
+        return palavra.charAt(0).toUpperCase() + palavra.slice(1).toLowerCase()
+      }
+      // Preposições ficam em minúsculo
+      if (preposicoes.includes(palavraLower)) {
+        return palavraLower
+      }
+      // Resto em Title Case
+      return palavra.charAt(0).toUpperCase() + palavra.slice(1).toLowerCase()
+    }).join(' ')
+  }
+
   const loadOrigens = async () => {
     try {
       const res = await axios.get('/api/filtros')
-      setOrigensDisponiveis(res.data.origens || [])
+      const origensRaw = res.data.origens || []
+      
+      // Normalizar para Title Case e remover duplicados (case-insensitive)
+      const origensMap = new Map()
+      origensRaw.forEach(origem => {
+        if (origem) {
+          const normalizada = toTitleCase(origem)
+          const chave = normalizada.toLowerCase()
+          // Mantém a versão normalizada, evitando duplicados
+          if (!origensMap.has(chave)) {
+            origensMap.set(chave, normalizada)
+          }
+        }
+      })
+      
+      // Converter para array e ordenar alfabeticamente
+      const origensUnicas = Array.from(origensMap.values()).sort((a, b) => 
+        a.localeCompare(b, 'pt-BR', { sensitivity: 'base' })
+      )
+      
+      setOrigensDisponiveis(origensUnicas)
     } catch (error) {
       console.error('Erro ao carregar origens:', error)
     }
@@ -565,20 +607,35 @@ function NegocioForm() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Origem da Negociação</label>
-            <select
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Origem da Negociação
+              <span className="ml-2 text-xs text-amber-600" title="Padrão: Primeira letra maiúscula (exceto preposições como de, da, do, para, etc.)">
+                ⚠️ Texto livre - siga o padrão existente
+              </span>
+            </label>
+            <input
+              type="text"
+              list="origens-sugestoes"
               name="origem"
               value={formData.origem}
               onChange={handleChange}
+              onBlur={(e) => {
+                const valorFormatado = toTitleCase(e.target.value);
+                if (valorFormatado !== e.target.value) {
+                  handleChange({ target: { name: 'origem', value: valorFormatado } });
+                }
+              }}
+              placeholder="Digite ou selecione a origem..."
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Selecione a origem</option>
+            />
+            <datalist id="origens-sugestoes">
               {origensDisponiveis.map((origem) => (
-                <option key={origem} value={origem}>
-                  {origem}
-                </option>
+                <option key={origem} value={origem} />
               ))}
-            </select>
+            </datalist>
+            <p className="text-xs text-gray-500 mt-1">
+              💡 Sugestões aparecem ao digitar. Use formato "Título" (ex: "Indicação de Cliente", "Whatsapp Ativo")
+            </p>
           </div>
         </div>
 
