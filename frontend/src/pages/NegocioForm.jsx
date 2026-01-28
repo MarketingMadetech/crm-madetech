@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { formatarDataBrasileira, converterParaISO, autoFormatarData, autoFormatarTelefone } from '../utils/dateUtils'
 import EQUIPAMENTOS from '../config/equipamentos'
+import RetornosAgendados from '../components/RetornosAgendados'
 
 function NegocioForm() {
   const navigate = useNavigate()
@@ -699,6 +700,14 @@ function NegocioForm() {
               </button>
             </div>
           </div>
+        )}
+
+        {/* Sistema de Retornos Agendados */}
+        {isEditing && (
+          <RetornosAgendados 
+            negocioId={id} 
+            onRetornoRealizado={() => loadNegocio()}
+          />
         )}
 
         {/* Campo de Ocorrências */}

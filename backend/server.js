@@ -131,6 +131,19 @@ db.serialize(() => {
     FOREIGN KEY (negocio_id) REFERENCES negocios(id) ON DELETE CASCADE
   )`);
 
+  // Tabela de retornos agendados
+  db.run(`CREATE TABLE IF NOT EXISTS retornos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    negocio_id INTEGER NOT NULL,
+    data_agendada DATE NOT NULL,
+    descricao TEXT,
+    realizado INTEGER DEFAULT 0,
+    data_realizado DATETIME,
+    observacao_retorno TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (negocio_id) REFERENCES negocios(id) ON DELETE CASCADE
+  )`);
+
   // Usuários padrão
   const usuariosPadrao = [
     { username: 'admin', senha: 'admin123', nome: 'Administrador', email: 'admin@crm.com', role: 'admin' },
@@ -649,6 +662,147 @@ app.post('/api/historico', authenticateToken, (req, res) => {
       res.json({ id: this.lastID });
     }
   );
+});
+
+// ========== ROTAS DE RETORNOS AGENDADOS ==========
+
+// Listar retornos de um negócio
+app.get('/api/negocios/:negocio_id/retornos', authenticateToken, (req, res) => {
+  const { negocio_id } = req.params;
+  
+  db.all(
+    'SELECT * FROM retornos WHERE negocio_id = ? ORDER BY realizado ASC, data_agendada ASC',
+    [negocio_id],
+    (err, retornos) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      res.json(retornos);
+    }
+  );
+});
+
+// Criar novo retorno agendado
+app.post('/api/negocios/:negocio_id/retornos', authenticateToken, (req, res) => {
+  const { negocio_id } = req.params;
+  const { data_agendada, descricao } = req.body;
+  
+  if (!data_agendada) {
+    return res.status(400).json({ error: 'Data agendada é obrigatória' });
+  }
+  
+  db.run(
+    `INSERT INTO retornos (negocio_id, data_agendada, descricao) VALUES (?, ?, ?)`,
+    [negocio_id, data_agendada, descricao || ''],
+    function(err) {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      res.json({ id: this.lastID, message: 'Retorno agendado com sucesso' });
+    }
+  );
+});
+
+// Marcar retorno como realizado
+app.put('/api/retornos/:id/realizar', authenticateToken, (req, res) => {
+  const { id } = req.params;
+  const { observacao_retorno, criar_ocorrencia } = req.body;
+  
+  // Primeiro busca o retorno para pegar os dados
+  db.get('SELECT * FROM retornos WHERE id = ?', [id], (err, retorno) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    if (!retorno) {
+      return res.status(404).json({ error: 'Retorno não encontrado' });
+    }
+    
+    // Marca como realizado
+    db.run(
+      `UPDATE retornos SET realizado = 1, data_realizado = CURRENT_TIMESTAMP, observacao_retorno = ? WHERE id = ?`,
+      [observacao_retorno || '', id],
+      function(err) {
+        if (err) {
+          return res.status(500).json({ error: err.message });
+        }
+        
+        // Se solicitado, criar ocorrência automaticamente
+        if (criar_ocorrencia) {
+          const hoje = new Date();
+          const dataFormatada = `${String(hoje.getDate()).padStart(2, '0')}/${String(hoje.getMonth() + 1).padStart(2, '0')}/${hoje.getFullYear()}`;
+          const textoOcorrencia = `[${dataFormatada}] ✅ RETORNO REALIZADO${retorno.descricao ? `: ${retorno.descricao}` : ''}${observacao_retorno ? ` - ${observacao_retorno}` : ''}`;
+          
+          // Buscar ocorrências atuais e adicionar nova
+          db.get('SELECT ocorrencias FROM negocios WHERE id = ?', [retorno.negocio_id], (err, negocio) => {
+            if (!err && negocio) {
+              const novasOcorrencias = negocio.ocorrencias 
+                ? `${negocio.ocorrencias}\n${textoOcorrencia}` 
+                : textoOcorrencia;
+              
+              db.run('UPDATE negocios SET ocorrencias = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?', 
+                [novasOcorrencias, retorno.negocio_id]);
+            }
+          });
+        }
+        
+        res.json({ message: 'Retorno marcado como realizado', negocio_id: retorno.negocio_id });
+      }
+    );
+  });
+});
+
+// Deletar retorno
+app.delete('/api/retornos/:id', authenticateToken, (req, res) => {
+  const { id } = req.params;
+  
+  db.run('DELETE FROM retornos WHERE id = ?', [id], function(err) {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    res.json({ message: 'Retorno removido com sucesso' });
+  });
+});
+
+// Listar TODOS os retornos pendentes (para página de Lembretes)
+app.get('/api/retornos/pendentes', authenticateToken, (req, res) => {
+  const hoje = new Date().toISOString().split('T')[0];
+  
+  const query = `
+    SELECT 
+      r.*,
+      n.empresa,
+      n.pessoa_contato,
+      n.telefone,
+      n.email,
+      n.equipamento,
+      n.valor_oferta,
+      n.etapa,
+      n.status,
+      CASE 
+        WHEN r.data_agendada < ? THEN 'atrasado'
+        WHEN r.data_agendada = ? THEN 'hoje'
+        ELSE 'futuro'
+      END as urgencia
+    FROM retornos r
+    JOIN negocios n ON r.negocio_id = n.id
+    WHERE r.realizado = 0
+    ORDER BY r.data_agendada ASC
+  `;
+  
+  db.all(query, [hoje, hoje], (err, retornos) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    
+    // Agrupa por urgência
+    const agrupado = {
+      atrasados: retornos.filter(r => r.urgencia === 'atrasado'),
+      hoje: retornos.filter(r => r.urgencia === 'hoje'),
+      proximos: retornos.filter(r => r.urgencia === 'futuro')
+    };
+    
+    res.json(agrupado);
+  });
 });
 
 // ========== ROTAS ESPECÍFICAS (ANTES DE STATIC) ========
