@@ -51,6 +51,13 @@ function Funil() {
 
   useEffect(() => {
     loadNegocios()
+    
+    // Auto-refresh a cada 30 segundos
+    const intervalo = setInterval(() => {
+      loadNegocios()
+    }, 30000)
+    
+    return () => clearInterval(intervalo)
   }, [])
 
   // Salva etapas no localStorage sempre que mudam
@@ -436,14 +443,24 @@ function Funil() {
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Funil de Vendas</h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Arraste os cards entre as colunas para mudar a etapa</p>
         </div>
-        <button
-          onClick={abrirConfigEtapas}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
-          title="Configurar etapas do funil"
-        >
-          <span>⚙️</span>
-          <span className="font-medium">Configurar Etapas</span>
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={loadNegocios}
+            disabled={loading}
+            className="flex items-center gap-2 px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
+            title="Atualizar funil"
+          >
+            <span className={loading ? 'animate-spin' : ''}>🔄</span>
+          </button>
+          <button
+            onClick={abrirConfigEtapas}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
+            title="Configurar etapas do funil"
+          >
+            <span>⚙️</span>
+            <span className="font-medium">Configurar Etapas</span>
+          </button>
+        </div>
       </div>
 
       {/* Notificação de atualização */}

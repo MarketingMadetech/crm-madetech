@@ -21,10 +21,10 @@ function Dashboard() {
   }, [periodo])
 
   useEffect(() => {
-    // Auto-refresh a cada 5 minutos
+    // Auto-refresh a cada 1 minuto
     const interval = setInterval(() => {
       loadData(true)
-    }, 5 * 60 * 1000)
+    }, 60 * 1000)
     
     return () => clearInterval(interval)
   }, [])

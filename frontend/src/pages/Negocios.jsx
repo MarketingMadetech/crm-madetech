@@ -147,6 +147,8 @@ function Negocios() {
   const [emailNegocio, setEmailNegocio] = useState(null)
   const [confirmDelete, setConfirmDelete] = useState(null)
   const [deletando, setDeletando] = useState(false)
+  const [ultimaAtualizacao, setUltimaAtualizacao] = useState(null)
+  const [atualizando, setAtualizando] = useState(false)
 
   // Helper para formatar datas SQL para formato brasileiro (importado de dateUtils)
   const formatarData = formatarDataBrasileira
@@ -166,6 +168,13 @@ function Negocios() {
   useEffect(() => {
     loadFiltros()
     loadNegocios()
+    
+    // Auto-refresh a cada 30 segundos
+    const intervalo = setInterval(() => {
+      loadNegocios(filtroAtivo, true) // forceRefresh = true
+    }, 30000)
+    
+    return () => clearInterval(intervalo)
   }, [])
 
   // Preposições que devem ficar em minúsculo
@@ -232,7 +241,11 @@ function Negocios() {
 
   const loadNegocios = useCallback(async (params = {}, forceRefresh = false) => {
     try {
-      setLoading(true)
+      if (forceRefresh) {
+        setAtualizando(true)
+      } else {
+        setLoading(true)
+      }
       
       // Cria chave de cache baseada nos parâmetros
       const cacheKey = `negocios:${JSON.stringify(params)}`
@@ -249,10 +262,13 @@ function Negocios() {
       console.log('[Negocios] Resposta da API:', res.data)
       cacheService.set(cacheKey, res.data)
       setNegocios(res.data)
+      setUltimaAtualizacao(new Date())
       setLoading(false)
+      setAtualizando(false)
     } catch (error) {
       console.error('Erro ao carregar negócios:', error)
       setLoading(false)
+      setAtualizando(false)
     }
   }, [])
 
@@ -528,9 +544,22 @@ function Negocios() {
             <p className="text-sm text-gray-600 dark:text-gray-400">
               📊 {negociosOrdenados.length} de {negocios.length} negócios
             </p>
+            {ultimaAtualizacao && (
+              <span className="text-xs text-gray-400 dark:text-gray-500">
+                • Atualizado às {ultimaAtualizacao.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
+              </span>
+            )}
           </div>
         </div>
         <div className="flex gap-3">
+          <button
+            onClick={() => loadNegocios(filtroAtivo, true)}
+            disabled={atualizando}
+            className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md shadow-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50"
+            title="Atualizar lista"
+          >
+            <span className={atualizando ? 'animate-spin' : ''}>🔄</span>
+          </button>
           {selecionados.length > 0 && (
             <button
               onClick={() => setMostrarAcoesMassa(!mostrarAcoesMassa)}

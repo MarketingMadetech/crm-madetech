@@ -4,6 +4,7 @@ import axios from 'axios'
 import { formatarDataBrasileira, converterParaISO, autoFormatarData, autoFormatarTelefone } from '../utils/dateUtils'
 import EQUIPAMENTOS from '../config/equipamentos'
 import RetornosAgendados from '../components/RetornosAgendados'
+import cacheService from '../utils/cacheService'
 
 function NegocioForm() {
   const navigate = useNavigate()
@@ -222,6 +223,9 @@ function NegocioForm() {
         const response = await axios.post('/api/negocios', dadosParaEnviar)
         console.log('✅ [FRONTEND] POST bem-sucedido. Resposta:', response.data);
       }
+      
+      // Limpar cache para forçar atualização da lista
+      cacheService.clearAll()
       
       console.log('✅ [FRONTEND] Redirecionando para /negocios');
       navigate('/negocios')
