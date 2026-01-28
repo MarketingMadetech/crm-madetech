@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import api from '../utils/api'
 
 function RetornosAgendados({ negocioId, onRetornoRealizado }) {
   const [retornos, setRetornos] = useState([])
@@ -27,7 +27,7 @@ function RetornosAgendados({ negocioId, onRetornoRealizado }) {
   const loadRetornos = async () => {
     try {
       setLoading(true)
-      const res = await axios.get(`/api/negocios/${negocioId}/retornos`)
+      const res = await api.get(`/negocios/${negocioId}/retornos`)
       setRetornos(res.data)
     } catch (error) {
       console.error('Erro ao carregar retornos:', error)
@@ -44,7 +44,7 @@ function RetornosAgendados({ negocioId, onRetornoRealizado }) {
     }
 
     try {
-      await axios.post(`/api/negocios/${negocioId}/retornos`, novoRetorno)
+      await api.post(`/negocios/${negocioId}/retornos`, novoRetorno)
       setNovoRetorno({ data_agendada: '', descricao: '' })
       setShowForm(false)
       loadRetornos()
@@ -58,14 +58,14 @@ function RetornosAgendados({ negocioId, onRetornoRealizado }) {
     if (!showRealizarModal) return
 
     try {
-      await axios.put(`/api/retornos/${showRealizarModal.id}/realizar`, {
+      await api.put(`/retornos/${showRealizarModal.id}/realizar`, {
         observacao_retorno: realizarData.observacao_retorno,
         criar_ocorrencia: realizarData.criar_ocorrencia
       })
 
       // Se quer agendar um novo retorno
       if (realizarData.agendar_novo && realizarData.nova_data) {
-        await axios.post(`/api/negocios/${negocioId}/retornos`, {
+        await api.post(`/negocios/${negocioId}/retornos`, {
           data_agendada: realizarData.nova_data,
           descricao: realizarData.nova_descricao || 'Retorno agendado'
         })
@@ -95,7 +95,7 @@ function RetornosAgendados({ negocioId, onRetornoRealizado }) {
     if (!confirm('Deseja realmente remover este agendamento de retorno?')) return
 
     try {
-      await axios.delete(`/api/retornos/${id}`)
+      await api.delete(`/retornos/${id}`)
       loadRetornos()
     } catch (error) {
       console.error('Erro ao deletar retorno:', error)
