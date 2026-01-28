@@ -703,6 +703,49 @@ app.post('/api/negocios/:negocio_id/retornos', authenticateToken, (req, res) => 
   );
 });
 
+// Listar TODOS os retornos pendentes (para página de Lembretes)
+// IMPORTANTE: Esta rota deve vir ANTES das rotas com :id para evitar conflito
+app.get('/api/retornos/pendentes', authenticateToken, (req, res) => {
+  const hoje = new Date().toISOString().split('T')[0];
+  
+  const query = `
+    SELECT 
+      r.*,
+      n.empresa,
+      n.pessoa_contato,
+      n.telefone,
+      n.email,
+      n.equipamento,
+      n.valor_oferta,
+      n.etapa,
+      n.status,
+      CASE 
+        WHEN r.data_agendada < ? THEN 'atrasado'
+        WHEN r.data_agendada = ? THEN 'hoje'
+        ELSE 'futuro'
+      END as urgencia
+    FROM retornos r
+    JOIN negocios n ON r.negocio_id = n.id
+    WHERE r.realizado = 0
+    ORDER BY r.data_agendada ASC
+  `;
+  
+  db.all(query, [hoje, hoje], (err, retornos) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    
+    // Agrupa por urgência
+    const agrupado = {
+      atrasados: retornos.filter(r => r.urgencia === 'atrasado'),
+      hoje: retornos.filter(r => r.urgencia === 'hoje'),
+      proximos: retornos.filter(r => r.urgencia === 'futuro')
+    };
+    
+    res.json(agrupado);
+  });
+});
+
 // Marcar retorno como realizado
 app.put('/api/retornos/:id/realizar', authenticateToken, (req, res) => {
   const { id } = req.params;
@@ -760,48 +803,6 @@ app.delete('/api/retornos/:id', authenticateToken, (req, res) => {
       return res.status(500).json({ error: err.message });
     }
     res.json({ message: 'Retorno removido com sucesso' });
-  });
-});
-
-// Listar TODOS os retornos pendentes (para página de Lembretes)
-app.get('/api/retornos/pendentes', authenticateToken, (req, res) => {
-  const hoje = new Date().toISOString().split('T')[0];
-  
-  const query = `
-    SELECT 
-      r.*,
-      n.empresa,
-      n.pessoa_contato,
-      n.telefone,
-      n.email,
-      n.equipamento,
-      n.valor_oferta,
-      n.etapa,
-      n.status,
-      CASE 
-        WHEN r.data_agendada < ? THEN 'atrasado'
-        WHEN r.data_agendada = ? THEN 'hoje'
-        ELSE 'futuro'
-      END as urgencia
-    FROM retornos r
-    JOIN negocios n ON r.negocio_id = n.id
-    WHERE r.realizado = 0
-    ORDER BY r.data_agendada ASC
-  `;
-  
-  db.all(query, [hoje, hoje], (err, retornos) => {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    
-    // Agrupa por urgência
-    const agrupado = {
-      atrasados: retornos.filter(r => r.urgencia === 'atrasado'),
-      hoje: retornos.filter(r => r.urgencia === 'hoje'),
-      proximos: retornos.filter(r => r.urgencia === 'futuro')
-    };
-    
-    res.json(agrupado);
   });
 });
 
