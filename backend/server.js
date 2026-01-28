@@ -142,7 +142,13 @@ db.serialize(() => {
     observacao_retorno TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (negocio_id) REFERENCES negocios(id) ON DELETE CASCADE
-  )`);
+  )`, (err) => {
+    if (err) {
+      console.error('❌ Erro ao criar tabela retornos:', err.message);
+    } else {
+      console.log('✅ Tabela retornos verificada/criada com sucesso');
+    }
+  });
 
   // Usuários padrão
   const usuariosPadrao = [
@@ -687,6 +693,8 @@ app.post('/api/negocios/:negocio_id/retornos', authenticateToken, (req, res) => 
   const { negocio_id } = req.params;
   const { data_agendada, descricao } = req.body;
   
+  console.log('📅 [POST /retornos] Criando retorno:', { negocio_id, data_agendada, descricao });
+  
   if (!data_agendada) {
     return res.status(400).json({ error: 'Data agendada é obrigatória' });
   }
@@ -696,8 +704,10 @@ app.post('/api/negocios/:negocio_id/retornos', authenticateToken, (req, res) => 
     [negocio_id, data_agendada, descricao || ''],
     function(err) {
       if (err) {
+        console.error('❌ [POST /retornos] Erro:', err.message);
         return res.status(500).json({ error: err.message });
       }
+      console.log('✅ [POST /retornos] Retorno criado com ID:', this.lastID);
       res.json({ id: this.lastID, message: 'Retorno agendado com sucesso' });
     }
   );
