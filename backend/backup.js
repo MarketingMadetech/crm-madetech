@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
+const sqlite3 = require('sqlite3').verbose();
 
 // Diretório de backups
 const BACKUP_DIR = path.join(__dirname, 'backups');
@@ -117,10 +118,59 @@ function restoreBackup(backupFileName) {
                     reject(err);
                 } else {
                     console.log(`✅ Backup restaurado com sucesso: ${backupFileName}`);
-                    resolve({
-                        fileName: backupFileName,
-                        restored: true
-                    });
+                    
+                    // Criar tabelas novas que podem não existir no backup antigo
+                    ensureNewTablesExist()
+                        .then(() => {
+                            resolve({
+                                fileName: backupFileName,
+                                restored: true
+                            });
+                        })
+                        .catch((tableErr) => {
+                            console.error('❌ Erro ao criar tabelas após restauração:', tableErr);
+                            // Ainda resolve porque a restauração funcionou
+                            resolve({
+                                fileName: backupFileName,
+                                restored: true,
+                                warning: 'Backup restaurado, mas houve erro ao criar tabelas novas'
+                            });
+                        });
+                }
+            });
+        });
+    });
+}
+
+// Função para garantir que tabelas novas existam após restaurar backup antigo
+function ensureNewTablesExist() {
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(DB_PATH, (err) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            
+            // Criar tabela de retornos se não existir
+            db.run(`CREATE TABLE IF NOT EXISTS retornos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                negocio_id INTEGER NOT NULL,
+                data_agendada DATE NOT NULL,
+                descricao TEXT,
+                realizado INTEGER DEFAULT 0,
+                data_realizado DATETIME,
+                observacao_retorno TEXT,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (negocio_id) REFERENCES negocios(id) ON DELETE CASCADE
+            )`, (err) => {
+                if (err) {
+                    console.error('❌ Erro ao criar tabela retornos:', err.message);
+                    db.close();
+                    reject(err);
+                } else {
+                    console.log('✅ Tabela retornos verificada/criada após restauração');
+                    db.close();
+                    resolve();
                 }
             });
         });
