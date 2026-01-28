@@ -1,215 +1,195 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
+import api from '../utils/api'
 
 function Notificacoes() {
-  const [notificacoes, setNotificacoes] = useState([])
+  const [retornos, setRetornos] = useState({ atrasados: [], hoje: [], proximos: [] })
   const [mostrar, setMostrar] = useState(false)
-  const [lidas, setLidas] = useState(() => {
-    const storage = localStorage.getItem('notificacoes_lidas')
-    return storage ? JSON.parse(storage) : []
-  })
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    carregarNotificacoes()
-    const intervalo = setInterval(carregarNotificacoes, 300000) // Atualiza a cada 5 min
+    carregarRetornos()
+    const intervalo = setInterval(carregarRetornos, 60000) // Atualiza a cada 1 min
     return () => clearInterval(intervalo)
   }, [])
 
-  const carregarNotificacoes = async () => {
+  const carregarRetornos = async () => {
     try {
-      const res = await axios.get('/api/negocios', { params: { status: 'Em andamento' } })
-      const negocios = res.data
-      const hoje = new Date()
-      const alerts = []
-
-      negocios.forEach(n => {
-        // Parse de data
-        const parseData = (dataStr) => {
-          if (!dataStr) return null
-          if (dataStr.includes('-')) return new Date(dataStr.split(' ')[0])
-          const [dia, mes, ano] = dataStr.split('/')
-          return new Date(ano, mes - 1, dia)
-        }
-
-        const dataCriacao = parseData(n.data_criacao)
-        const dataFechamento = parseData(n.data_fechamento)
-
-        // Alertas para negócios parados > 30 dias
-        if (dataCriacao) {
-          const diasParados = Math.floor((hoje - dataCriacao) / (1000 * 60 * 60 * 24))
-          if (diasParados > 30 && n.etapa === 'Contato inicial') {
-            alerts.push({
-              id: `parado-${n.id}`,
-              tipo: 'parado',
-              negocio: n,
-              mensagem: `${n.empresa} está parado há ${diasParados} dias`,
-              urgencia: diasParados > 60 ? 'alta' : 'media',
-              icone: '⚠️'
-            })
-          }
-        }
-
-        // Alertas para fechamento próximo
-        if (dataFechamento) {
-          const diasParaFechamento = Math.floor((dataFechamento - hoje) / (1000 * 60 * 60 * 24))
-          if (diasParaFechamento >= 0 && diasParaFechamento <= 7) {
-            alerts.push({
-              id: `fechamento-${n.id}`,
-              tipo: 'fechamento',
-              negocio: n,
-              mensagem: `${n.empresa} fecha em ${diasParaFechamento} ${diasParaFechamento === 1 ? 'dia' : 'dias'}`,
-              urgencia: diasParaFechamento <= 3 ? 'alta' : 'media',
-              icone: '📅'
-            })
-          }
-        }
-
-        // Alertas para propostas antigas
-        if (dataCriacao && n.etapa && n.etapa.toLowerCase().includes('proposta')) {
-          const diasProposta = Math.floor((hoje - dataCriacao) / (1000 * 60 * 60 * 24))
-          if (diasProposta > 14) {
-            alerts.push({
-              id: `proposta-${n.id}`,
-              tipo: 'proposta',
-              negocio: n,
-              mensagem: `Proposta de ${n.empresa} sem retorno há ${diasProposta} dias`,
-              urgencia: diasProposta > 30 ? 'alta' : 'media',
-              icone: '📧'
-            })
-          }
-        }
-      })
-
-      setNotificacoes(alerts)
+      const res = await api.get('/retornos/pendentes')
+      setRetornos(res.data)
     } catch (error) {
-      console.error('Erro ao carregar notificações:', error)
+      console.error('Erro ao carregar retornos:', error)
+    } finally {
+      setLoading(false)
     }
   }
 
-  const marcarComoLida = (id) => {
-    const novasLidas = [...lidas, id]
-    setLidas(novasLidas)
-    localStorage.setItem('notificacoes_lidas', JSON.stringify(novasLidas))
+  const formatarData = (dataStr) => {
+    if (!dataStr) return ''
+    const data = new Date(dataStr + 'T00:00:00')
+    return data.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
   }
 
-  const marcarTodasComoLidas = () => {
-    const ids = notificacoes.map(n => n.id)
-    setLidas(ids)
-    localStorage.setItem('notificacoes_lidas', JSON.stringify(ids))
-  }
-
-  const notificacoesNaoLidas = notificacoes.filter(n => !lidas.includes(n.id))
-  const totalNaoLidas = notificacoesNaoLidas.length
-
-  const getCorUrgencia = (urgencia) => {
-    switch (urgencia) {
-      case 'alta': return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-red-200'
-      case 'media': return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200'
-      default: return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200'
-    }
-  }
+  const totalPendentes = retornos.atrasados.length + retornos.hoje.length + retornos.proximos.length
+  const temUrgentes = retornos.atrasados.length > 0 || retornos.hoje.length > 0
 
   return (
     <div className="relative">
-      {/* Botão de notificações */}
+      {/* Botão do sininho */}
       <button
         onClick={() => setMostrar(!mostrar)}
-        className="relative p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+        className={`relative p-2 rounded-full transition-colors ${
+          temUrgentes 
+            ? 'hover:bg-red-100 dark:hover:bg-red-900/30' 
+            : 'hover:bg-gray-100 dark:hover:bg-gray-700'
+        }`}
+        title="Retornos Agendados"
       >
-        🔔
-        {totalNaoLidas > 0 && (
-          <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-            {totalNaoLidas}
+        <span className={temUrgentes ? 'animate-pulse' : ''}>🔔</span>
+        {totalPendentes > 0 && (
+          <span className={`absolute -top-1 -right-1 inline-flex items-center justify-center min-w-[20px] h-5 px-1 text-xs font-bold text-white rounded-full ${
+            retornos.atrasados.length > 0 ? 'bg-red-600' : retornos.hoje.length > 0 ? 'bg-amber-500' : 'bg-blue-600'
+          }`}>
+            {totalPendentes > 99 ? '99+' : totalPendentes}
           </span>
         )}
       </button>
 
-      {/* Painel de notificações */}
+      {/* Dropdown de retornos */}
       {mostrar && (
         <>
           <div 
             className="fixed inset-0 z-40" 
             onClick={() => setMostrar(false)}
           />
-          <div className="absolute right-0 mt-2 w-96 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50 max-h-[500px] overflow-y-auto border border-gray-200 dark:border-gray-700">
+          <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50 max-h-[500px] overflow-hidden border border-gray-200 dark:border-gray-700">
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Notificações {totalNaoLidas > 0 && `(${totalNaoLidas})`}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                📅 Retornos Agendados
+                {totalPendentes > 0 && (
+                  <span className="text-sm bg-blue-600 text-white px-2 py-0.5 rounded-full">{totalPendentes}</span>
+                )}
               </h3>
-              {totalNaoLidas > 0 && (
-                <button
-                  onClick={marcarTodasComoLidas}
-                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
-                >
-                  Marcar todas como lidas
-                </button>
-              )}
             </div>
 
-            {/* Lista de notificações */}
-            <div className="divide-y divide-gray-200 dark:divide-gray-700">
-              {notificacoes.length === 0 ? (
-                <div className="p-4 text-center text-gray-500 dark:text-gray-400">
-                  Nenhuma notificação no momento 🎉
+            {/* Conteúdo */}
+            <div className="overflow-y-auto max-h-[380px]">
+              {loading ? (
+                <div className="p-6 text-center text-gray-500 dark:text-gray-400">
+                  <span className="inline-block animate-spin text-2xl">⏳</span>
+                  <p className="mt-2">Carregando...</p>
+                </div>
+              ) : totalPendentes === 0 ? (
+                <div className="p-6 text-center text-gray-500 dark:text-gray-400">
+                  <div className="text-4xl mb-2">🎉</div>
+                  <p>Nenhum retorno pendente!</p>
                 </div>
               ) : (
-                notificacoes.map((notif) => {
-                  const lida = lidas.includes(notif.id)
-                  return (
-                    <Link
-                      key={notif.id}
-                      to={`/negocios/${notif.negocio.id}/editar`}
-                      className={`block p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
-                        !lida ? 'bg-blue-50 dark:bg-blue-900/10' : ''
-                      }`}
-                      onClick={() => {
-                        marcarComoLida(notif.id)
-                        setMostrar(false)
-                      }}
-                    >
-                      <div className="flex items-start gap-3">
-                        <span className="text-2xl">{notif.icone}</span>
-                        <div className="flex-1">
-                          <p className={`text-sm font-medium ${
-                            !lida ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400'
-                          }`}>
-                            {notif.mensagem}
-                          </p>
-                          <div className="flex items-center gap-2 mt-1">
-                            <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border ${
-                              getCorUrgencia(notif.urgencia)
-                            }`}>
-                              {notif.urgencia === 'alta' ? 'Urgente' : 'Atenção'}
-                            </span>
-                            <span className="text-xs text-gray-500 dark:text-gray-400">
-                              {notif.negocio.etapa}
-                            </span>
-                          </div>
-                        </div>
-                        {!lida && (
-                          <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-                        )}
+                <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                  {/* Atrasados */}
+                  {retornos.atrasados.length > 0 && (
+                    <div className="bg-red-50 dark:bg-red-900/20">
+                      <div className="px-4 py-2 text-sm font-semibold text-red-700 dark:text-red-400 flex items-center gap-2">
+                        🔴 Atrasados ({retornos.atrasados.length})
                       </div>
-                    </Link>
-                  )
-                })
+                      {retornos.atrasados.slice(0, 3).map((r) => (
+                        <Link
+                          key={r.id}
+                          to={`/negocios/${r.negocio_id}/editar`}
+                          className="block px-4 py-3 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors border-t border-red-200 dark:border-red-800"
+                          onClick={() => setMostrar(false)}
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="min-w-0 flex-1">
+                              <p className="font-medium text-gray-900 dark:text-white truncate">{r.empresa}</p>
+                              {r.descricao && <p className="text-sm text-gray-600 dark:text-gray-400 truncate">📝 {r.descricao}</p>}
+                            </div>
+                            <span className="text-xs text-red-600 dark:text-red-400 whitespace-nowrap">{formatarData(r.data_agendada)}</span>
+                          </div>
+                        </Link>
+                      ))}
+                      {retornos.atrasados.length > 3 && (
+                        <div className="px-4 py-2 text-xs text-red-600 dark:text-red-400 text-center border-t border-red-200 dark:border-red-800">
+                          +{retornos.atrasados.length - 3} mais atrasados
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Hoje */}
+                  {retornos.hoje.length > 0 && (
+                    <div className="bg-amber-50 dark:bg-amber-900/20">
+                      <div className="px-4 py-2 text-sm font-semibold text-amber-700 dark:text-amber-400 flex items-center gap-2">
+                        🟡 Para Hoje ({retornos.hoje.length})
+                      </div>
+                      {retornos.hoje.slice(0, 3).map((r) => (
+                        <Link
+                          key={r.id}
+                          to={`/negocios/${r.negocio_id}/editar`}
+                          className="block px-4 py-3 hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors border-t border-amber-200 dark:border-amber-800"
+                          onClick={() => setMostrar(false)}
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="min-w-0 flex-1">
+                              <p className="font-medium text-gray-900 dark:text-white truncate">{r.empresa}</p>
+                              {r.descricao && <p className="text-sm text-gray-600 dark:text-gray-400 truncate">📝 {r.descricao}</p>}
+                            </div>
+                            <span className="text-xs font-bold text-amber-600 dark:text-amber-400">HOJE</span>
+                          </div>
+                        </Link>
+                      ))}
+                      {retornos.hoje.length > 3 && (
+                        <div className="px-4 py-2 text-xs text-amber-600 dark:text-amber-400 text-center border-t border-amber-200 dark:border-amber-800">
+                          +{retornos.hoje.length - 3} mais para hoje
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Próximos */}
+                  {retornos.proximos.length > 0 && (
+                    <div>
+                      <div className="px-4 py-2 text-sm font-semibold text-blue-700 dark:text-blue-400 flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20">
+                        🔵 Próximos ({retornos.proximos.length})
+                      </div>
+                      {retornos.proximos.slice(0, 3).map((r) => (
+                        <Link
+                          key={r.id}
+                          to={`/negocios/${r.negocio_id}/editar`}
+                          className="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors border-t border-gray-200 dark:border-gray-700"
+                          onClick={() => setMostrar(false)}
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="min-w-0 flex-1">
+                              <p className="font-medium text-gray-900 dark:text-white truncate">{r.empresa}</p>
+                              {r.descricao && <p className="text-sm text-gray-600 dark:text-gray-400 truncate">📝 {r.descricao}</p>}
+                            </div>
+                            <span className="text-xs text-blue-600 dark:text-blue-400 whitespace-nowrap">{formatarData(r.data_agendada)}</span>
+                          </div>
+                        </Link>
+                      ))}
+                      {retornos.proximos.length > 3 && (
+                        <div className="px-4 py-2 text-xs text-blue-600 dark:text-blue-400 text-center border-t border-gray-200 dark:border-gray-700">
+                          +{retornos.proximos.length - 3} próximos
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
               )}
             </div>
 
-            {/* Footer */}
-            {notificacoes.length > 0 && (
-              <div className="p-3 border-t border-gray-200 dark:border-gray-700 text-center">
-                <Link
-                  to="/lembretes"
-                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
-                  onClick={() => setMostrar(false)}
-                >
-                  Ver todos os lembretes →
-                </Link>
-              </div>
-            )}
+            {/* Footer - Link para página completa */}
+            <div className="p-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-center">
+              <Link
+                to="/lembretes"
+                className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+                onClick={() => setMostrar(false)}
+              >
+                Ver todos os retornos →
+              </Link>
+            </div>
           </div>
         </>
       )}

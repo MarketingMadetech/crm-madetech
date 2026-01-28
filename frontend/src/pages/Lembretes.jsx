@@ -92,6 +92,17 @@ function Lembretes() {
     }
   }
 
+  const handleDeleteRetorno = async (id) => {
+    if (!confirm('Tem certeza que deseja apagar este retorno agendado?')) return
+    try {
+      await api.delete(`/retornos/${id}`)
+      loadRetornos()
+    } catch (error) {
+      console.error('Erro ao apagar retorno:', error)
+      alert('Erro ao apagar retorno')
+    }
+  }
+
   const totalPendentes = retornos.atrasados.length + retornos.hoje.length + retornos.proximos.length
 
   if (loading) {
@@ -131,6 +142,7 @@ function Lembretes() {
           <div className="flex flex-col gap-2">
             <button onClick={() => setModalRetorno(retorno)} className="px-3 py-1.5 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors whitespace-nowrap">✓ Realizado</button>
             <Link to={`/negocios/${retorno.negocio_id}/editar`} className="px-3 py-1.5 text-sm text-center bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">Abrir</Link>
+            <button onClick={() => handleDeleteRetorno(retorno.id)} className="px-3 py-1.5 text-sm text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md transition-colors" title="Apagar retorno">🗑️</button>
           </div>
         </div>
       </div>
