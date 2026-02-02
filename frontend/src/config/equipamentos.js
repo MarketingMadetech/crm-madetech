@@ -2,8 +2,8 @@
 // 📋 LISTA DE EQUIPAMENTOS DISPONÍVEIS
 // ===================================
 // Lista extraída automaticamente da planilha atualizada
-// Última atualização: 08/01/2026
-// Total: 130 equipamentos
+// Última atualização: 02/02/2026
+// Total: 143 equipamentos (incluindo linha completa M5-M6.7)
 
 export const EQUIPAMENTOS = [
   "BC91",
@@ -16,9 +16,28 @@ export const EQUIPAMENTOS = [
   "Centro de Furação CNC",
   "Centro de Furação HB611G",
   "Centro de Furação HB621G",
+  // --- Linha M5 ---
+  "Centro de Furação M5",
+  // --- Linha M6 ---
   "Centro de Furação M6",
+  "Centro de Furação M6 Automático",
+  "Centro de Furação M6 Single",
+  // --- Linha M6.2 ---
+  "Centro de Furação M6.2",
+  "Centro de Furação M6.2 Automático",
+  // --- Linha M6.5 ---
   "Centro de Furação M6.5",
+  "Centro de Furação M6.5 Automático",
+  "Centro de Furação M6.5 Single",
+  "Centro de Furação M6.5-2",
+  "Centro de Furação M6.5-2 Automático",
+  // --- Linha M6.7 ---
   "Centro de Furação M6.7",
+  "Centro de Furação M6.7 Automático",
+  "Centro de Furação M6.7 Single",
+  "Centro de Furação M6.7-2",
+  "Centro de Furação M6.7-2 Automático",
+  // --- Linha M6.8 ---
   "Centro de Furação M6.8",
   "Centro de Furação Point 2",
   "Centro de Furação Vitap",
