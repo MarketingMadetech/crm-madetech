@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Triângulo Cyberpunk PNG</title>
+    <style>
+        body {
+            background: #1a1a2e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            background: repeating-conic-gradient(#333 0% 25%, #222 0% 50%) 50% / 20px 20px;
+            border: 2px solid #ff0066;
+            box-shadow: 0 0 30px #ff006644;
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #ff0066, #ff0088);
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 0 20px #ff006666;
+        }
+        button:hover {
+            box-shadow: 0 0 40px #ff0066aa;
+        }
+        h1 {
+            color: #ff0066;
+            text-shadow: 0 0 20px #ff0066;
+        }
+        p {
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔺 Triângulo Cyberpunk</h1>
+    <canvas id="canvas" width="512" height="512"></canvas>
+    <button onclick="download()">📥 BAIXAR PNG (512x512)</button>
+    <p>Fundo transparente • Pink/Vermelho Neon • Glow Effect</p>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const size = 512;
+        
+        function drawTriangle() {
+            ctx.clearRect(0, 0, size, size);
+            
+            // Coordenadas do triângulo equilátero centralizado
+            const centerX = size / 2;
+            const centerY = size / 2;
+            const triangleSize = size * 0.75;
+            const height = triangleSize * Math.sqrt(3) / 2;
+            
+            const points = [
+                { x: centerX, y: centerY - height / 2 - 20 },
+                { x: centerX + triangleSize / 2, y: centerY + height / 2 - 20 },
+                { x: centerX - triangleSize / 2, y: centerY + height / 2 - 20 }
+            ];
+            
+            // Função para desenhar o triângulo
+            function drawPath() {
+                ctx.beginPath();
+                ctx.moveTo(points[0].x, points[0].y);
+                ctx.lineTo(points[1].x, points[1].y);
+                ctx.lineTo(points[2].x, points[2].y);
+                ctx.closePath();
+            }
+            
+            // Camadas de glow (do mais externo para o mais interno)
+            const glowLayers = [
+                { blur: 60, color: 'rgba(255, 0, 102, 0.15)', width: 20 },
+                { blur: 40, color: 'rgba(255, 0, 102, 0.2)', width: 15 },
+                { blur: 25, color: 'rgba(255, 0, 102, 0.3)', width: 10 },
+                { blur: 15, color: 'rgba(255, 0, 136, 0.5)', width: 8 },
+                { blur: 8, color: 'rgba(255, 51, 153, 0.7)', width: 5 },
+                { blur: 4, color: 'rgba(255, 51, 153, 0.9)', width: 4 },
+                { blur: 2, color: '#ff0066', width: 3 },
+                { blur: 0, color: '#ff3399', width: 2.5 },
+                { blur: 0, color: '#ff66aa', width: 1.5 },
+                { blur: 0, color: '#ffffff', width: 0.8 },
+            ];
+            
+            glowLayers.forEach(layer => {
+                ctx.save();
+                ctx.shadowBlur = layer.blur;
+                ctx.shadowColor = layer.color;
+                ctx.strokeStyle = layer.color;
+                ctx.lineWidth = layer.width;
+                ctx.lineJoin = 'round';
+                ctx.lineCap = 'round';
+                drawPath();
+                ctx.stroke();
+                ctx.restore();
+            });
+        }
+        
+        drawTriangle();
+        
+        function download() {
+            const link = document.createElement('a');
+            link.download = 'triangulo-cyberpunk-neon.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>

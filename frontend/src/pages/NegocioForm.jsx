@@ -40,6 +40,10 @@ function NegocioForm() {
   const [error, setError] = useState(null)
   const [origensDisponiveis, setOrigensDisponiveis] = useState([])
   
+  // Estado para equipamento personalizado
+  const [equipamentoPersonalizado, setEquipamentoPersonalizado] = useState(false)
+  const [equipamentoCustom, setEquipamentoCustom] = useState('')
+  
   // Estado para nova ocorrência
   const [novaOcorrencia, setNovaOcorrencia] = useState({
     data: new Date().toISOString().split('T')[0],
@@ -103,6 +107,13 @@ function NegocioForm() {
         ...res.data,
         data_criacao: formatarDataBrasileira(res.data.data_criacao),
         data_fechamento: formatarDataBrasileira(res.data.data_fechamento)
+      }
+      
+      // Verificar se o equipamento existe na lista
+      // Se não existir, ativar modo personalizado
+      if (res.data.equipamento && !EQUIPAMENTOS.includes(res.data.equipamento)) {
+        setEquipamentoPersonalizado(true)
+        setEquipamentoCustom(res.data.equipamento)
       }
       
       setFormData(dadosFormatados)
@@ -324,19 +335,64 @@ function NegocioForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Equipamento</label>
-            <select
-              name="equipamento"
-              value={formData.equipamento}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Selecione um equipamento</option>
-              {EQUIPAMENTOS.map((equip) => (
-                <option key={equip} value={equip}>
-                  {equip}
-                </option>
-              ))}
-            </select>
+            {!equipamentoPersonalizado ? (
+              <>
+                <select
+                  name="equipamento"
+                  value={formData.equipamento}
+                  onChange={(e) => {
+                    if (e.target.value === '__OUTRO__') {
+                      setEquipamentoPersonalizado(true)
+                      setFormData({ ...formData, equipamento: '' })
+                    } else {
+                      handleChange(e)
+                    }
+                  }}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">Selecione um equipamento</option>
+                  {EQUIPAMENTOS.map((equip) => (
+                    <option key={equip} value={equip}>
+                      {equip}
+                    </option>
+                  ))}
+                  <option value="__OUTRO__">➕ Cadastrar novo equipamento...</option>
+                </select>
+              </>
+            ) : (
+              <div className="space-y-2">
+                <div className="bg-yellow-50 border border-yellow-200 rounded-md p-3 text-sm">
+                  <p className="font-semibold text-yellow-800 mb-1">📝 Padrão de cadastro:</p>
+                  <ul className="text-yellow-700 list-disc list-inside space-y-1">
+                    <li>Use <strong>Primeira Letra Maiúscula</strong> em cada palavra</li>
+                    <li>Exemplo: "Centro de Furação M6.5 Automático"</li>
+                    <li>Evite abreviações: escreva "Coladeira de Bordos", não "Col. Bordos"</li>
+                    <li>Inclua o modelo completo: "Nesting CNC 3020 ATC"</li>
+                  </ul>
+                </div>
+                <input
+                  type="text"
+                  value={equipamentoCustom}
+                  onChange={(e) => {
+                    setEquipamentoCustom(e.target.value)
+                    setFormData({ ...formData, equipamento: e.target.value })
+                  }}
+                  placeholder="Digite o nome do novo equipamento..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEquipamentoPersonalizado(false)
+                    setEquipamentoCustom('')
+                    setFormData({ ...formData, equipamento: '' })
+                  }}
+                  className="text-sm text-blue-600 hover:text-blue-800 underline"
+                >
+                  ← Voltar para lista de equipamentos
+                </button>
+              </div>
+            )}
           </div>
 
           <div>

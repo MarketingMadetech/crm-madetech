@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <!-- Glow filter intenso -->
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur1"/>
+      <feGaussianBlur stdDeviation="6" result="blur2"/>
+      <feGaussianBlur stdDeviation="12" result="blur3"/>
+      <feGaussianBlur stdDeviation="20" result="blur4"/>
+      <feMerge>
+        <feMergeNode in="blur4"/>
+        <feMergeNode in="blur3"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Gradiente neon pink/vermelho -->
+    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff0066"/>
+      <stop offset="50%" style="stop-color:#ff0044"/>
+      <stop offset="100%" style="stop-color:#ff0088"/>
+    </linearGradient>
+    
+    <!-- Glow externo adicional -->
+    <filter id="outerGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="8" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="glow"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background transparente já está por padrão -->
+  
+  <!-- Camada de glow externa (mais difusa) -->
+  <polygon 
+    points="100,25 175,155 25,155" 
+    fill="none" 
+    stroke="#ff0066" 
+    stroke-width="4"
+    filter="url(#outerGlow)"
+    opacity="0.6"/>
+  
+  <!-- Triângulo principal com glow neon -->
+  <polygon 
+    points="100,25 175,155 25,155" 
+    fill="none" 
+    stroke="url(#neonGradient)" 
+    stroke-width="3"
+    stroke-linejoin="round"
+    filter="url(#neonGlow)"/>
+  
+  <!-- Linha interna mais brilhante -->
+  <polygon 
+    points="100,25 175,155 25,155" 
+    fill="none" 
+    stroke="#ff3399" 
+    stroke-width="1.5"
+    stroke-linejoin="round"
+    opacity="0.9"/>
+    
+  <!-- Centro ultra brilhante -->
+  <polygon 
+    points="100,25 175,155 25,155" 
+    fill="none" 
+    stroke="#ffffff" 
+    stroke-width="0.5"
+    stroke-linejoin="round"
+    opacity="0.7"/>
+</svg>

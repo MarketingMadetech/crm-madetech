@@ -2,8 +2,10 @@
 // 📋 LISTA DE EQUIPAMENTOS DISPONÍVEIS
 // ===================================
 // Lista extraída automaticamente da planilha atualizada
-// Última atualização: 02/02/2026
-// Total: 143 equipamentos (incluindo linha completa M5-M6.7)
+// Última atualização: 04/02/2026
+// Total: ~140 equipamentos (linha completa M5-M6.7)
+// ⚠️ PADRÃO: Primeira Letra Maiúscula em cada palavra
+//    Exemplo: "Coladeira de Bordos Vectra" (não "bordos vectra")
 
 export const EQUIPAMENTOS = [
   "BC91",
@@ -64,25 +66,22 @@ export const EQUIPAMENTOS = [
   "Coladeira de Bordos Prime 4GS",
   "Coladeira de Bordos Ultimate",
   "Coladeira de Bordos Vectra",
-  "Coladeira de bordos Astra + R",
-  "Coladeira de bordos BC92",
-  "Coladeira de bordos Ultimate",
-  "Coladeira de bordos Vectra",
-  "Coladeira de bordos Vectra com PUR",
-  "Coladeira de bordos Verry",
+  "Coladeira de Bordos Vectra com PUR",
+  "Coladeira de Bordos Astra + R",
+  "Coladeira de Bordos BC92",
+  "Coladeira de Bordos Verry",
   "Coletores de pó",
   "Compressor Parafuso",
   "Contour 2.0",
   "Contour 2.0 Plus",
   "Contour S Line",
-  "Contour S line",
   "Corte Laser tubos",
   "Célula Nesting 5º eixo",
   "Eclipse",
   "Embaladora Strech",
   "Embaladora Strech Immergut",
   "Emendadora de Lâminas",
-  "Esquadrejadeira MJ 1132",
+  "Esquadrejadeira MJ1132",
   "Esteira Retorno para Coladora de Brodo",
   "Furadeira Horizontal CNC",
   "Furadeira Múltipla Lidear",
@@ -113,7 +112,6 @@ export const EQUIPAMENTOS = [
   "Nesting Robust V1 com etiquetagem",
   "Nesting Robust V2",
   "Nesting SPL 3020",
-  "Nesting3020 Marchiori",
   "NestingHold HE710GA",
   "Point 1",
   "Point 2",
