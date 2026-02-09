@@ -696,7 +696,7 @@ function Negocios() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Origem</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Origem da Negociação</label>
             <select
               value={filtroAtivo.origem}
               onChange={(e) => handleFiltroChange('origem', e.target.value)}
