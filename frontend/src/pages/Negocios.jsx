@@ -169,10 +169,10 @@ function Negocios() {
     loadFiltros()
     loadNegocios()
     
-    // Auto-refresh a cada 30 segundos
+    // Auto-refresh a cada 2 minutos
     const intervalo = setInterval(() => {
       loadNegocios(filtroAtivo, true) // forceRefresh = true
-    }, 30000)
+    }, 120000)
     
     return () => clearInterval(intervalo)
   }, [])
